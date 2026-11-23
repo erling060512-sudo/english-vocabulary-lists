@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>词汇表（专升本版）</title>
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:#faf7f0; --surface:#ffffff; --text:#1f2937; --dim:#78716c;
+  --border:#e7e0d2; --accent:#0f766e;
+  --bad-bg:#fef2f2; --bad-bd:#fca5a5; --bad-tx:#b91c1c;
+  --good-bg:#f0fdf4; --good-bd:#86efac; --good-tx:#15803d;
+  --fb-good-bg:#f0fdf4; --fb-good-tx:#166534;
+  --fb-bad-bg:#fef2f2; --fb-bad-tx:#991b1b;
+  --count-bg:#fef2f2; --count-tx:#b91c1c;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#171512; --surface:#23201b; --text:#f0ede6; --dim:#a8a29e;
+    --border:#3a352c; --accent:#2dd4bf;
+    --bad-bg:#450a0a; --bad-bd:#7f1d1d; --bad-tx:#fca5a5;
+    --good-bg:#052e16; --good-bd:#14532d; --good-tx:#86efac;
+    --fb-good-bg:#052e16; --fb-good-tx:#bbf7d0;
+    --fb-bad-bg:#450a0a; --fb-bad-tx:#fecaca;
+    --count-bg:#450a0a; --count-tx:#fecaca;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;min-height:2rem}
+button:disabled{cursor:not-allowed}
+.serif{font-family:Georgia,'Times New Roman',serif}
+.wrap{margin:0 auto;width:100%;max-width:42rem;padding:1rem 1rem 7rem}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:1rem}
+.topbar .cnt{font-size:.875rem;color:var(--dim)}
+.topbar .cnt strong{color:var(--text)}
+.accent-wrap{display:flex;align-items:center;gap:.5rem}
+.accent-wrap .lbl{font-size:.875rem;color:var(--dim)}
+.accent{display:inline-flex;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:.25rem}
+.accent button{min-height:2.25rem;border-radius:999px;padding:0 1rem;font-size:.875rem;font-weight:600;color:var(--dim)}
+.accent button.on{background:var(--text);color:var(--bg)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:.25rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:.25rem;margin-bottom:1.25rem}
+.tabs button{min-height:2.75rem;border-radius:999px;font-size:1rem;font-weight:600;color:var(--dim)}
+.tabs button.on{background:var(--text);color:var(--bg)}
+.card{border:1px solid var(--border);background:var(--surface);border-radius:1rem;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.idle{padding:2.5rem 1.25rem;text-align:center}
+.idle h2{margin:0 0 .5rem;font-size:1.125rem;font-weight:600}
+.idle p.desc{margin:0 auto 1.5rem;max-width:28rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
+.btn-accent{display:inline-block;min-height:3rem;border-radius:999px;background:var(--accent);padding:0 2rem;font-size:1rem;font-weight:600;color:#fff}
+.btn-accent:disabled{opacity:.4}
+.btn-dark{min-height:3rem;border-radius:999px;background:var(--text);color:var(--bg);padding:0 2rem;font-size:1rem;font-weight:600}
+.btn-dark:disabled{opacity:.35}
+.btn-ghost{min-height:2.75rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);padding:0 1.5rem;font-weight:500}
+.btn-speak{display:inline-block;margin-top:1rem;min-height:2.75rem;border-radius:999px;background:var(--accent);padding:0 1.5rem;font-weight:600;color:#fff}
+.book-entry{display:flex;width:100%;align-items:center;gap:.75rem;border:1px solid var(--border);background:var(--surface);border-radius:1rem;padding:1rem;text-align:left;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.book-entry .ic{flex:none;display:flex;width:2.75rem;height:2.75rem;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--bg);border-radius:.75rem;color:var(--accent)}
+.book-entry .tt{min-width:0;flex:1}
+.book-entry .tt .a{display:block;font-size:1rem;font-weight:600}
+.book-entry .tt .b{display:block;margin-top:.125rem;font-size:.875rem;color:var(--dim)}
+.book-entry .arw{flex:none;color:var(--dim)}
+.backhome{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-bottom:1rem}
+.backhome button{display:inline-flex;min-height:2.75rem;align-items:center;gap:.5rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:0 1.25rem;font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.stage{position:relative;overflow:hidden;padding:2rem 1.25rem;text-align:center}
+.stage.compact{padding:1rem 1.25rem}
+.stage.compact .reveal-zone{margin-top:1rem}
+.stage .word{margin:0 0 .5rem;font-size:2.25rem;font-weight:600;word-break:break-word}
+.ipa p{margin:0;font-size:1rem;line-height:1.65;color:var(--text)}
+.ipa p.off{color:var(--dim)}
+.ipa .one{margin:0 .125rem;display:inline-block;white-space:nowrap}
+.ipa .lab{margin-left:.25rem;font-size:.875rem}
+.chips{margin-top:.75rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
+.chips button{display:inline-flex;min-height:2.25rem;align-items:center;gap:.375rem;border:1px solid var(--border);background:var(--bg);border-radius:999px;padding:.375rem .75rem;font-size:.875rem}
+.chips .fm{font-weight:500}
+.chips .fi{color:var(--dim)}
+.reveal-zone{margin:1.5rem auto 0;max-width:28rem}
+.reveal-zone .meaning{margin:1rem 0 0;min-height:1.75rem;font-size:1.125rem;line-height:1.7}
+.reveal-zone .meaning.hide{visibility:hidden}
+.judge-row{margin-top:1.25rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.judge-row button{min-height:3rem;border-radius:999px;padding:0 1rem;font-size:.875rem;font-weight:600}
+.jbtn-bad{border:1px solid var(--bad-bd);background:var(--bad-bg);color:var(--bad-tx)}
+.jbtn-bad.on{background:#dc2626;color:#fff;border-color:#dc2626}
+.jbtn-good{border:1px solid var(--good-bd);background:var(--good-bg);color:var(--good-tx)}
+.jbtn-good.on{background:#16a34a;color:#fff;border-color:#16a34a}
+.jbtn-good:disabled{opacity:.35}
+.jbtn-next{background:var(--text);color:var(--bg);padding:0 1.25rem !important}
+.jbtn-next:disabled{opacity:.35}
+.stats{margin-top:1rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;font-size:.875rem;color:var(--dim)}
+.endround{margin-top:1rem;text-align:center}
+.endround button{display:inline-flex;min-height:2.75rem;align-items:center;gap:.5rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:0 1.5rem;font-weight:500}
+.below-book{margin-top:1rem}
+.quiz-card{padding:2rem 1.25rem}
+.quiz-card .tip{margin:0 0 .75rem;text-align:center;font-size:.875rem;color:var(--dim)}
+.quiz-card .meaning{margin:0 0 1.5rem;min-height:3.5rem;text-align:center;font-size:1.25rem;line-height:1.7}
+.quiz-input{display:block;width:100%;min-height:3rem;border:1px solid var(--border);background:var(--bg);border-radius:.75rem;padding:0 1rem;text-align:center;font-size:1.125rem;color:var(--text);outline:none}
+.quiz-input:focus{border-color:var(--accent)}
+.quiz-input:disabled{opacity:.6}
+.feedback{margin-top:1rem;border-radius:.75rem;padding:.75rem 1rem;text-align:center;font-size:1rem}
+.feedback.good{background:var(--fb-good-bg);color:var(--fb-good-tx)}
+.feedback.bad{background:var(--fb-bad-bg);color:var(--fb-bad-tx)}
+.feedback .ft{margin:0;font-weight:600}
+.feedback .fw{margin:.5rem 0 0;font-size:1.5rem;font-weight:600;color:var(--text)}
+.feedback .btn-speak{margin-top:.75rem;min-height:2.5rem;font-size:.875rem;padding:0 1.25rem}
+.quiz-btns{margin-top:1.25rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.75rem}
+.pill{position:fixed;right:1rem;z-index:30;display:inline-flex;min-height:3rem;align-items:center;gap:.5rem;border-radius:999px;background:var(--text);color:var(--bg);padding:0 1.25rem;font-weight:600;box-shadow:0 10px 15px rgba(0,0,0,.2);bottom:calc(20px + env(safe-area-inset-bottom))}
+.pill strong{border-radius:999px;background:#dc2626;padding:.125rem .625rem;font-size:.875rem;color:#fff}
+.overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.5)}
+.sheet{width:100%;max-width:28rem;border-radius:1.5rem 1.5rem 0 0;background:var(--surface);padding:1.75rem 1.5rem;text-align:center;box-shadow:0 20px 25px rgba(0,0,0,.25)}
+.sheet h3{margin:0;font-size:1.125rem;font-weight:700}
+.sheet .rate{margin:1rem 0;font-size:3rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.sheet .info{margin:0 0 1.5rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
+.sheet .btns{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem}
+.sheet .btns button{min-height:3rem;border-radius:999px;padding:0 1.75rem;font-weight:600}
+.book-overlay{position:fixed;inset:0;z-index:40;overflow-y:auto;background:var(--bg)}
+.book-wrap{margin:0 auto;width:100%;max-width:42rem;padding:1rem 1rem 4rem}
+.book-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:1rem}
+.book-head h2{margin:0;font-size:1.25rem;font-weight:700}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:.25rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:.25rem;margin-bottom:.75rem}
+.seg button{min-height:2.5rem;border-radius:999px;font-weight:600;color:var(--dim)}
+.seg button.on{background:var(--text);color:var(--bg)}
+.seg.acc button.on{background:var(--accent);color:#fff}
+.practice-box{margin-bottom:1rem;border:1px solid var(--accent);background:var(--surface);border-radius:1rem;padding:1rem;text-align:center}
+.practice-box p{margin:0 0 .75rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
+.io-box{margin-bottom:1rem;border:1px solid var(--border);background:var(--surface);border-radius:1rem;padding:1rem}
+.io-box p{margin:0 0 .75rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
+.io-box .row{display:flex;flex-wrap:wrap;gap:.5rem}
+.io-box .row button{min-height:2.75rem;border-radius:999px;border:1px solid var(--border);padding:0 1.25rem;font-weight:500}
+.io-box .row button.danger-soft{background:var(--bad-bg);border-color:var(--bad-bd);color:var(--bad-tx)}
+.io-box .row button.armed{background:#dc2626;color:#fff;border-color:#dc2626}
+.io-warn{margin:.75rem 0 0;border:1px solid var(--bad-bd);background:var(--bad-bg);border-radius:.75rem;padding:.75rem 1rem;text-align:center;font-size:.875rem;font-weight:600;line-height:1.7;color:var(--bad-tx)}
+.paste-card{width:100%;max-width:28rem;max-height:92vh;overflow-y:auto;border-radius:1.5rem 1.5rem 0 0;background:var(--surface);padding:1.5rem;box-shadow:0 20px 25px rgba(0,0,0,.25)}
+.paste-card .top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.75rem}
+.paste-card h3{margin:0;font-size:1.125rem;font-weight:700}
+.paste-card p{margin:0 0 1rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
+.paste-card textarea{width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:.75rem;background:var(--bg);color:var(--text);padding:.75rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1rem;line-height:1.6;margin-bottom:1rem}
+.paste-card .row{display:flex;flex-wrap:wrap;gap:.5rem}
+.paste-card .row button{min-height:3rem;border-radius:999px;border:1px solid var(--border);padding:0 1.5rem;font-weight:500}
+.paste-card .row button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.paste-card .row button.armed{background:#dc2626;border-color:#dc2626;color:#fff}
+.confirm-card{width:100%;max-width:28rem;border-radius:1.5rem 1.5rem 0 0;background:var(--surface);padding:1.5rem;box-shadow:0 20px 25px rgba(0,0,0,.25)}
+.confirm-card h3{margin:0 0 .75rem;font-size:1.125rem;font-weight:700}
+.confirm-card p{margin:0 0 1.25rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
+.confirm-card .row{display:flex;flex-wrap:wrap;gap:.5rem}
+.confirm-card .row button{min-height:3rem;border-radius:999px;border:1px solid var(--border);padding:0 1.5rem;font-weight:500}
+.confirm-card .row button.danger{background:#dc2626;border-color:#dc2626;color:#fff;font-weight:600}
+.book-empty{padding:2.5rem 0;text-align:center;color:var(--dim)}
+.book-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.book-list button{display:flex;width:100%;min-height:3.5rem;align-items:center;justify-content:space-between;gap:.75rem;border:1px solid var(--border);background:var(--surface);border-radius:.75rem;padding:.75rem 1rem;text-align:left}
+.book-list .w{display:block;font-size:1.125rem;font-weight:600}
+.book-list .m{display:block;font-size:.875rem;color:var(--dim)}
+.book-list .r{display:block;font-size:.75rem;color:var(--dim)}
+.book-list .c{flex:none;border-radius:999px;background:var(--count-bg);color:var(--count-tx);padding:.25rem .75rem;font-size:.875rem;font-weight:600}
+.clear-row{margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem}
+.clear-row button{min-height:2.75rem;border-radius:999px;border:1px solid var(--border);padding:0 1.25rem;font-weight:500}
+.clear-row button.armed{background:#dc2626;color:#fff;border-color:#dc2626}
+.modal-card{width:100%;max-width:28rem;border-radius:1.5rem 1.5rem 0 0;background:var(--surface);padding:1.5rem;text-align:center;box-shadow:0 20px 25px rgba(0,0,0,.25)}
+.modal-card .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.modal-card .word{margin:0 0 .5rem;font-size:1.875rem;font-weight:600;word-break:break-word}
+.modal-card .meaning{margin:1.25rem 0 0;font-size:1.125rem;line-height:1.7}
+.toast{position:fixed;left:50%;transform:translateX(-50%);z-index:60;width:max-content;max-width:92vw;border-radius:999px;background:var(--text);color:var(--bg);padding:.75rem 1.25rem;text-align:center;font-size:.875rem;font-weight:500;box-shadow:0 10px 15px rgba(0,0,0,.2);bottom:calc(96px + env(safe-area-inset-bottom))}
+.stage-content{position:relative}
+.stamp{position:absolute;top:50%;width:6rem;height:6rem;pointer-events:none}
+.stamp svg{width:100%;height:100%;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.14))}
+.stamp-wrong{left:6%;transform:translateY(-50%) rotate(-12deg)}
+.stamp-correct{right:6%;transform:translateY(-50%) rotate(12deg)}
+@keyframes stamp-pop{0%{opacity:0;scale:1.7}55%{opacity:1;scale:.93}100%{opacity:1;scale:1}}
+.stamp-pop{animation:stamp-pop .28s ease-out both}
+@media (prefers-reduced-motion: reduce){.stamp-pop{animation:none}}
+@media (min-width:640px){
+  .stamp{width:7rem;height:7rem}
+  .stage .word{font-size:3rem}
+  .overlay{align-items:center;padding:1.5rem}
+  .sheet,.modal-card,.paste-card{border-radius:1.5rem}
+  .quiz-card .meaning{font-size:1.5rem}
+}
+@media (min-width:1024px){
+  .wrap,.book-wrap{max-width:56rem;padding-left:2rem;padding-right:2rem}
+  .topbar .cnt{font-size:1rem}
+  .tabs button{min-height:3rem;font-size:1.125rem}
+  .idle{padding:3rem 2.5rem}
+  .idle h2{font-size:1.5rem}
+  .idle p.desc{max-width:36rem;font-size:1rem}
+  .btn-accent,.btn-dark{min-height:3.5rem;padding:0 2.5rem;font-size:1.125rem}
+  .book-entry{gap:1rem;padding:1.25rem 1.5rem}
+  .book-entry .ic{width:3.5rem;height:3.5rem}
+  .book-entry .tt .a{font-size:1.25rem}
+  .book-entry .tt .b{font-size:1rem}
+  .backhome button{min-height:3rem;padding:0 1.5rem;font-size:1.125rem}
+  .stage{padding:3rem 2.5rem}
+  .stage.compact{padding:1.5rem 2.5rem}
+  .stage .word{font-size:3.75rem}
+  .ipa p{font-size:1.25rem}
+  .ipa .lab{font-size:1rem}
+  .btn-speak{min-height:3rem;padding:0 2rem;font-size:1.125rem}
+  .chips button{min-height:2.5rem;padding:.375rem 1rem;font-size:1rem}
+  .reveal-zone{max-width:36rem}
+  .reveal-zone .meaning{min-height:2.25rem;font-size:1.5rem}
+  .judge-row button{min-height:3.5rem;padding:0 2rem;font-size:1.125rem}
+  .jbtn-next{padding:0 2.25rem !important}
+  .stats{font-size:1rem}
+  .endround button{min-height:3rem;padding:0 2rem;font-size:1.125rem}
+  .quiz-card{padding:2.5rem}
+  .quiz-card .tip{font-size:1rem}
+  .quiz-card .meaning{min-height:4rem;font-size:1.875rem}
+  .quiz-input{min-height:3.5rem;font-size:1.25rem}
+  .feedback{padding:1rem 1.5rem;font-size:1.125rem}
+  .feedback .fw{font-size:2.25rem}
+  .feedback .btn-speak{min-height:2.75rem;font-size:1rem;padding:0 1.5rem}
+  .book-head h2{font-size:1.5rem}
+  .book-list .w{font-size:1.25rem}
+  .book-list .m{font-size:1rem}
+  .modal-card{max-width:32rem;padding:2rem}
+  .modal-card .word{font-size:2.25rem}
+  .modal-card .meaning{font-size:1.25rem}
+  .stamp{width:8rem;height:8rem}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="pill-slot"></div>
+<div id="panel-slot"></div>
+<div id="book-slot"></div>
+<div id="modal-slot"></div>
+<div id="paste-slot"></div>
+<div id="confirm-slot"></div>
+<div id="toast-slot"></div>
+<!-- 不设 accept 过滤、不用 display:none：备份文件转手后扩展名/类型常对不上，
+     带过滤会在手机文件选择器里变灰选不了；display:none 的文件框靠 JS 触发点击，
+     部分手机浏览器不弹选择器。改成 1px 视觉隐藏，程序点击照样生效。 -->
+<input type="file" id="io-file" aria-label="选择错题备份文件" style="position:fixed;left:0;bottom:0;width:1px;height:1px;opacity:.01;border:0;padding:0">
+<script>
+"use strict";
+var WORDS = [{"word": "sneaker", "ipa": "/ˈsniːkə/（英）/ˈsniːkər/（美）", "meaning": "n.（复）轻便运动鞋（美）。"}, {"word": "sneeze", "ipa": "/sniːz/", "meaning": "v.打喷嚏。"}, {"word": "sniff", "ipa": "/snɪf/", "meaning": "v.抽鼻子（哭、患感冒时）。"}, {"word": "snow", "ipa": "/snəʊ/（英）/snoʊ/（美）", "meaning": "n.雪 vi.下雪。"}, {"word": "snowball", "ipa": "/ˈsnəʊbɔːl/（英）/ˈsnoʊbɔːl/（美）", "meaning": "n.雪球。"}, {"word": "snowman", "ipa": "/ˈsnəʊmæn/（英）/ˈsnoʊmæn/（美）", "meaning": "n.雪人。"}, {"word": "snowy", "ipa": "/ˈsnəʊi/（英）/ˈsnoʊi/（美）", "meaning": "a.雪（白）的；下雪的；多（积）雪的。"}, {"word": "so", "ipa": "/səʊ/（英）/soʊ/（美）", "meaning": "ad.如此，这么；非常；同样 conj.因此，所以。"}, {"word": "soap", "ipa": "/səʊp/（英）/soʊp/（美）", "meaning": "n.肥皂。"}, {"word": "sob", "ipa": "/sɒb/（英）/sɑːb/（美）", "meaning": "n.&v.抽泣，啜泣。"}, {"word": "soccer", "ipa": "/ˈsɒkə/（英）/ˈsɑːkər/（美）", "meaning": "n.英式足球。"}, {"word": "social", "ipa": "/ˈsəʊʃl/（英）/ˈsoʊʃl/（美）", "meaning": "a. 社会的；社交的。"}, {"word": "socialism", "ipa": "/ˈsəʊʃəlɪzəm/（英）/ˈsoʊʃəlɪzəm/（美）", "meaning": "n.社会主义。"}, {"word": "socialist", "ipa": "/ˈsəʊʃəlɪst/（英）/ˈsoʊʃəlɪst/（美）", "meaning": "a.社会主义的。"}, {"word": "society", "ipa": "/səˈsaɪəti/", "meaning": "n.社会。"}, {"word": "sock", "ipa": "/sɒk/（英）/sɑːk/（美）", "meaning": "n.短袜。"}, {"word": "socket", "ipa": "/ˈsɒkɪt/（英）/ˈsɑːkɪt/（美）", "meaning": "n.（电源）插座。"}, {"word": "sofa", "ipa": "/ˈsəʊfə/（英）/ˈsoʊfə/（美）", "meaning": "n.（长）沙发。"}, {"word": "soft", "ipa": "/sɒft/（英）/sɔːft/（美）", "meaning": "a.软的，柔和的。"}, {"word": "software", "ipa": "/ˈsɒftweə/（英）/ˈsɔːftwer/（美）", "meaning": "n.软件。"}, {"word": "soft drink", "ipa": "/ˌsɒft ˈdrɪŋk/（英）/ˌsɔːft ˈdrɪŋk/（美）", "meaning": "n.（不含酒精）清凉饮料。"}, {"word": "softball", "ipa": "/ˈsɒftbɔːl/（英）/ˈsɔːftbɔːl/（美）", "meaning": "n.垒球。"}, {"word": "soil", "ipa": "/sɔɪl/", "meaning": "n.土壤，土地。"}, {"word": "solar", "ipa": "/ˈsəʊlə/（英）/ˈsoʊlər/（美）", "meaning": "a.太阳的。"}, {"word": "soldier", "ipa": "/ˈsəʊldʒə/（英）/ˈsoʊldʒər/（美）", "meaning": "n.士兵，战士。"}, {"word": "solid", "ipa": "/ˈsɒlɪd/（英）/ˈsɑːlɪd/（美）", "meaning": "a.结实的，固体的 n.固体。"}, {"word": "some", "ipa": "/sʌm；səm/", "meaning": "a.一些，若干；有些；某一 pron.若干，一些。"}, {"word": "somebody", "ipa": "/ˈsʌmbədi/（英）/ˈsʌmbɑːdi/（美）", "meaning": "pron.某人；有人；有名气的人。"}, {"word": "someone", "ipa": "/ˈsʌmwʌn/", "meaning": "pron.某一个人。"}, {"word": "something", "ipa": "/ˈsʌmθɪŋ/", "meaning": "pron.某事；某物。"}, {"word": "skirt", "ipa": "/skɜːt/（英）/skɜːrt/（美）", "meaning": "n.女裙。"}, {"word": "sky", "ipa": "/skaɪ/", "meaning": "n.天；天空。"}, {"word": "skyscraper", "ipa": "/ˈskaɪskreɪpə/（英）/ˈskaɪskreɪpər/（美）", "meaning": "n.摩天楼。"}, {"word": "slave", "ipa": "/sleɪv/", "meaning": "n.奴隶。"}, {"word": "slavery", "ipa": "/ˈsleɪvəri/", "meaning": "n.奴隶制度。"}, {"word": "sleep", "ipa": "/sliːp/", "meaning": "n.睡觉。"}, {"word": "sleep / slept", "ipa": "/sliːp/；/slept/", "meaning": "vi.睡觉。"}, {"word": "sleepy", "ipa": "/ˈsliːpi/", "meaning": "a.想睡的，困倦的，瞌睡的。"}, {"word": "sleeve", "ipa": "/sliːv/", "meaning": "n.袖子，袖套。"}, {"word": "slice", "ipa": "/slaɪs/", "meaning": "n.片，切面（薄）片。"}, {"word": "slide", "ipa": "/slaɪd/", "meaning": "n.幻灯片，滑道 v.滑行，滑动。"}, {"word": "slight", "ipa": "/slaɪt/", "meaning": "a.轻微的，细小的。"}, {"word": "slim", "ipa": "/slɪm/", "meaning": "a.苗条的，纤细的。"}, {"word": "slip", "ipa": "/slɪp/", "meaning": "n.片，条，纸片，纸条。"}, {"word": "slow", "ipa": "/sləʊ/（英）/sloʊ/（美）", "meaning": "ad.慢慢地，缓慢地。"}, {"word": "small", "ipa": "/smɔːl/", "meaning": "a.小的，少的。"}, {"word": "smart", "ipa": "/smɑːt/（英）/smɑːrt/（美）", "meaning": "a.灵巧的，伶俐的；（人、服装等）时髦的，帅的。"}, {"word": "smell / smelt / smelled", "ipa": "/smel/；/smelt/；/smeld/", "meaning": "v.嗅，闻到；发气味 n.气味。"}, {"word": "smelly", "ipa": "/ˈsmeli/", "meaning": "a.有臭味的，发出臭味的。"}, {"word": "smile", "ipa": "/smaɪl/", "meaning": "n.&v.微笑。"}, {"word": "smog", "ipa": "/smɒɡ/（英）/smɑːɡ/（美）", "meaning": "n.烟雾（=smoke+fog）。"}, {"word": "smoke", "ipa": "/sməʊk/（英）/smoʊk/（美）", "meaning": "n.烟 v.冒烟；吸烟。"}, {"word": "smoke-free", "ipa": "/ˌsməʊk ˈfriː/（英）/ˌsmoʊk ˈfriː/（美）", "meaning": "a.非吸烟的，无烟的。"}, {"word": "smoker", "ipa": "/ˈsməʊkə/（英）/ˈsmoʊkər/（美）", "meaning": "n.吸烟者。"}, {"word": "smoking", "ipa": "/ˈsməʊkɪŋ/（英）/ˈsmoʊkɪŋ/（美）", "meaning": "n.吸烟，抽烟；冒烟。"}, {"word": "smooth", "ipa": "/smuːð/", "meaning": "a.光滑的；平坦的。"}, {"word": "snack", "ipa": "/snæk/", "meaning": "n.小吃。"}, {"word": "snackbar", "ipa": "/ˈsnækbɑː/（英）/ˈsnækbɑːr/（美）", "meaning": "n.快餐店。"}, {"word": "snake", "ipa": "/sneɪk/", "meaning": "n.蛇 v.蛇般爬行；蜿蜒行进。"}, {"word": "snatch", "ipa": "/snætʃ/", "meaning": "v.夺，夺得，夺走。"}, {"word": "simple-minded", "ipa": "/ˌsɪmpl ˈmaɪndɪd/", "meaning": "a.纯朴，头脑简单。"}, {"word": "simplify", "ipa": "/ˈsɪmplɪfaɪ/", "meaning": "v.使简化，使简易。"}, {"word": "simply", "ipa": "/ˈsɪmpli/", "meaning": "ad.简单地，（加强语气）的确。"}, {"word": "since", "ipa": "/sɪns/", "meaning": "ad.从那时以来 conj.从……以来，……以后，由于 prep.从……以来。"}, {"word": "sincerely", "ipa": "/sɪnˈsɪəli/（英）/sɪnˈsɪrli/（美）", "meaning": "ad.真诚地。"}, {"word": "sing / sang / sung", "ipa": "/sɪŋ/；/sæŋ/；/sʌŋ/", "meaning": "v.唱，唱歌。"}, {"word": "singer", "ipa": "/ˈsɪŋə/（英）/ˈsɪŋər/（美）", "meaning": "n.歌唱家，歌手。"}, {"word": "single", "ipa": "/ˈsɪŋɡl/", "meaning": "a.单一的，单个的。"}, {"word": "sink", "ipa": "/sɪŋk/", "meaning": "n.洗涤槽；污水槽。"}, {"word": "sink / sank / sunk", "ipa": "/sɪŋk/；/sæŋk/；/sʌŋk/", "meaning": "vi.下沉；消沉。"}, {"word": "sir", "ipa": "/sɜː/（英）/sɜːr/（美）", "meaning": "n.先生；阁下。"}, {"word": "sister", "ipa": "/ˈsɪstə/（英）/ˈsɪstər/（美）", "meaning": "n.姐；妹。"}, {"word": "sister-in-law", "ipa": "/ˈsɪstə ɪn lɔː/（英）/ˈsɪstər ɪn lɔː/（美）", "meaning": "n.嫂，弟媳。"}, {"word": "sit / sat", "ipa": "/sɪt/；/sæt/", "meaning": "vi.坐。"}, {"word": "situation", "ipa": "/ˌsɪtʃuˈeɪʃn/", "meaning": "n.形势，情况。"}, {"word": "six", "ipa": "/sɪks/", "meaning": "num.六。"}, {"word": "sixth", "ipa": "/sɪksθ/", "meaning": "num.第六。"}, {"word": "sixty", "ipa": "/ˈsɪksti/", "meaning": "num.六十。"}, {"word": "sixteen", "ipa": "/ˌsɪksˈtiːn/", "meaning": "num.十六。"}, {"word": "sixteenth", "ipa": "/ˌsɪksˈtiːnθ/", "meaning": "num.第十六。"}, {"word": "size", "ipa": "/saɪz/", "meaning": "n.尺寸，大小。"}, {"word": "skate", "ipa": "/skeɪt/", "meaning": "vi.溜冰，滑冰。"}, {"word": "skateboard", "ipa": "/ˈskeɪtbɔːd/（英）/ˈskeɪtbɔːrd/（美）", "meaning": "n.冰鞋，滑板。"}, {"word": "ski", "ipa": "/skiː/", "meaning": "n.&vi.滑雪板；滑雪。"}, {"word": "skill", "ipa": "/skɪl/", "meaning": "n.技能，技巧。"}, {"word": "skilled", "ipa": "/skɪld/", "meaning": "a.熟练的；有技能的。"}, {"word": "skillful", "ipa": "/ˈskɪlfl/（英）/ˈskɪlfəl/（美）", "meaning": "a.熟练，精湛的，灵巧的。"}, {"word": "skillfully", "ipa": "/ˈskɪlfəli/", "meaning": "ad.精湛地，巧妙地。"}, {"word": "skin", "ipa": "/skɪn/", "meaning": "n.皮，皮肤；兽皮。"}, {"word": "skip", "ipa": "/skɪp/", "meaning": "v.蹦蹦跳跳；跳绳。"}, {"word": "sometimes", "ipa": "/ˈsʌmtaɪmz/", "meaning": "ad.有时。"}, {"word": "somewhere", "ipa": "/ˈsʌmweə/（英）/ˈsʌmwer/（美）", "meaning": "ad.在某处。"}, {"word": "son", "ipa": "/sʌn/", "meaning": "n.儿子。"}, {"word": "song", "ipa": "/sɒŋ/（英）/sɔːŋ/（美）", "meaning": "n.歌唱，歌曲。"}, {"word": "soon", "ipa": "/suːn/", "meaning": "ad.不久，很快，一会儿。"}, {"word": "sorrow", "ipa": "/ˈsɒrəʊ/（英）/ˈsɔːroʊ/（美）", "meaning": "n.悲伤，悲痛。"}, {"word": "sorry", "ipa": "/ˈsɒri/（英）/ˈsɔːri/（美）", "meaning": "a.对不起，抱歉；难过的。"}, {"word": "sort", "ipa": "/sɔːt/（英）/sɔːrt/（美）", "meaning": "n.种类；排序 v.安排妥当；分类。"}, {"word": "so-so", "ipa": "/ˌsəʊ ˈsəʊ/（英）/ˌsoʊ ˈsoʊ/（美）", "meaning": "a.一般；不怎么样；凑合。"}, {"word": "soul", "ipa": "/səʊl/（英）/soʊl/（美）", "meaning": "n.灵魂；心灵；气魄。"}, {"word": "sound", "ipa": "/saʊnd/", "meaning": "vi.听起来，发出声音 n.声音。"}, {"word": "soup", "ipa": "/suːp/", "meaning": "n.汤。"}, {"word": "sour", "ipa": "/ˈsaʊə/（英）/ˈsaʊər/（美）", "meaning": "a.酸的，馊的。"}, {"word": "south", "ipa": "/saʊθ/", "meaning": "a.南（方）的；向南的；从南方来的 ad.在南方；向南方；自南方 n.南；南方；南风；南部。"}, {"word": "southeast", "ipa": "/ˌsaʊθˈiːst/", "meaning": "n.东南。"}, {"word": "southern", "ipa": "/ˈsʌðən/（英）/ˈsʌðərn/（美）", "meaning": "a.南部的，南方的。"}, {"word": "southwest", "ipa": "/ˌsaʊθˈwest/", "meaning": "n.西南。"}, {"word": "souvenir", "ipa": "/ˌsuːvəˈnɪə/（英）/ˌsuːvəˈnɪr/（美）", "meaning": "n.旅游纪念品，纪念物。"}, {"word": "sow / sowed / sown", "ipa": "/səʊ/；/səʊd/；/səʊn/（英）/soʊ/；/soʊd/；/soʊn/（美）", "meaning": "vt.播种。"}, {"word": "space", "ipa": "/speɪs/", "meaning": "n.空间。"}, {"word": "spaceship", "ipa": "/ˈspeɪsʃɪp/", "meaning": "n.宇宙飞船。"}, {"word": "spade", "ipa": "/speɪd/", "meaning": "n.铲子；纸牌中的黑桃。"}, {"word": "spaghetti", "ipa": "/spəˈɡeti/", "meaning": "n.意大利式面条。"}, {"word": "Spain", "ipa": "/speɪn/", "meaning": "n.西班牙。"}, {"word": "Spanish", "ipa": "/ˈspænɪʃ/", "meaning": "a.西班牙人的，西班牙的，西班牙语的 n.西班牙语。"}, {"word": "spare", "ipa": "/speə/（英）/sper/（美）", "meaning": "a.空闲，多余的，剩余的。"}, {"word": "sparrow", "ipa": "/ˈspærəʊ/（英）/ˈspæroʊ/（美）", "meaning": "n.麻雀，雀型鸟类。"}, {"word": "speak / spoke / spoken", "ipa": "/spiːk/；/spəʊk/；/ˈspəʊkən/（英）/spiːk/；/spoʊk/；/ˈspoʊkən/（美）", "meaning": "v.说，讲；谈话；发言。"}, {"word": "speaker", "ipa": "/ˈspiːkə/（英）/ˈspiːkər/（美）", "meaning": "n.演讲人，演说家。"}, {"word": "spear", "ipa": "/spɪə/（英）/spɪr/（美）", "meaning": "n.矛，枪，梭镖。"}, {"word": "special", "ipa": "/ˈspeʃl/", "meaning": "a.特别的，专门的。"}, {"word": "specialist", "ipa": "/ˈspeʃəlɪst/", "meaning": "n.（医学）专家，专科医生；专家；专业人员。"}, {"word": "specific", "ipa": "/spəˈsɪfɪk/", "meaning": "a.明确的，具体的，独特的。"}, {"word": "speech", "ipa": "/spiːtʃ/", "meaning": "n.演讲。"}, {"word": "speed", "ipa": "/spiːd/", "meaning": "n.速度 v.（使）加速。"}, {"word": "spell", "ipa": "/spel/", "meaning": "vt.拼写。"}, {"word": "spelling", "ipa": "/ˈspelɪŋ/", "meaning": "n.拼写，拼读。"}, {"word": "spend / spent", "ipa": "/spend/；/spent/", "meaning": "v.度过；花费（钱、时间等）。"}, {"word": "spin", "ipa": "/spɪn/", "meaning": "v.&n.纺，（使）快速旋转；旋转，旋转运动。"}, {"word": "spirit", "ipa": "/ˈspɪrɪt/", "meaning": "n.精神。"}, {"word": "spiritual", "ipa": "/ˈspɪrɪtʃuəl/", "meaning": "a.精神的；心灵的。"}, {"word": "spit", "ipa": "/spɪt/", "meaning": "v.吐唾沫；吐痰。"}, {"word": "splendid", "ipa": "/ˈsplendɪd/", "meaning": "a.灿烂的，辉煌的；（口语）极好的。"}, {"word": "split", "ipa": "/splɪt/", "meaning": "v.撕开；切开。"}, {"word": "spoken", "ipa": "/ˈspəʊkən/（英）/ˈspoʊkən/（美）", "meaning": "a.口语的。"}, {"word": "spokesman", "ipa": "/ˈspəʊksmən/（英）/ˈspoʊksmən/（美）", "meaning": "n.发言人。"}, {"word": "sponsor", "ipa": "/ˈspɒnsə/（英）/ˈspɑːnsər/（美）", "meaning": "n.赞助者，赞助商。"}, {"word": "spoon", "ipa": "/spuːn/", "meaning": "n.匙，调羹。"}, {"word": "spoonful", "ipa": "/ˈspuːnfʊl/", "meaning": "n.一匙（的量）。"}, {"word": "sport", "ipa": "/spɔːt/（英）/spɔːrt/（美）", "meaning": "vn.体育运动，锻炼；（复，英）运动会。"}, {"word": "spot", "ipa": "/spɒt/（英）/spɑːt/（美）", "meaning": "n.斑点，污点；场所，地点 v.沾上污渍，弄脏。"}, {"word": "spray", "ipa": "/spreɪ/", "meaning": "n./v.水雾，喷雾（器）喷洒。"}, {"word": "spread", "ipa": "/spred/", "meaning": "v.延伸；展开。"}, {"word": "spring", "ipa": "/sprɪŋ/", "meaning": "n.春天，春季 n.泉水，泉。"}, {"word": "spy", "ipa": "/spaɪ/", "meaning": "n.密探，间谍 v.侦探，刺探。"}, {"word": "square", "ipa": "/skweə/（英）/skwer/（美）", "meaning": "n.广场 a.平方的；方形的，宽而结实的（体格，肩膀）。"}, {"word": "squeeze", "ipa": "/skwiːz/", "meaning": "n.挤压，捏，塞。"}, {"word": "squid", "ipa": "/skwɪd/", "meaning": "n.鱿鱼。"}, {"word": "squirrel", "ipa": "/ˈskwɪrəl/（英）/ˈskwɜːrəl/（美）", "meaning": "n.松鼠。"}, {"word": "stable", "ipa": "/ˈsteɪbl/", "meaning": "a.稳固的，牢固的。"}];
+
+/* ================= helpers ================= */
+function esc(s){
+  return String(s == null ? "" : s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+function shuffleArr(arr){
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function splitForms(word){
+  return String(word == null ? "" : word).split("/").map(function(s){ return s.trim(); }).filter(Boolean);
+}
+function splitIpaGroup(s){
+  var parts = String(s == null ? "" : s).split("/").map(function(x){ return x.trim(); }).filter(Boolean);
+  var out = [];
+  parts.forEach(function(p){
+    p.split(/[；;]/).forEach(function(q){
+      var t = q.trim();
+      if (t) out.push(t);
+    });
+  });
+  return out;
+}
+function ipaGroups(ipa){
+  var s = String(ipa == null ? "" : ipa).trim();
+  if (!s) return [];
+  var ukMark = s.indexOf("（英）");
+  if (ukMark === -1) return [{ label:"", items: splitIpaGroup(s) }];
+  var ukPart = s.slice(0, ukMark);
+  var rest = s.slice(ukMark + 3);
+  var usMark = rest.indexOf("（美）");
+  var usPart = usMark === -1 ? rest : rest.slice(0, usMark);
+  return [
+    { label:"（英）", items: splitIpaGroup(ukPart) },
+    { label:"（美）", items: splitIpaGroup(usPart) }
+  ];
+}
+function ipaVariants(ipa, accent){
+  var s = String(ipa == null ? "" : ipa).trim();
+  if (!s) return [];
+  var ukMark = s.indexOf("（英）");
+  if (ukMark === -1) return splitIpaGroup(s);
+  var ukPart = s.slice(0, ukMark);
+  var rest = s.slice(ukMark + 3);
+  var usMark = rest.indexOf("（美）");
+  var usPart = usMark === -1 ? rest : rest.slice(0, usMark);
+  return splitIpaGroup(accent === "uk" ? ukPart : usPart);
+}
+function formIpaPairs(entry, accent){
+  var forms = splitForms(entry.word);
+  if (forms.length < 2) return [];
+  var vars = ipaVariants(entry.ipa, accent);
+  if (vars.length !== forms.length) return [];
+  return forms.map(function(f, i){ return { form: f, ipa: "/" + (vars[i] || "") + "/" }; });
+}
+function ipaHtml(ipa, accent){
+  var groups = ipaGroups(ipa);
+  if (!groups.length) return "";
+  var h = '<div class="ipa">';
+  groups.forEach(function(g){
+    var active = groups.length < 2 || (accent === "uk" ? g.label === "（英）" : g.label === "（美）");
+    h += '<p' + (active ? '' : ' class="off"') + '>';
+    g.items.forEach(function(it){ h += '<span class="one">/' + esc(it) + '/</span>'; });
+    if (g.label) h += '<span class="lab">' + esc(g.label) + '</span>';
+    h += '</p>';
+  });
+  return h + '</div>';
+}
+function formChipsHtml(entry, accent, fnName){
+  var pairs = formIpaPairs(entry, accent);
+  if (!pairs.length) return "";
+  var h = '<div class="chips">';
+  pairs.forEach(function(pr, i){
+    h += '<button type="button" aria-label="播放 ' + esc(pr.form) + ' 的发音" onclick="' + fnName + '(' + i + ')">'
+       + '<span aria-hidden="true">🔊</span><span class="fm">' + esc(pr.form) + '</span>'
+       + '<span class="fi">' + esc(pr.ipa) + '</span></button>';
+  });
+  return h + '</div>';
+}
+function normalizeAnswer(s){
+  return String(s == null ? "" : s).trim().toLowerCase().replace(/\s+/g, "");
+}
+function answerMatches(input, target){
+  var u = normalizeAnswer(input);
+  if (!u) return false;
+  if (u === normalizeAnswer(target)) return true;
+  var forms = splitForms(target);
+  if (forms.length > 1){
+    var joined = "";
+    for (var i = 0; i < forms.length; i++){
+      if (u === normalizeAnswer(forms[i])) return true;
+      joined += normalizeAnswer(forms[i]);
+    }
+    if (u.replace(/\//g, "") === joined) return true;
+  }
+  return false;
+}
+function rateText(correct, wrong){
+  var done = correct + wrong;
+  if (!done) return "—";
+  return Math.round((correct / done) * 100) + "%";
+}
+function sortedBookEntries(book, bySeqAsc){
+  return Object.entries(book).sort(function(a, b){
+    if (b[1].count !== a[1].count) return b[1].count - a[1].count;
+    return bySeqAsc ? a[1].seq - b[1].seq : b[1].seq - a[1].seq;
+  });
+}
+var eventIdCounter = 0;
+function newEventId(){
+  eventIdCounter += 1;
+  return "e-" + Date.now().toString(36) + "-" + eventIdCounter.toString(36) + "-" + Math.floor(Math.random() * 0xffffffff).toString(36);
+}
+/* 旧备份只有次数、没有每条错次的编号：按（词，第几次）补出固定编号，
+   同一条旧记录在哪个设备上补出来的编号都一样，合并时就能认出是同一条，
+   不会重复计数。补的数量正好等于原次数，不改次数。 */
+function materializeEvents(wordKey, count, events, at){
+  var out = [];
+  var seen = {};
+  (events || []).forEach(function(e){
+    if (!e || !e.id || seen[e.id]) return;
+    seen[e.id] = true;
+    out.push({ id: e.id, at: typeof e.at === "string" ? e.at : at });
+  });
+  for (var i = 0; out.length < count; i += 1){
+    var id = "legacy:" + wordKey + ":" + i;
+    if (seen[id]) continue;
+    seen[id] = true;
+    out.push({ id: id, at: at });
+  }
+  return out;
+}
+function normalizeImportedBook(data){
+  if (!data || typeof data !== "object" || Array.isArray(data)) return null;
+  var raw = (data.items && typeof data.items === "object" && !Array.isArray(data.items)) ? data.items : data;
+  var out = {};
+  Object.keys(raw).forEach(function(k){
+    var it = raw[k];
+    if (!it || typeof it !== "object") return;
+    var word = String(it.word != null ? it.word : (k || "")).trim();
+    if (!word) return;
+    var count = parseInt(String(it.count != null ? it.count : ""), 10);
+    if (!(count > 0)) count = 1;
+    var reasons = [];
+    if (Array.isArray(it.reasons)){
+      it.reasons.forEach(function(r){
+        var t = String(r == null ? "" : r).trim();
+        if (t && reasons.indexOf(t) === -1) reasons.push(t);
+      });
+    }
+    var lastTime = (typeof it.lastTime === "string" && it.lastTime) ? it.lastTime : new Date().toISOString();
+    var rawEvents = [];
+    if (Array.isArray(it.events)){
+      it.events.forEach(function(x){
+        if (x && typeof x === "object" && typeof x.id === "string" && x.id){
+          rawEvents.push({ id: x.id, at: typeof x.at === "string" ? x.at : lastTime });
+        }
+      });
+    }
+    var key = word.toLowerCase();
+    var events = materializeEvents(key, count, rawEvents, lastTime);
+    var seqNum = Number(it.seq);
+    out[key] = {
+      word: word,
+      meaning: String(it.meaning != null ? it.meaning : ""),
+      ipa: String(it.ipa != null ? it.ipa : (it.pron != null ? it.pron : "")),
+      count: events.length || count,
+      reasons: reasons,
+      events: events,
+      seq: (isFinite(seqNum) && seqNum > 0) ? Math.floor(seqNum) : 0,
+      lastTime: lastTime
+    };
+  });
+  return Object.keys(out).length ? out : null;
+}
+
+/* ================= audio (Youdao, device TTS fallback) ================= */
+var currentAudio = null;
+var speakSeq = 0;
+function speakFallback(word, accent, onDone){
+  var called = false;
+  function done(){ if (called) return; called = true; if (onDone) onDone(); }
+  try {
+    if (!("speechSynthesis" in window)){ done(); return; }
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(word);
+    u.lang = accent === "uk" ? "en-GB" : "en-US";
+    u.rate = 0.82;
+    var voices = window.speechSynthesis.getVoices();
+    var want = accent === "uk" ? /^en[-_]GB/i : /^en[-_]US/i;
+    var v = null, i;
+    for (i = 0; i < voices.length; i++){ if (want.test(voices[i].lang)){ v = voices[i]; break; } }
+    if (!v){ for (i = 0; i < voices.length; i++){ if (/^en/i.test(voices[i].lang)){ v = voices[i]; break; } } }
+    if (v){ u.voice = v; u.lang = v.lang; }
+    u.onend = done;
+    u.onerror = done;
+    window.speechSynthesis.speak(u);
+    setTimeout(done, 5000);
+  } catch (e) { done(); }
+}
+function speakOne(word, accent, onDone){
+  var finished = false;
+  function finish(){ if (finished) return; finished = true; if (onDone) onDone(); }
+  var fellBack = false;
+  function fallback(){ if (fellBack) return; fellBack = true; speakFallback(word, accent, finish); }
+  try {
+    if (currentAudio){ try { currentAudio.pause(); } catch (e) {} }
+    var type = accent === "uk" ? 1 : 2;
+    var url = "https://dict.youdao.com/dictvoice?audio=" + encodeURIComponent(word) + "&type=" + type;
+    var a = new Audio(url);
+    currentAudio = a;
+    a.addEventListener("ended", finish);
+    a.addEventListener("error", fallback);
+    var p = a.play();
+    if (p && typeof p.catch === "function") p.catch(fallback);
+    setTimeout(finish, 6000);
+  } catch (e) { fallback(); }
+}
+function speakWord(word, accent){
+  if (!word) return;
+  var forms = splitForms(word);
+  if (forms.length <= 1){
+    speakSeq += 1;
+    speakOne(forms[0] || word, accent);
+    return;
+  }
+  var token = ++speakSeq;
+  var i = 0;
+  function step(){
+    if (token !== speakSeq) return;
+    if (i >= forms.length) return;
+    var f = forms[i];
+    i += 1;
+    speakOne(f, accent, function(){
+      if (token !== speakSeq) return;
+      setTimeout(step, 350);
+    });
+  }
+  step();
+}
+
+/* ================= verdict stamp (same seal design as the online version) ================= */
+function stampSvg(variant){
+  var wrong = variant === "wrong";
+  var ink = wrong ? "#dc2626" : "#16a34a";
+  var gid = wrong ? "stamp-ink-wrong" : "stamp-ink-correct";
+  var label = wrong ? "不会/错误" : "正确";
+  var fontSize = wrong ? 15.5 : 19;
+  var letterSpacing = wrong ? 1.5 : 7;
+  var mark = wrong
+    ? '<path d="M47 27 L71 51 M71 27 L47 51" stroke="' + ink + '" stroke-width="6.5" stroke-linecap="round" fill="none"/>'
+    : '<path d="M43 39 L55 51 L76 27" stroke="' + ink + '" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
+  var rays = "";
+  for (var i = 0; i < 24; i++) rays += '<line x1="60" y1="60" x2="60" y2="14" transform="rotate(' + (i * 15) + ' 60 60)"/>';
+  return '<svg viewBox="0 0 120 120" aria-hidden="true"><defs>'
+    + '<radialGradient id="' + gid + '" cx="50%" cy="50%" r="50%">'
+    + '<stop offset="0%" stop-color="' + ink + '" stop-opacity="0.16"/>'
+    + '<stop offset="65%" stop-color="' + ink + '" stop-opacity="0.06"/>'
+    + '<stop offset="100%" stop-color="' + ink + '" stop-opacity="0.11"/>'
+    + '</radialGradient>'
+    + '<clipPath id="' + gid + '-clip"><circle cx="60" cy="60" r="44"/></clipPath></defs>'
+    + '<circle cx="60" cy="60" r="56" fill="url(#' + gid + ')"/>'
+    + '<g clip-path="url(#' + gid + '-clip)" stroke="' + ink + '" stroke-width="5" opacity="0.05">' + rays + '</g>'
+    + '<circle cx="60" cy="60" r="56" fill="none" stroke="' + ink + '" stroke-width="4"/>'
+    + '<circle cx="60" cy="60" r="50" fill="none" stroke="' + ink + '" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1 6.44" opacity="0.5"/>'
+    + '<circle cx="60" cy="60" r="44" fill="none" stroke="' + ink + '" stroke-width="1.3" opacity="0.65"/>'
+    + mark
+    + '<line x1="32" y1="63" x2="52" y2="63" stroke="' + ink + '" stroke-width="1.6" opacity="0.7"/>'
+    + '<line x1="68" y1="63" x2="88" y2="63" stroke="' + ink + '" stroke-width="1.6" opacity="0.7"/>'
+    + '<rect x="56.8" y="59.8" width="6.4" height="6.4" transform="rotate(45 60 63)" fill="' + ink + '" opacity="0.85"/>'
+    + '<circle cx="27" cy="63" r="2" fill="' + ink + '" opacity="0.7"/>'
+    + '<circle cx="93" cy="63" r="2" fill="' + ink + '" opacity="0.7"/>'
+    + '<text x="' + (60 + letterSpacing / 2) + '" y="86" text-anchor="middle" fill="' + ink + '" font-weight="700" font-size="' + fontSize + '" letter-spacing="' + letterSpacing + '">' + label + '</text>'
+    + '<circle cx="48" cy="98" r="2.1" fill="' + ink + '" opacity="0.75"/>'
+    + '<circle cx="60" cy="98" r="2.1" fill="' + ink + '" opacity="0.75"/>'
+    + '<circle cx="72" cy="98" r="2.1" fill="' + ink + '" opacity="0.75"/>'
+    + '</svg>';
+}
+
+/* ================= storage: history lives in this browser ================= */
+var ACCENT_KEY = "vocabAccent_v1";
+var FC_HIST_KEY = "zsbFlashHistory_v1";
+var QZ_HIST_KEY = "zsbQuizHistory_v1";
+function loadBook(k){
+  try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; }
+}
+function saveBook(k, b){
+  try { localStorage.setItem(k, JSON.stringify(b)); } catch (e) {}
+}
+var bookSeq = 0;
+var fcHistoryBook = loadBook(FC_HIST_KEY);
+var qzHistoryBook = loadBook(QZ_HIST_KEY);
+/* 中译英原来的累计错题接着用，不丢记录 */
+if (!Object.keys(qzHistoryBook).length){
+  var legacyBook = loadBook("zsbErrorBook_v1");
+  if (Object.keys(legacyBook).length) qzHistoryBook = legacyBook;
+}
+[fcHistoryBook, qzHistoryBook].forEach(function(b){
+  Object.keys(b).forEach(function(k){
+    if (typeof b[k].seq !== "number") b[k].seq = ++bookSeq;
+    else if (b[k].seq > bookSeq) bookSeq = b[k].seq;
+    /* 本机已存的旧记录补上每条错次的编号（数量正好等于原次数，不改次数） */
+    var rec = b[k];
+    rec.events = materializeEvents(k, rec.count || 0, rec.events, rec.lastTime || "");
+    if (rec.events.length) rec.count = rec.events.length;
+  });
+});
+saveBook(FC_HIST_KEY, fcHistoryBook);
+saveBook(QZ_HIST_KEY, qzHistoryBook);
+var fcSessionBook = {};
+var qzSessionBook = {};
+var sessionSeq = 0;
+
+function applyDeltaToBook(book, entry, reason, delta){
+  var key = entry.word.toLowerCase();
+  var cur = book[key];
+  if (delta === 1){
+    var nowIso = new Date().toISOString();
+    if (cur){
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
+      cur.events.push({ id: newEventId(), at: nowIso });
+      cur.count = cur.events.length;
+      if (reason && cur.reasons.indexOf(reason) === -1) cur.reasons.push(reason);
+      cur.lastTime = nowIso;
+      if (!cur.ipa) cur.ipa = entry.ipa;
+    } else {
+      book[key] = {
+        word: entry.word, meaning: entry.meaning, ipa: entry.ipa,
+        count: 1, reasons: reason ? [reason] : [],
+        events: [{ id: newEventId(), at: nowIso }],
+        seq: ++bookSeq, lastTime: nowIso
+      };
+    }
+  } else if (cur){
+    if (cur.count <= 1) delete book[key];
+    else {
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
+      cur.events.pop();
+      cur.count = cur.events.length;
+      if (!cur.count) delete book[key];
+    }
+  }
+}
+function recordError(mode, entry, reason, delta){
+  var session = mode === "flash" ? fcSessionBook : qzSessionBook;
+  var key = entry.word.toLowerCase();
+  var cur = session[key];
+  if (delta === 1){
+    var nowIso2 = new Date().toISOString();
+    if (cur){
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
+      cur.events.push({ id: newEventId(), at: nowIso2 });
+      cur.count = cur.events.length;
+      if (cur.reasons.indexOf(reason) === -1) cur.reasons.push(reason);
+      cur.lastTime = nowIso2;
+    } else {
+      session[key] = {
+        word: entry.word, meaning: entry.meaning, ipa: entry.ipa,
+        count: 1, reasons: [reason], seq: ++sessionSeq,
+        events: [{ id: newEventId(), at: nowIso2 }],
+        lastTime: nowIso2
+      };
+    }
+  } else if (cur){
+    if (cur.count <= 1) delete session[key];
+    else {
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
+      cur.events.pop();
+      cur.count = cur.events.length;
+      if (!cur.count) delete session[key];
+    }
+  }
+  if (mode === "flash"){ applyDeltaToBook(fcHistoryBook, entry, reason, delta); saveBook(FC_HIST_KEY, fcHistoryBook); }
+  else { applyDeltaToBook(qzHistoryBook, entry, reason, delta); saveBook(QZ_HIST_KEY, qzHistoryBook); }
+}
+function historyBook(mode){ return mode === "flash" ? fcHistoryBook : qzHistoryBook; }
+function sessionBook(mode){ return mode === "flash" ? fcSessionBook : qzSessionBook; }
+function bookFor(mode, tab){ return tab === "session" ? sessionBook(mode) : historyBook(mode); }
+
+/* ================= global state ================= */
+var ALL_INDICES = WORDS.map(function(_, i){ return i; });
+var wordIndexByKey = {};
+WORDS.forEach(function(w, i){ wordIndexByKey[w.word.toLowerCase()] = i; });
+
+var view = "flash";
+var accent = "uk";
+try { if (localStorage.getItem(ACCENT_KEY) === "us") accent = "us"; } catch (e) {}
+function setAccent(a){
+  accent = a;
+  try { localStorage.setItem(ACCENT_KEY, a); } catch (e) {}
+  render();
+}
+
+var toastTimer = null;
+function showToast(msg){
+  var slot = document.getElementById("toast-slot");
+  slot.innerHTML = '<div class="toast" role="status">' + esc(msg) + '</div>';
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ slot.innerHTML = ""; }, 2600);
+}
+
+function idleRound(){
+  return { status:"idle", queue:[], current:-1, total:0, correct:0, wrong:0, isReview:false };
+}
+function remainingOf(r){
+  return r.queue.length + (r.status === "active" && r.current >= 0 ? 1 : 0);
+}
+
+/* flash state */
+var fc = idleRound();
+var fcRevealed = false;
+var fcJudged = null; /* null | "correct" | "wrong" */
+var fcPile = [];
+var fcPanel = { open:false, round:null };
+
+/* quiz state */
+var qz = idleRound();
+var qzInput = "";
+var qzFeedback = null; /* null | {kind, text} */
+var qzAnswered = false;
+var qzPile = [];
+var qzPanel = { open:false, round:null };
+
+/* notebook state */
+var bookOpen = false;
+var bookMode = "flash";
+var bookTab = "session";
+var modalEntry = null;
+var ioAction = null; /* "import" | "merge" */
+var importArmed = false;
+var importArmTimer = null;
+/* 粘贴导入：选文件在手机浏览器上可能没反应时，把备份内容粘贴进来导入/合并 */
+var pasteOpen = false;
+var pasteText = "";
+var pasteArmed = false;
+/* 清空确认弹窗：null | "session" | "history"，渲染进独立的 confirm-slot，
+   打开、取消、确认都不重渲染错题本，滚动位置原地不动 */
+var clearConfirm = null;
+/* 错题本每个（模式 × 页签）的滚动位置：renderBook 重建浮层前后存/恢复，
+   切换模式、页签或任何重渲染都不再弹回顶部 */
+var bookScrollPos = {};
+var lastBookKey = null;
+var currentBookEntries = [];
+
+/* ================= flash logic ================= */
+function startFlashRound(pool, isReview){
+  var q = shuffleArr(pool);
+  fc = {
+    status: q.length ? "active" : "finished",
+    queue: q.slice(1),
+    current: q.length ? q[0] : -1,
+    total: pool.length, correct: 0, wrong: 0, isReview: !!isReview
+  };
+  fcRevealed = false;
+  fcJudged = null;
+  fcPile = [];
+  render();
+}
+function finishFlashRound(){
+  fc.status = "finished"; fc.current = -1; fc.queue = [];
+  fcPanel = { open:true, round:{ correct: fc.correct, wrong: fc.wrong, total: fc.total } };
+}
+function fcEntry(){ return fc.current >= 0 ? WORDS[fc.current] : null; }
+function fcSpeak(){ var e = fcEntry(); if (e) speakWord(e.word, accent); }
+function fcSpeakForm(i){
+  var e = fcEntry(); if (!e) return;
+  var pairs = formIpaPairs(e, accent);
+  if (pairs[i]){ speakSeq += 1; speakOne(pairs[i].form, accent); }
+}
+function fcToggleReveal(){ fcRevealed = !fcRevealed; render(); }
+function fcJudge(kind){
+  var e = fcEntry();
+  if (!e || fc.status !== "active") return;
+  if (kind === "correct" && !fcRevealed) return;
+  if (fcJudged === kind) return;
+  var prev = fcJudged;
+  if (kind === "wrong"){
+    fcRevealed = true;
+    recordError("flash", e, "不会/错误", 1);
+    if (fcPile.indexOf(fc.current) === -1) fcPile.push(fc.current);
+  } else if (prev === "wrong"){
+    recordError("flash", e, "不会/错误", -1);
+    fcPile = fcPile.filter(function(x){ return x !== fc.current; });
+  }
+  fcJudged = kind;
+  render();
+}
+function fcNext(){
+  if (fc.status !== "active" || fcJudged === null) return;
+  if (fcJudged === "correct") fc.correct += 1; else fc.wrong += 1;
+  if (!fc.queue.length){
+    fc.current = -1;
+    finishFlashRound();
+  } else {
+    fc.current = fc.queue.shift();
+  }
+  fcRevealed = false;
+  fcJudged = null;
+  render();
+}
+/* 练到一半结束本轮：按已答的题结算（当前这张已判定未点「下一个」的也算进去），再用总词库随机开新一轮 */
+function fcEndRound(){
+  if (fc.status !== "active") return;
+  var c = fc.correct, w = fc.wrong;
+  if (fcJudged === "correct") c += 1;
+  else if (fcJudged === "wrong") w += 1;
+  startFlashRound(ALL_INDICES, false);
+  if (c + w > 0) showToast("上一轮已结算：正确率 " + rateText(c, w) + "（答对 " + c + " · 答错 " + w + "），已开始新一轮");
+  else showToast("已结束本轮，开始新一轮");
+}
+/* 回到主界面：不结算本轮；已记进错题本的记录都已即时保存，不受影响 */
+function fcGoHome(){
+  fc = idleRound();
+  fcRevealed = false;
+  fcJudged = null;
+  fcPile = [];
+  fcPanel = { open:false, round:null };
+  render();
+}
+
+/* ================= quiz logic ================= */
+function startQuizRound(pool, isReview){
+  var q = shuffleArr(pool);
+  qz = {
+    status: q.length ? "active" : "finished",
+    queue: q.slice(1),
+    current: q.length ? q[0] : -1,
+    total: pool.length, correct: 0, wrong: 0, isReview: !!isReview
+  };
+  qzInput = "";
+  qzFeedback = null;
+  qzAnswered = false;
+  qzPile = [];
+  render();
+}
+function finishQuizRound(){
+  qz.status = "finished"; qz.current = -1; qz.queue = [];
+  qzPanel = { open:true, round:{ correct: qz.correct, wrong: qz.wrong, total: qz.total } };
+}
+function qzEntry(){ return qz.current >= 0 ? WORDS[qz.current] : null; }
+function qzSpeak(){ var e = qzEntry(); if (e) speakWord(e.word, accent); }
+function qzSpeakForm(i){
+  var e = qzEntry(); if (!e) return;
+  var pairs = formIpaPairs(e, accent);
+  if (pairs[i]){ speakSeq += 1; speakOne(pairs[i].form, accent); }
+}
+function qzAdvance(wasCorrect){
+  if (wasCorrect) qz.correct += 1; else qz.wrong += 1;
+  if (!qz.queue.length){
+    qz.current = -1;
+    finishQuizRound();
+  } else {
+    qz.current = qz.queue.shift();
+  }
+  qzInput = "";
+  qzFeedback = null;
+  qzAnswered = false;
+  render();
+}
+function qzSubmit(){
+  var e = qzEntry();
+  if (!e || qz.status !== "active" || qzAnswered) return;
+  var inputEl = document.getElementById("quiz-answer");
+  qzInput = inputEl ? inputEl.value : qzInput;
+  if (!qzInput.trim()){ showToast("先输入英文单词，再提交"); return; }
+  qzAnswered = true;
+  if (answerMatches(qzInput, e.word)){
+    qzFeedback = { kind:"correct", text:"✓ 正确" };
+  } else {
+    recordError("quiz", e, "拼写错误", 1);
+    if (qzPile.indexOf(qz.current) === -1) qzPile.push(qz.current);
+    qzFeedback = { kind:"wrong", text:"✗ 不正确，正确答案：" + e.word };
+  }
+  render();
+}
+function qzUnknown(){
+  var e = qzEntry();
+  if (!e || qz.status !== "active" || qzAnswered) return;
+  qzAnswered = true;
+  recordError("quiz", e, "不知道", 1);
+  if (qzPile.indexOf(qz.current) === -1) qzPile.push(qz.current);
+  qzFeedback = { kind:"unknown", text:"正确答案：" + e.word };
+  render();
+}
+function qzNext(){
+  if (!qzFeedback) return;
+  qzAdvance(qzFeedback.kind === "correct");
+}
+function qzInputKey(ev){
+  if (ev.key === "Enter"){
+    if (qzFeedback) qzNext();
+    else qzSubmit();
+  }
+}
+/* 练到一半结束本轮：按已答的题结算（当前这道已提交未点「下一个」的也算进去），再用总词库随机开新一轮 */
+function qzEndRound(){
+  if (qz.status !== "active") return;
+  var c = qz.correct, w = qz.wrong;
+  if (qzFeedback){
+    if (qzFeedback.kind === "correct") c += 1; else w += 1;
+  }
+  startQuizRound(ALL_INDICES, false);
+  if (c + w > 0) showToast("上一轮已结算：正确率 " + rateText(c, w) + "（答对 " + c + " · 答错 " + w + "），已开始新一轮");
+  else showToast("已结束本轮，开始新一轮");
+}
+/* 回到主界面：不结算本轮；已记进错题本的记录都已即时保存，不受影响 */
+function qzGoHome(){
+  qz = idleRound();
+  qzInput = "";
+  qzFeedback = null;
+  qzAnswered = false;
+  qzPile = [];
+  qzPanel = { open:false, round:null };
+  render();
+}
+
+/* ================= pile panel ================= */
+function openPilePanel(mode){
+  if (mode === "flash"){
+    fcPanel = { open:true, round:{ correct: fc.correct, wrong: fc.wrong, total: fc.total } };
+  } else {
+    qzPanel = { open:true, round:{ correct: qz.correct, wrong: qz.wrong, total: qz.total } };
+  }
+  render();
+}
+function pilePanelStartPractice(mode){
+  if (mode === "flash"){
+    var pool = fcPile.slice();
+    fcPanel = { open:false, round:null };
+    if (pool.length) startFlashRound(pool, true); else render();
+  } else {
+    var pool2 = qzPile.slice();
+    qzPanel = { open:false, round:null };
+    if (pool2.length) startQuizRound(pool2, true); else render();
+  }
+}
+function pilePanelFinish(mode){
+  if (mode === "flash"){ fcPanel = { open:false, round:null }; fc = idleRound(); fcPile = []; }
+  else { qzPanel = { open:false, round:null }; qz = idleRound(); qzPile = []; }
+  render();
+}
+function pilePanelClose(mode){
+  if (mode === "flash") fcPanel = { open:false, round:null };
+  else qzPanel = { open:false, round:null };
+  render();
+}
+
+/* ================= notebook ================= */
+function disarmImport(){
+  importArmed = false;
+  if (importArmTimer){ clearTimeout(importArmTimer); importArmTimer = null; }
+}
+function openBook(mode){
+  bookMode = mode;
+  bookTab = "session";
+  disarmImport();
+  clearConfirm = null;
+  bookScrollPos = {};
+  pasteOpen = false; pasteText = ""; pasteArmed = false;
+  bookOpen = true;
+  render();
+  renderPaste();
+  renderConfirm();
+}
+function closeBook(){ bookOpen = false; clearConfirm = null; render(); renderConfirm(); }
+function setBookMode(mode){ bookMode = mode; disarmImport(); clearConfirm = null; pasteOpen = false; pasteText = ""; pasteArmed = false; render(); renderPaste(); renderConfirm(); }
+function setBookTab(tab){ bookTab = tab; render(); }
+
+function handleExport(){
+  var hist = historyBook(bookMode);
+  var keys = Object.keys(hist);
+  if (!keys.length){ showToast("历史错题是空的，没有可导出的记录"); return; }
+  var now = new Date();
+  var payload = {
+    app: "词汇表（专升本版）",
+    kind: "错题本历史错题备份",
+    mode: bookMode,
+    modeName: bookMode === "flash" ? "英译中" : "中译英",
+    exportedAt: now.toISOString(),
+    items: hist
+  };
+  var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  function pad(n){ return String(n).padStart(2, "0"); }
+  a.href = url;
+  a.download = "错题本-" + payload.modeName + "-历史错题-" + keys.length + "词-专升本150词版本-" + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + ".json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+  showToast("已导出 " + keys.length + " 个词的历史错题");
+}
+function armOrPickImport(){
+  if (!importArmed){
+    importArmed = true;
+    if (importArmTimer) clearTimeout(importArmTimer);
+    importArmTimer = setTimeout(function(){ importArmed = false; renderBook(); }, 6000);
+    renderBook();
+    return;
+  }
+  disarmImport();
+  ioAction = "import";
+  document.getElementById("io-file").click();
+}
+function pickMerge(){
+  disarmImport();
+  ioAction = "merge";
+  document.getElementById("io-file").click();
+}
+function replaceHistoryBook(mode, items){
+  /* 保留每条记录自带的序号（原来的排序），没有序号的排在已有最大序号之后 */
+  var used = {};
+  var next = 0;
+  Object.keys(items).forEach(function(k){ if (items[k].seq > 0) next = Math.max(next, items[k].seq); });
+  Object.keys(items).forEach(function(k){
+    var s = items[k].seq;
+    if (!(s > 0) || used[s]){ next += 1; s = next; }
+    used[s] = true;
+    items[k].seq = s;
+    if (s > bookSeq) bookSeq = s;
+  });
+  if (mode === "flash"){ fcHistoryBook = items; saveBook(FC_HIST_KEY, fcHistoryBook); }
+  else { qzHistoryBook = items; saveBook(QZ_HIST_KEY, qzHistoryBook); }
+}
+function mergeHistoryBook(mode, items){
+  var book = historyBook(mode);
+  var seq = 0;
+  Object.keys(book).forEach(function(k){ if (book[k].seq > seq) seq = book[k].seq; });
+  var added = 0, merged = 0, skipped = 0;
+  Object.keys(items).forEach(function(rawKey){
+    var key = rawKey.toLowerCase();
+    var inc = items[rawKey];
+    var cur = book[key];
+    if (cur){
+      merged += 1;
+      inc.reasons.forEach(function(r){ if (cur.reasons.indexOf(r) === -1) cur.reasons.push(r); });
+      /* 按每条错次的编号取并集：已经有的不重复算，只有真正新的错次才让次数增加，合并后次数不会变少 */
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
+      var seen = {};
+      cur.events.forEach(function(e){ seen[e.id] = true; });
+      (inc.events || []).forEach(function(e){
+        if (seen[e.id]) skipped += 1;
+        else { seen[e.id] = true; cur.events.push(e); }
+      });
+      cur.count = cur.events.length;
+      if (!cur.ipa) cur.ipa = inc.ipa;
+      if (new Date(inc.lastTime) > new Date(cur.lastTime)) cur.lastTime = inc.lastTime;
+    } else {
+      added += 1;
+      seq += 1;
+      book[key] = {
+        word: inc.word, meaning: inc.meaning, ipa: inc.ipa,
+        count: inc.count, reasons: inc.reasons.slice(), events: (inc.events || []).slice(),
+        seq: seq, lastTime: inc.lastTime
+      };
+      if (seq > bookSeq) bookSeq = seq;
+    }
+  });
+  if (mode === "flash") saveBook(FC_HIST_KEY, fcHistoryBook);
+  else saveBook(QZ_HIST_KEY, qzHistoryBook);
+  return { added: added, merged: merged, skipped: skipped };
+}
+/* 备份文本解析：先去掉可能混进来的 BOM 头和首尾空白（文件在聊天软件、
+   备忘录之间转手保存时常会带上，JSON.parse 遇到 BOM 会直接失败）；
+   粘贴进来的内容若被包了一层，截取第一个 { 到最后一个 } 再解析。 */
+function parseBackupText(text){
+  var t = String(text == null ? "" : text);
+  if (t.charCodeAt(0) === 0xFEFF) t = t.slice(1);
+  t = t.replace(/^\s+/, "").replace(/\s+$/, "");
+  var s = t.indexOf("{"), e = t.lastIndexOf("}");
+  if (s > 0 && e > s) t = t.slice(s, e + 1);
+  return JSON.parse(t);
+}
+/* 备份识别：导出、文件导入、粘贴导入共用这一套规则（与在线版一致）。
+   导出的是带时间戳、次数、每条错次编号的详细 JSON，识别时先按原样
+   整体解析；内容经剪贴板、聊天软件、备忘录转手时可能被截断、引号
+   被换成弯引号、或被转义，整体解析就会失败或只剩几个词——这时逐条
+   抢救：把文本里每一条完整的单词记录单独抠出来解析，能认出的全认，
+   时间戳、次数、错次编号都跟着记录一起进来。最后取识别出词数最多
+   的结果，一个词都不丢。 */
+function parseBackupBook(rawText){
+  var raw = String(rawText == null ? "" : rawText);
+  var candidates = [];
+  function consider(data){
+    var b = normalizeImportedBook(data);
+    if (b) candidates.push(b);
+  }
+  /* 0) 内容被整体转义成一个 JSON 字符串（\"…\"）时，先解一层。 */
+  var work = raw;
+  try {
+    var once = JSON.parse(raw.replace(/^\s+/, "").replace(/\s+$/, ""));
+    if (typeof once === "string") work = once;
+  } catch (e) { /* 不是整体字符串，继续下面的流程 */ }
+  /* 1) 原样整体解析。 */
+  var strictData = null;
+  try { strictData = parseBackupText(work); } catch (e) { strictData = null; }
+  if (typeof strictData === "string"){
+    try { strictData = parseBackupText(strictData); } catch (e) { strictData = null; }
+  }
+  if (strictData) consider(strictData);
+  /* 2) 修掉转手时常见的变形（弯引号、HTML 转义）后再整体解析。 */
+  var repaired = work
+    .replace(/[“”„]/g, "\"")
+    .replace(/[‘’]/g, "'")
+    .replace(/&quot;/g, "\"")
+    .replace(/&#34;/g, "\"")
+    .replace(/&amp;/g, "&");
+  if (repaired !== raw){
+    try { consider(parseBackupText(repaired)); } catch (e) { /* 落到逐条抢救 */ }
+  }
+  /* 3) 逐条抢救：扫描文本里每一个完整的 { … } 片段，能解析且带 word
+        字段的就是一条单词记录。外层结构坏了、文本被截断时，完整的
+        记录照样一条条认出来。 */
+  var salvaged = {};
+  for (var i = 0; i < repaired.length; i += 1){
+    if (repaired.charAt(i) !== "{") continue;
+    var depth = 0, inStr = false, escCh = false, end = -1;
+    for (var j = i; j < repaired.length; j += 1){
+      var c = repaired.charAt(j);
+      if (inStr){
+        if (escCh) escCh = false;
+        else if (c === "\\") escCh = true;
+        else if (c === "\"") inStr = false;
+        continue;
+      }
+      if (c === "\"") inStr = true;
+      else if (c === "{") depth += 1;
+      else if (c === "}"){
+        depth -= 1;
+        if (depth === 0){ end = j; break; }
+      }
+    }
+    if (end === -1) continue;
+    try {
+      var obj = JSON.parse(repaired.slice(i, end + 1));
+      if (obj && typeof obj === "object" && !Array.isArray(obj)
+          && typeof obj.word === "string" && obj.word.trim()){
+        salvaged[obj.word.trim().toLowerCase()] = obj;
+      }
+    } catch (e) { /* 不是完整的 JSON 片段，跳过 */ }
+  }
+  if (Object.keys(salvaged).length) consider(salvaged);
+  if (!candidates.length) return null;
+  var best = candidates[0];
+  candidates.forEach(function(b){
+    if (Object.keys(b).length > Object.keys(best).length) best = b;
+  });
+  return best;
+}
+function applyImported(action, text){
+  var imported = parseBackupBook(text);
+  if (!imported){ showToast("读不出错题记录，请确认用的是导出的备份"); return false; }
+  var inCount = Object.keys(imported).length;
+  if (action === "import"){
+    replaceHistoryBook(bookMode, imported);
+    render();
+    showToast("已导入 " + inCount + " 个词，替换了原来的历史错题");
+  } else {
+    var res = mergeHistoryBook(bookMode, imported);
+    render();
+    showToast(res.skipped > 0
+      ? "合并完成：新增 " + res.added + " 个词，合并 " + res.merged + " 个词，其中 " + res.skipped + " 次是已有的记录，已跳过不重复计数"
+      : "合并完成：新增 " + res.added + " 个词，合并 " + res.merged + " 个词");
+  }
+  return true;
+}
+function handleFileChosen(file){
+  var action = ioAction;
+  ioAction = null;
+  if (!action || !file) return;
+  var reader = new FileReader();
+  reader.onload = function(){
+    /* 与粘贴导入走同一个识别入口（applyImported → parseBackupBook） */
+    if (!applyImported(action, reader.result)){
+      showToast("这个文件读不出错题记录，请确认选的是导出的备份文件；选文件不行时可以试试「粘贴导入」");
+    }
+  };
+  reader.onerror = function(){ showToast("文件读取失败，请重试，或试试「粘贴导入」"); };
+  reader.readAsText(file);
+}
+/* 粘贴导入改成独立弹窗：渲染进自己的 paste-slot，不重渲染错题本，
+   点开、关闭都不动错题本的滚动位置，不会跳回顶部。 */
+function togglePasteImport(){
+  pasteOpen = true;
+  pasteArmed = false;
+  renderPaste();
+}
+function closePasteImport(){
+  pasteOpen = false;
+  pasteArmed = false;
+  renderPaste();
+}
+function renderPaste(){
+  var slot = document.getElementById("paste-slot");
+  if (!slot) return;
+  if (!pasteOpen){ slot.innerHTML = ""; return; }
+  var modeLabel = bookMode === "flash" ? "英译中" : "中译英";
+  slot.innerHTML = '<div class="overlay" style="z-index:55" role="dialog" aria-modal="true" aria-label="粘贴导入" onclick="closePasteImport()">'
+    + '<div class="paste-card" onclick="event.stopPropagation()">'
+    + '<div class="top"><h3>粘贴导入</h3>'
+    + '<button type="button" class="btn-ghost" aria-label="关闭粘贴导入面板" onclick="closePasteImport()">关闭</button></div>'
+    + '<p>作用于当前这本（' + modeLabel + '）的历史错题。先打开备份文件，全选复制里面的全部内容，再粘贴到下面，点「导入（替换）」或「合并」。</p>'
+    + '<textarea id="paste-area" aria-label="粘贴备份内容" rows="8" placeholder="把备份文件的全部内容粘贴到这里" oninput="onPasteInput(this)">' + esc(pasteText) + '</textarea>'
+    + '<div class="row">'
+    + '<button type="button" id="paste-import-btn" aria-label="粘贴导入替换历史错题" class="primary' + (pasteArmed ? " armed" : "") + '" onclick="applyPasted(\'import\')">' + (pasteArmed ? "再点一次确认替换" : "导入（替换）") + '</button>'
+    + '<button type="button" aria-label="粘贴合并历史错题" onclick="applyPasted(\'merge\')">合并</button>'
+    + '</div></div></div>';
+}
+function onPasteInput(el){
+  pasteText = el.value;
+  if (pasteArmed){
+    pasteArmed = false;
+    var b = document.getElementById("paste-import-btn");
+    if (b){ b.textContent = "导入（替换）"; b.className = "primary"; }
+  }
+}
+function applyPasted(action){
+  if (action === "import" && !pasteArmed){
+    pasteArmed = true;
+    var b = document.getElementById("paste-import-btn");
+    if (b){ b.textContent = "再点一次确认替换"; b.className = "primary armed"; }
+    showToast("导入会替换当前历史错题，确认就再点一次「导入（替换）」");
+    return;
+  }
+  pasteArmed = false;
+  var ok = applyImported(action, pasteText);
+  if (!ok){
+    showToast("这份内容读不出错题记录，请把备份文件的全部内容原样粘贴进来");
+    return;
+  }
+  if (ok){
+    pasteOpen = false;
+    pasteText = "";
+    renderPaste();
+  }
+}
+/* 清空改成独立弹窗确认：点「清空」只把弹窗渲染进 confirm-slot，
+   错题本浮层一个字都不动，人停在原来的界面和滚动位置；点「确认清空」
+   才真正清空，点「取消」或弹窗外任意处就关掉、什么都不动。 */
+function askClearBook(){
+  clearConfirm = bookTab;
+  renderConfirm();
+}
+function closeClearConfirm(){
+  clearConfirm = null;
+  renderConfirm();
+}
+function doClearBook(){
+  var which = clearConfirm;
+  clearConfirm = null;
+  renderConfirm();
+  if (which === "session"){
+    if (bookMode === "flash") fcSessionBook = {}; else qzSessionBook = {};
+    render();
+    showToast("本次错题已清空，历史错题不受影响");
+  } else if (which === "history"){
+    if (bookMode === "flash"){ fcHistoryBook = {}; saveBook(FC_HIST_KEY, fcHistoryBook); }
+    else { qzHistoryBook = {}; saveBook(QZ_HIST_KEY, qzHistoryBook); }
+    render();
+    showToast("历史错题已清空");
+  }
+}
+function renderConfirm(){
+  var slot = document.getElementById("confirm-slot");
+  if (!slot) return;
+  if (!clearConfirm){
+    slot.innerHTML = "";
+    document.body.style.overflow = "";
+    return;
+  }
+  var modeLabel = bookMode === "flash" ? "英译中" : "中译英";
+  var isHist = clearConfirm === "history";
+  var count = Object.keys(bookFor(bookMode, clearConfirm)).length;
+  slot.innerHTML = '<div class="overlay" style="z-index:55" role="dialog" aria-modal="true" aria-label="' + (isHist ? "确认清空历史错题" : "确认清空本次错题") + '" onclick="closeClearConfirm()">'
+    + '<div class="confirm-card" onclick="event.stopPropagation()">'
+    + '<h3>' + (isHist ? "清空历史错题" : "清空本次错题") + '</h3>'
+    + '<p>要清空「' + modeLabel + '」错题本里的' + (isHist ? "历史" : "本次") + '错题（共 ' + count + ' 个词）吗？清空后无法恢复，' + (isHist ? "本次错题不受影响。" : "历史错题不受影响。") + '</p>'
+    + '<div class="row">'
+    + '<button type="button" aria-label="取消清空" onclick="closeClearConfirm()">取消</button>'
+    + '<button type="button" class="danger" aria-label="' + (isHist ? "确认清空历史错题" : "确认清空本次错题") + '" onclick="doClearBook()">确认清空</button>'
+    + '</div></div></div>';
+  /* 弹窗打开期间锁住底下页面的滚动，关掉后在上面的分支里恢复 */
+  document.body.style.overflow = "hidden";
+}
+/* 用某个模式的历史错题当词库，随机练一轮，走正常结算流程 */
+function startHistoryPractice(mode){
+  var hist = historyBook(mode);
+  var pool = [];
+  Object.keys(hist).forEach(function(key){
+    var idx = wordIndexByKey[key];
+    if (idx !== undefined) pool.push(idx);
+  });
+  if (!pool.length){ showToast("历史错题是空的，还没有可以练习的词"); return; }
+  bookOpen = false;
+  view = mode;
+  if (mode === "flash") startFlashRound(pool, false);
+  else startQuizRound(pool, false);
+}
+/* 用某个模式的本次错题当词库，随机练一轮，走正常结算流程（与历史错题练习同款） */
+function startSessionPractice(mode){
+  var sess = sessionBook(mode);
+  var pool = [];
+  Object.keys(sess).forEach(function(key){
+    var idx = wordIndexByKey[key];
+    if (idx !== undefined) pool.push(idx);
+  });
+  if (!pool.length){ showToast("本次错题是空的，还没有可以练习的词"); return; }
+  bookOpen = false;
+  view = mode;
+  if (mode === "flash") startFlashRound(pool, false);
+  else startQuizRound(pool, false);
+}
+function openWordCard(i){
+  var pair = currentBookEntries[i];
+  if (!pair) return;
+  var rec = pair[1];
+  var idx = wordIndexByKey[pair[0]];
+  modalEntry = idx !== undefined ? WORDS[idx] : { word: rec.word, ipa: rec.ipa, meaning: rec.meaning };
+  renderModal();
+}
+function closeWordCard(){ modalEntry = null; renderModal(); }
+function modalSpeak(){ if (modalEntry) speakWord(modalEntry.word, accent); }
+function modalSpeakForm(i){
+  if (!modalEntry) return;
+  var pairs = formIpaPairs(modalEntry, accent);
+  if (pairs[i]){ speakSeq += 1; speakOne(pairs[i].form, accent); }
+}
+
+/* ================= shared render pieces ================= */
+var BOOK_ICON = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3-3 3 3 0 0 0-3 3z"/></svg>';
+var CHEV_R = '<svg class="arw" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
+var CHEV_L = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
+var REFRESH_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>';
+
+function accentHtml(label){
+  return '<div class="accent" role="group" aria-label="' + esc(label) + '">'
+    + '<button type="button" aria-pressed="' + (accent === "uk") + '" aria-label="英式发音" class="' + (accent === "uk" ? "on" : "") + '" onclick="setAccent(\'uk\')">英式</button>'
+    + '<button type="button" aria-pressed="' + (accent === "us") + '" aria-label="美式发音" class="' + (accent === "us" ? "on" : "") + '" onclick="setAccent(\'us\')">美式</button>'
+    + '</div>';
+}
+function bookEntryHtml(mode){
+  var label = mode === "flash" ? "英译中" : "中译英";
+  var sc = Object.keys(sessionBook(mode)).length;
+  var hc = Object.keys(historyBook(mode)).length;
+  return '<button type="button" class="book-entry" aria-label="打开错题本（' + label + '），本次 ' + sc + ' 个，历史 ' + hc + ' 个" onclick="openBook(\'' + mode + '\')">'
+    + '<span class="ic">' + BOOK_ICON + '</span>'
+    + '<span class="tt"><span class="a">错题本（' + label + '）</span>'
+    + '<span class="b">本次 ' + sc + ' · 历史 ' + hc + '</span></span>'
+    + CHEV_R + '</button>';
+}
+function backHomeHtml(fnName){
+  return '<div class="backhome"><button type="button" aria-label="回到主界面" onclick="' + fnName + '()">' + CHEV_L + '回到主界面</button>'
+    + '<span class="accent-wrap"><span class="lbl">发音：</span>' + accentHtml("发音口音切换") + '</span></div>';
+}
+function endRoundHtml(fnName){
+  return '<div class="endround"><button type="button" aria-label="结束本轮，开始新一轮" onclick="' + fnName + '()">' + REFRESH_ICON + '结束本轮，开始新一轮</button></div>';
+}
+function statsHtml(round, remaining){
+  var h = '<div class="stats"><span aria-live="polite">本轮剩余 ' + remaining + ' 个</span><span>正确 ' + round.correct + ' · 错误 ' + round.wrong;
+  if (round.correct + round.wrong > 0) h += ' · 正确率 ' + rateText(round.correct, round.wrong);
+  if (round.isReview) h += ' · 「不知道」练习轮';
+  return h + '</span></div>';
+}
+
+/* ================= flash view ================= */
+function flashHtml(){
+  if (fc.status === "idle"){
+    return '<div class="card idle"><h2>英译中闪卡 · 150 个词</h2>'
+      + '<p class="desc">每轮随机不重复出完 150 个词。先看英文想中文意思，点「查看中文释义」对答案，再点「不会/错误」或「正确」判定，点了判定才能点「下一个」。</p>'
+      + '<button type="button" class="btn-accent" onclick="startFlashRound(ALL_INDICES,false)">开始这一轮</button>'
+      + '<div style="margin:1.5rem auto 0;max-width:36rem;text-align:left">' + bookEntryHtml("flash") + '</div></div>';
+  }
+  if (fc.status === "finished"){
+    return '<div class="card idle"><h2>这一轮已完成</h2>'
+      + '<p class="desc" style="margin-bottom:1.5rem">正确率 ' + rateText(fc.correct, fc.wrong) + '（答对 ' + fc.correct + ' · 不会 ' + fc.wrong + '）</p>'
+      + '<button type="button" class="btn-accent" onclick="fcGoHome()">完成</button></div>';
+  }
+  var e = fcEntry();
+  if (!e) return "";
+  var h = backHomeHtml("fcGoHome");
+  h += '<div class="card stage' + (fcRevealed ? "" : " compact") + '">';
+  h += '<div class="stage-content"><p class="word serif">' + esc(e.word) + '</p>'
+    + ipaHtml(e.ipa, accent)
+    + '<div class="reveal-zone"><button type="button" class="btn-ghost" aria-label="查看中文释义" onclick="fcToggleReveal()">' + (fcRevealed ? "隐藏中文释义" : "查看中文释义") + '</button>'
+    + (fcRevealed ? '<p class="meaning" aria-live="polite">' + esc(e.meaning) + '</p>' : '')
+    + '</div>'
+    + '<button type="button" class="btn-speak" aria-label="听发音" onclick="fcSpeak()">🔊 听发音</button>'
+    + formChipsHtml(e, accent, "fcSpeakForm")
+    + '</div>';
+  if (fcJudged) h += '<div class="stamp ' + (fcJudged === "wrong" ? "stamp-wrong" : "stamp-correct") + '" aria-hidden="true"><div class="stamp-pop">' + stampSvg(fcJudged) + '</div></div>';
+  h += '</div>';
+  h += '<div class="judge-row">'
+    + '<button type="button" aria-label="不会/错误" aria-pressed="' + (fcJudged === "wrong") + '" class="jbtn-bad' + (fcJudged === "wrong" ? " on" : "") + '" onclick="fcJudge(\'wrong\')">不会/错误</button>'
+    + '<button type="button" aria-label="下一个" class="jbtn-next"' + (fcJudged === null ? " disabled" : "") + ' onclick="fcNext()">下一个</button>'
+    + '<button type="button" aria-label="正确" aria-pressed="' + (fcJudged === "correct") + '" class="jbtn-good' + (fcJudged === "correct" ? " on" : "") + '"' + (fcRevealed ? "" : " disabled") + ' onclick="fcJudge(\'correct\')">正确</button>'
+    + '</div>';
+  h += statsHtml(fc, remainingOf(fc));
+  h += endRoundHtml("fcEndRound");
+  h += '<div class="below-book">' + bookEntryHtml("flash") + '</div>';
+  return h;
+}
+
+/* ================= quiz view ================= */
+function quizHtml(){
+  if (qz.status === "idle"){
+    return '<div class="card idle"><h2>中译英拼写 · 150 个词</h2>'
+      + '<p class="desc">每轮随机不重复出完 150 个词。看中文意思写英文，带「/」的并列形式写任意一个都算对。答错和点「不知道」都会记进中译英错题本。</p>'
+      + '<button type="button" class="btn-accent" onclick="startQuizRound(ALL_INDICES,false)">开始这一轮</button>'
+      + '<div style="margin:1.5rem auto 0;max-width:36rem;text-align:left">' + bookEntryHtml("quiz") + '</div></div>';
+  }
+  if (qz.status === "finished"){
+    return '<div class="card idle"><h2>这一轮已完成</h2>'
+      + '<p class="desc" style="margin-bottom:1.5rem">正确率 ' + rateText(qz.correct, qz.wrong) + '（答对 ' + qz.correct + ' · 答错 ' + qz.wrong + '）</p>'
+      + '<button type="button" class="btn-accent" onclick="qzGoHome()">完成</button></div>';
+  }
+  var e = qzEntry();
+  if (!e) return "";
+  var h = backHomeHtml("qzGoHome");
+  h += '<div class="card quiz-card">'
+    + '<p class="tip">请根据中文意思写出英文</p>'
+    + '<p class="meaning">' + esc(e.meaning) + '</p>'
+    + '<label for="quiz-answer" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">输入英文单词</label>'
+    + '<input id="quiz-answer" class="quiz-input" type="text" value="' + esc(qzInput) + '" onkeydown="qzInputKey(event)"' + (qzFeedback ? " disabled" : "") + ' placeholder="输入英文单词" autocapitalize="none" autocomplete="off" autocorrect="off" spellcheck="false">';
+  if (qzFeedback){
+    h += '<div class="feedback ' + (qzFeedback.kind === "correct" ? "good" : "bad") + '" aria-live="polite">'
+      + '<p class="ft">' + esc(qzFeedback.text) + '</p>'
+      + '<p class="fw serif">' + esc(e.word) + '</p>'
+      + ipaHtml(e.ipa, accent)
+      + '<button type="button" class="btn-speak" aria-label="听发音" onclick="qzSpeak()">🔊 听发音</button>'
+      + formChipsHtml(e, accent, "qzSpeakForm")
+      + '</div>';
+  }
+  h += '<div class="quiz-btns">';
+  if (qzFeedback){
+    h += '<button type="button" class="btn-dark" aria-label="下一个" onclick="qzNext()">下一个</button>';
+  } else {
+    h += '<button type="button" class="btn-accent" aria-label="提交答案" onclick="qzSubmit()">提交答案</button>'
+      + '<button type="button" class="btn-ghost" aria-label="不知道" onclick="qzUnknown()">不知道</button>';
+  }
+  h += '</div></div>';
+  h += statsHtml(qz, remainingOf(qz));
+  h += endRoundHtml("qzEndRound");
+  h += '<div class="below-book">' + bookEntryHtml("quiz") + '</div>';
+  return h;
+}
+
+/* ================= pile panel ================= */
+function pilePanelHtml(mode){
+  var panel = mode === "flash" ? fcPanel : qzPanel;
+  var round = mode === "flash" ? fc : qz;
+  var pile = mode === "flash" ? fcPile : qzPile;
+  if (!panel.open) return "";
+  var r = panel.round || { correct: 0, wrong: 0, total: 0 };
+  var title = (mode === "flash" ? "英译中" : "中译英") + " · 本轮正确率";
+  var h = '<div class="overlay" role="dialog" aria-modal="true" aria-label="' + title + '" onclick="pilePanelClose(\'' + mode + '\')">'
+    + '<div class="sheet" onclick="event.stopPropagation()">'
+    + '<h3>' + title + '</h3>'
+    + '<p class="rate">' + rateText(r.correct, r.wrong) + '</p>'
+    + '<p class="info">答对 ' + r.correct + ' · 不会 ' + r.wrong + ' · 本轮共 ' + r.total + ' 个词<br>不知道的词 ' + pile.length + ' 个</p>'
+    + '<div class="btns">';
+  if (pile.length > 0)
+    h += '<button type="button" class="btn-accent" aria-label="开始练习不知道的词" onclick="pilePanelStartPractice(\'' + mode + '\')">开始练习</button>';
+  if (round.status === "finished")
+    h += '<button type="button" class="btn-dark" aria-label="完成" onclick="pilePanelFinish(\'' + mode + '\')">完成</button>';
+  else
+    h += '<button type="button" class="btn-ghost" aria-label="继续这一轮" onclick="pilePanelClose(\'' + mode + '\')">继续这一轮</button>';
+  return h + '</div></div></div>';
+}
+
+/* ================= notebook overlay ================= */
+function renderBook(){
+  var slot = document.getElementById("book-slot");
+  if (!bookOpen){ slot.innerHTML = ""; lastBookKey = null; return; }
+  /* 浮层是整段重建的：重建前先把当前滚动位置存到上一个（模式×页签）名下，
+     重建后恢复当前（模式×页签）存过的位置——切换页签、切换模式、导入
+     待确认、清空后重渲染等任何一次重建都不再把人弹回顶部。 */
+  var key = bookMode + ":" + bookTab;
+  var oldOv = slot.querySelector(".book-overlay");
+  if (oldOv && lastBookKey) bookScrollPos[lastBookKey] = oldOv.scrollTop;
+  var modeLabel = bookMode === "flash" ? "英译中" : "中译英";
+  var sessionCount = Object.keys(sessionBook(bookMode)).length;
+  var historyCount = Object.keys(historyBook(bookMode)).length;
+  var h = '<div class="book-overlay"><div class="book-wrap">';
+  h += '<div class="book-head"><h2>错题本 · ' + modeLabel + '</h2>'
+    + '<button type="button" class="btn-ghost" aria-label="关闭错题本" onclick="closeBook()">关闭</button></div>';
+  h += '<div class="seg" role="group" aria-label="错题本模式">'
+    + '<button type="button" aria-pressed="' + (bookMode === "flash") + '" class="' + (bookMode === "flash" ? "on" : "") + '" onclick="setBookMode(\'flash\')">英译中</button>'
+    + '<button type="button" aria-pressed="' + (bookMode === "quiz") + '" class="' + (bookMode === "quiz" ? "on" : "") + '" onclick="setBookMode(\'quiz\')">中译英</button></div>';
+  h += '<div class="seg acc" role="group" aria-label="错题本范围">'
+    + '<button type="button" aria-pressed="' + (bookTab === "session") + '" class="' + (bookTab === "session" ? "on" : "") + '" onclick="setBookTab(\'session\')">本次错题（' + sessionCount + '）</button>'
+    + '<button type="button" aria-pressed="' + (bookTab === "history") + '" class="' + (bookTab === "history" ? "on" : "") + '" onclick="setBookTab(\'history\')">历史错题（' + historyCount + '）</button></div>';
+  if (bookTab === "session"){
+    h += '<div class="practice-box"><p>用这次练习里记下的本次错题当词库，随机不重复练一轮，练完照常统计这一轮的正确率。</p>'
+      + '<button type="button" class="btn-accent" aria-label="用本次错题练习一轮"' + (sessionCount === 0 ? " disabled" : "") + ' onclick="startSessionPractice(\'' + bookMode + '\')">用本次错题练习一轮（' + sessionCount + ' 个词）</button></div>';
+  }
+  if (bookTab === "history"){
+    h += '<div class="practice-box"><p>用这本累积的历史错题当词库，随机不重复练一轮，练完照常统计这一轮的正确率。</p>'
+      + '<button type="button" class="btn-accent" aria-label="用历史错题练习一轮"' + (historyCount === 0 ? " disabled" : "") + ' onclick="startHistoryPractice(\'' + bookMode + '\')">用历史错题练习一轮（' + historyCount + ' 个词）</button></div>';
+    h += '<div class="io-box"><p>作用于当前这本（' + modeLabel + '）的历史错题，存在这台设备的浏览器里，打开自动读回。导出：把历史错题存成一个备份文件。导入：选一个备份文件，用里面的记录替换当前历史错题。合并：选一个备份文件，把里面的记录按词并进来，同一个词的次数相加。选文件没反应时，点「粘贴导入」，把备份文件的内容粘贴进来也能导入、合并。</p>'
+      + '<div class="row">'
+      + '<button type="button" aria-label="导出历史错题" onclick="handleExport()">导出</button>'
+      + '<button type="button" aria-label="导入历史错题" class="' + (importArmed ? "armed" : "") + '" onclick="armOrPickImport()">' + (importArmed ? "再点一次选文件" : "导入") + '</button>'
+      + '<button type="button" aria-label="合并历史错题" onclick="pickMerge()">合并</button>'
+      + '<button type="button" aria-label="粘贴备份内容导入" onclick="togglePasteImport()">粘贴导入</button>'
+      + '<button type="button" aria-label="清空历史错题" class="danger-soft" onclick="askClearBook()">清空历史错题</button>'
+      + '</div>';
+    if (importArmed)
+      h += '<p class="io-warn" role="alert">导入会替换当前历史错题，再点一次选文件</p>';
+    h += '</div>';
+  }
+  var entries = sortedBookEntries(bookFor(bookMode, bookTab), bookTab === "session");
+  currentBookEntries = entries;
+  if (!entries.length){
+    h += '<p class="book-empty">还没有错题。继续保持！</p>';
+  } else {
+    h += '<ul class="book-list">';
+    entries.forEach(function(pair, i){
+      var rec = pair[1];
+      h += '<li><button type="button" aria-label="查看单词卡片 ' + esc(rec.word) + '" onclick="openWordCard(' + i + ')">'
+        + '<span><span class="w serif">' + esc(rec.word) + '</span>'
+        + '<span class="m">' + esc(rec.meaning) + '</span>'
+        + (rec.reasons.length ? '<span class="r">' + esc(rec.reasons.join(" · ")) + '</span>' : '')
+        + '</span><span class="c">×' + rec.count + '</span></button></li>';
+    });
+    h += '</ul>';
+  }
+  /* 历史错题的清空按钮已挪到上方导入导出那一行（粘贴导入后面），
+     底部这行只剩本次错题的清空。 */
+  if (bookTab === "session"){
+    h += '<div class="clear-row"><button type="button" aria-label="清空本次错题" onclick="askClearBook()">清空本次错题</button></div>';
+  }
+  h += '</div></div>';
+  slot.innerHTML = h;
+  var newOv = slot.querySelector(".book-overlay");
+  if (newOv) newOv.scrollTop = bookScrollPos[key] || 0;
+  lastBookKey = key;
+}
+
+/* ================= word card modal ================= */
+function renderModal(){
+  var slot = document.getElementById("modal-slot");
+  if (!modalEntry){ slot.innerHTML = ""; return; }
+  slot.innerHTML = '<div class="overlay" role="dialog" aria-modal="true" aria-label="单词卡片 ' + esc(modalEntry.word) + '" onclick="closeWordCard()">'
+    + '<div class="modal-card" onclick="event.stopPropagation()">'
+    + '<div class="top">' + accentHtml("卡片发音口音切换")
+    + '<button type="button" class="btn-ghost" aria-label="关闭单词卡片" onclick="closeWordCard()">关闭</button></div>'
+    + '<p class="word serif">' + esc(modalEntry.word) + '</p>'
+    + ipaHtml(modalEntry.ipa, accent)
+    + '<button type="button" class="btn-speak" aria-label="听发音" onclick="modalSpeak()">🔊 听发音</button>'
+    + formChipsHtml(modalEntry, accent, "modalSpeakForm")
+    + '<p class="meaning">' + esc(modalEntry.meaning) + '</p>'
+    + '</div></div>';
+}
+
+/* ================= main render ================= */
+function render(){
+  var app = document.getElementById("app");
+  var h = '<main class="wrap">'
+    + '<div class="topbar"><p class="cnt" style="margin:0">共 <strong>150</strong> 个词 · sneaker — stable</p>'
+    + (((view === "flash" && fc.status === "active") || (view === "quiz" && qz.status === "active"))
+        ? ''
+        : '<div class="accent-wrap"><span class="lbl">发音：</span>' + accentHtml("发音口音切换") + '</div>')
+    + '</div>'
+    + '<div class="tabs" role="tablist" aria-label="练习模式">'
+    + '<button type="button" role="tab" aria-selected="' + (view === "flash") + '" class="' + (view === "flash" ? "on" : "") + '" onclick="setView(\'flash\')">英译中闪卡</button>'
+    + '<button type="button" role="tab" aria-selected="' + (view === "quiz") + '" class="' + (view === "quiz" ? "on" : "") + '" onclick="setView(\'quiz\')">中译英拼写</button></div>'
+    + (view === "flash"
+        ? '<section aria-label="英译中闪卡">' + flashHtml() + '</section>'
+        : '<section aria-label="中译英拼写">' + quizHtml() + '</section>')
+    + '</main>';
+  /* keep whatever the user is typing in the quiz input across re-renders */
+  var activeEl = document.activeElement;
+  var hadFocus = activeEl && activeEl.id === "quiz-answer";
+  if (hadFocus) qzInput = activeEl.value;
+  app.innerHTML = h;
+  if (hadFocus){
+    var inp = document.getElementById("quiz-answer");
+    if (inp && !inp.disabled){
+      inp.focus();
+      try { inp.setSelectionRange(inp.value.length, inp.value.length); } catch (e) {}
+    }
+  }
+  /* pile pill */
+  var pillSlot = document.getElementById("pill-slot");
+  var round = view === "flash" ? fc : qz;
+  var pile = view === "flash" ? fcPile : qzPile;
+  if (round.status === "active"){
+    pillSlot.innerHTML = '<button type="button" class="pill" aria-label="不知道的词，' + pile.length + ' 个，打开查看本轮正确率" onclick="openPilePanel(\'' + view + '\')">不知道的词<strong>' + pile.length + '</strong></button>';
+  } else {
+    pillSlot.innerHTML = "";
+  }
+  /* pile panel */
+  document.getElementById("panel-slot").innerHTML = pilePanelHtml("flash") + pilePanelHtml("quiz");
+  renderBook();
+  renderModal();
+}
+function setView(v){ view = v; render(); }
+
+document.getElementById("io-file").addEventListener("change", function(ev){
+  var f = ev.target.files && ev.target.files[0];
+  ev.target.value = "";
+  if (f) handleFileChosen(f);
+});
+document.addEventListener("keydown", function(ev){
+  if (ev.key === "Escape" && clearConfirm) closeClearConfirm();
+  else if (ev.key === "Escape" && pasteOpen) closePasteImport();
+  else if (ev.key === "Escape" && modalEntry) closeWordCard();
+});
+render();
+
+</script>
+</body>
+</html>
