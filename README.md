@@ -7,7 +7,7 @@ My English vocabulary lists. Open and use directly in the browser, no download, 
 ## 词表
 
 ### 1. 英语兔词汇表 | English Rabbit Vocabulary
-- 777 词
+- 777 词，持续更新中
 - 中译英拼写测验、英译中闪卡、错题本、英美发音切换
 - 在线打开：https://erling060512-sudo.github.io/english-vocabulary-lists/english-rabbit/
 
