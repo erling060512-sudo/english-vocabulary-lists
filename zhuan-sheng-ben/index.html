@@ -70,6 +70,11 @@ button:disabled{cursor:not-allowed}
 .ipa p.off{color:var(--dim)}
 .ipa .one{margin:0 .125rem;display:inline-block;white-space:nowrap}
 .ipa .lab{margin-left:.25rem;font-size:.875rem}
+/* 练习音标遮挡：每张卡第一次出现时音标朦胧模糊，点一下或鼠标悬停一次后显示，本卡内保持显示，下一张卡重新遮起。只用在练习（闪卡/拼写反馈），错题本不用。 */
+.ipa-veil{cursor:pointer;border-radius:.5rem;outline:none}
+.ipa-veil:focus-visible{box-shadow:0 0 0 2px var(--accent)}
+.ipa-veil .ipa{filter:blur(6px);opacity:.55;user-select:none;-webkit-user-select:none;transition:filter .2s ease,opacity .2s ease}
+.chips .fi.blur{filter:blur(4px);opacity:.55;user-select:none;-webkit-user-select:none}
 .chips{margin-top:.75rem;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
 .chips button{display:inline-flex;min-height:2.25rem;align-items:center;gap:.375rem;border:1px solid var(--border);background:var(--bg);border-radius:999px;padding:.375rem .75rem;font-size:.875rem}
 .chips .fm{font-weight:500}
@@ -334,16 +339,52 @@ function ipaHtml(ipa, accent){
   });
   return h + '</div>';
 }
-function formChipsHtml(entry, accent, fnName){
+function formChipsHtml(entry, accent, fnName, blurFi){
   var pairs = formIpaPairs(entry, accent);
   if (!pairs.length) return "";
   var h = '<div class="chips">';
   pairs.forEach(function(pr, i){
     h += '<button type="button" aria-label="播放 ' + esc(pr.form) + ' 的发音" onclick="' + fnName + '(' + i + ')">'
        + '<span aria-hidden="true">🔊</span><span class="fm">' + esc(pr.form) + '</span>'
-       + '<span class="fi">' + esc(pr.ipa) + '</span></button>';
+       + '<span class="fi' + (blurFi ? ' blur' : '') + '"' + (blurFi ? ' aria-hidden="true"' : '') + '>' + esc(pr.ipa) + '</span></button>';
   });
   return h + '</div>';
+}
+/* 电脑端音标悬停防误触：每张新卡出现时只记录、不触发——指针本来就
+   停在音标出现的位置上不算悬停；只有指针后来移动过、且移进音标区
+   停留约 0.3 秒才显示（中途移开取消计时）。手机点按（onclick）与
+   键盘聚焦不受影响。每换一张卡 ipaHoverReset 重置一次。 */
+var ipaHover = {
+  fc: { moved:false, inside:false, timer:null },
+  qz: { moved:false, inside:false, timer:null }
+};
+function ipaHoverReset(key){
+  var s = ipaHover[key];
+  s.moved = false; s.inside = false;
+  if (s.timer){ clearTimeout(s.timer); s.timer = null; }
+}
+function ipaHoverEnter(key){ ipaHover[key].inside = true; }
+function ipaHoverMove(key, showFn){
+  var s = ipaHover[key];
+  s.moved = true;
+  if (!s.inside || s.timer) return;
+  s.timer = setTimeout(function(){
+    s.timer = null;
+    if (s.inside && s.moved) showFn();
+  }, 300);
+}
+function ipaHoverLeave(key){
+  var s = ipaHover[key];
+  s.inside = false;
+  if (s.timer){ clearTimeout(s.timer); s.timer = null; }
+}
+/* 练习专用音标：shown=false 时把 ipaHtml 包进遮挡层（模糊），点一下
+   （onclick）显示，电脑端走上面的悬停门控（ipaHover*）显示；错题本
+   仍直接用 ipaHtml，正常显示。 */
+function practiceIpaHtml(ipa, accent, shown, revealFn, hoverKey){
+  var inner = ipaHtml(ipa, accent);
+  if (!inner || shown) return inner;
+  return '<div class="ipa-veil" role="button" tabindex="0" aria-label="显示音标" title="点一下或把鼠标停在音标上显示" onclick="' + revealFn + '()" onmouseenter="ipaHoverEnter(\'' + hoverKey + '\')" onmousemove="ipaHoverMove(\'' + hoverKey + '\',' + revealFn + ')" onmouseleave="ipaHoverLeave(\'' + hoverKey + '\')" onfocus="' + revealFn + '()" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();' + revealFn + '();}">' + inner + '</div>';
 }
 function normalizeAnswer(s){
   return String(s == null ? "" : s).trim().toLowerCase().replace(/\s+/g, "");
@@ -677,6 +718,9 @@ function remainingOf(r){
 /* flash state */
 var fc = idleRound();
 var fcRevealed = false;
+/* 当前闪卡的音标是否已点开/悬停显示；每换一张卡重置为 false */
+var fcIpaShown = false;
+function fcShowIpa(){ if (!fcIpaShown){ fcIpaShown = true; render(); } }
 var fcJudged = null; /* null | "correct" | "wrong" */
 /* True only in the brief moment right after a verdict is SWITCHED from
    the other verdict (正确 ↔ 不会/错误): only that switch plays the
@@ -692,6 +736,9 @@ var fcPanel = { open:false, round:null };
 var qz = idleRound();
 var qzInput = "";
 var qzFeedback = null; /* null | {kind, text} */
+/* 当前拼写题反馈卡的音标是否已点开/悬停显示；每换一题重置为 false */
+var qzIpaShown = false;
+function qzShowIpa(){ if (!qzIpaShown){ qzIpaShown = true; render(); } }
 var qzAnswered = false;
 var qzPile = [];
 var qzPanel = { open:false, round:null };
@@ -738,6 +785,8 @@ function startFlashRound(pool, isReview){
     total: pool.length, correct: 0, wrong: 0, isReview: !!isReview
   };
   fcRevealed = false;
+  fcIpaShown = false;
+  ipaHoverReset("fc");
   fcJudged = null;
   fcPile = [];
   render();
@@ -793,6 +842,8 @@ function fcNext(){
     fc.current = fc.queue.shift();
   }
   fcRevealed = false;
+  fcIpaShown = false;
+  ipaHoverReset("fc");
   fcJudged = null;
   render();
 }
@@ -829,6 +880,8 @@ function startQuizRound(pool, isReview){
   };
   qzInput = "";
   qzFeedback = null;
+  qzIpaShown = false;
+  ipaHoverReset("qz");
   qzAnswered = false;
   qzPile = [];
   render();
@@ -857,6 +910,8 @@ function qzAdvance(wasCorrect){
   }
   qzInput = "";
   qzFeedback = null;
+  qzIpaShown = false;
+  ipaHoverReset("qz");
   qzAnswered = false;
   render();
 }
@@ -992,11 +1047,11 @@ function buildShareData(mode){
   var counts = {};
   var orderOf = {};
   var order = 0;
-  rounds.forEach(function(r){
+  rounds.forEach(function(r, ri){
     r.wrongWords.forEach(function(word){
       var key = word.toLowerCase();
-      if (counts[key]) counts[key].count += 1;
-      else { counts[key] = { word: word, count: 1 }; orderOf[key] = order++; }
+      if (counts[key]) { counts[key].count += 1; counts[key].lastWrongIdx = ri; }
+      else { counts[key] = { word: word, count: 1, lastWrongIdx: ri }; orderOf[key] = order++; }
     });
   });
   var wordByKey = {};
@@ -1010,18 +1065,37 @@ function buildShareData(mode){
     if (b.count !== a.count) return b.count - a.count;
     return orderOf[a.word.toLowerCase()] - orderOf[b.word.toLowerCase()];
   });
-  var last = rounds[rounds.length - 1];
-  var totals = rounds.reduce(function(acc, r){
-    return { total: acc.total + r.total, correct: acc.correct + r.correct, wrong: acc.wrong + r.wrong };
-  }, { total: 0, correct: 0, wrong: 0 });
+  var totalCorrect = rounds.reduce(function(acc, r){ return acc + r.correct; }, 0);
+  var totalWrong = rounds.reduce(function(acc, r){ return acc + r.wrong; }, 0);
+  var first = rounds[0];
+  var firstCorrect = first ? first.correct : 0;
+  /* 涉及的不同词数（去重）：第一轮答对的词（之后不会再出现）加上
+     任何一轮错过的不同词数；后面的轮次只重练错词，不会带来新词。
+     不再单独算「最终掌握」：第一次练的正确率（第一轮正确率）才
+     是真正的正确率；第一轮答错、后来练对的词单独记 laterFixed。
+     重点词：只要在这条链里答错过的词都是重点词，按错的次数从
+     多到少分批列出来——错了几次就归到「错了几次」那一批，每种
+     错次一批，错次多的排前面；同一批里按首次出错顺序。与在线
+     版一致。 */
+  var distinctWords = firstCorrect + Object.keys(counts).length;
+  var keyErrorCounts = Object.keys(counts).map(function(k){ return counts[k].count; });
+  keyErrorCounts = keyErrorCounts.filter(function(n, i){ return keyErrorCounts.indexOf(n) === i; });
+  keyErrorCounts.sort(function(a, b){ return b - a; });
+  var keyWordGroups = keyErrorCounts.map(function(errors){
+    var words = Object.keys(counts).filter(function(k){ return counts[k].count === errors; });
+    words.sort(function(a, b){ return orderOf[a] - orderOf[b]; });
+    return { errors: errors, words: words.map(function(k){ return counts[k].word; }) };
+  });
   var now = new Date();
   return {
     modeLabel: mode === "flash" ? "英译中" : "中译英",
     dateText: now.getFullYear() + "年" + (now.getMonth() + 1) + "月" + now.getDate() + "日",
     rounds: rounds,
     wrongWords: wrongWords,
-    totals: totals,
-    lastRoundPerfect: !!last && !last.live && last.wrong === 0 && last.correct > 0
+    distinctWords: distinctWords,
+    firstCorrect: firstCorrect,
+    keyWordGroups: keyWordGroups,
+    laterFixed: totalCorrect - firstCorrect
   };
 }
 function roundRectPath(ctx, x, y, w, h, r){
@@ -1034,10 +1108,13 @@ function roundRectPath(ctx, x, y, w, h, r){
   ctx.arcTo(x, y, x + w, y, rr);
   ctx.closePath();
 }
-/* 把卡片画到 1080px 宽的 canvas 上（540 CSS px 的 2 倍）：先给所有
-   轮次加总的整体汇总（共练/答对/答错/整体正确率），再每一轮按顺序
-   列出（练了几个词、答对几个、正确率），再列错词（按错误次数从高
-   到低）。与在线版同一张卡片。 */
+/* 把卡片画到 1080px 宽的 canvas 上（540 CSS px 的 2 倍）：整体情况
+   写能反映掌握程度的统计（涉及的不同词数去重 / 第一次就答对几个与
+   首次正确率 / 答错过的重点词按错的次数从多到少分批列
+   出来 / 后来练对几个；总答对答错次数不写，后面轮次词少、几乎必
+   对，纯次数没意义），再每一轮按顺序列出（练了几个词、答对几个、
+   正确率；第 1 轮的正确率标绿，第一次练的正确率才是真正的正确
+   率），最后列错词（按错误次数从高到低）。与在线版同一张卡片。 */
 function drawShareCard(data){
   var u = 2;
   var W = 540 * u;
@@ -1055,7 +1132,18 @@ function drawShareCard(data){
   /* 错词排版走共用的 layoutShareWords（单列：单词 + ×次数、音标、释义
      折行），先量好每条高度，画布高度才正好装下。 */
   var wordEntries = layoutShareWords(ctx, font, data.wrongWords, contentW);
-  var summaryH = (64 + 16) * u;
+  /* 整体情况框里的重点词分批名单按框内宽度折行，先量好行数，框高
+     和画布高度才正好装下：每批一行标题加折行后的词名行数；没有
+     重点词时画一行占位。与在线版一致。 */
+  ctx.font = font(14, 400);
+  var keyGroups = data.keyWordGroups.map(function(g){
+    return { errors: g.errors, count: g.words.length, lines: wrapCanvasLines(ctx, g.words.join("、"), contentW - 32 * u) };
+  });
+  var keyLineCount = keyGroups.length
+    ? keyGroups.reduce(function(acc, g){ return acc + 1 + g.lines.length; }, 0)
+    : 1;
+  var summaryBoxH = 90 + keyLineCount * 20;
+  var summaryH = (summaryBoxH + 16) * u;
   var wordsH = shareWordsHeight(wordEntries) * u;
   var H = margin * 2
     + (36 + 20 + 8 + 46 + 6 + 22 + 20) * u
@@ -1066,10 +1154,12 @@ function drawShareCard(data){
     + wordsH
     + (24 + 20 + 32) * u;
   var y = paintShareCardHeader(canvas, ctx, font, C, { u: u, W: W, margin: margin, contentX: contentX }, H, "练习分享卡片", data.modeLabel + " · " + data.dateText + " · 共 " + data.rounds.length + " 轮");
-  /* 整体汇总：卡片上所有轮次加起来算——共练多少个词、答对、答错、
-     整体正确率。最后一轮全对只在汇总行后标「本轮全对」，不拿它当
-     整体的百分之百。与在线版同一张卡片。 */
-  roundRectPath(ctx, contentX, y, contentW, 64 * u, 12 * u);
+  /* 整体情况，只写能反映掌握程度的：涉及的不同词数（去重）、第一
+     次就答对几个与首次正确率、答错过的重点词（按错的次数从多到
+     少分批列出来）、后来练对几个。总答对答错次数不写。不再有
+     「最终掌握」一块；每一轮列表里第 1 轮的正确率标绿——第一次
+     练的正确率才是真正的正确率。与在线版同一张卡片。 */
+  roundRectPath(ctx, contentX, y, contentW, summaryBoxH * u, 12 * u);
   ctx.fillStyle = C.bg;
   ctx.fill();
   ctx.strokeStyle = C.border;
@@ -1080,19 +1170,26 @@ function drawShareCard(data){
   ctx.fillText("整体情况", contentX + 16 * u, y + 27 * u);
   ctx.font = font(18, 700);
   ctx.textAlign = "right";
-  ctx.fillText("整体正确率 " + rateText(data.totals.correct, data.totals.wrong), contentX + contentW - 16 * u, y + 28 * u);
+  ctx.fillText("首次正确率 " + rateText(data.firstCorrect, data.distinctWords - data.firstCorrect), contentX + contentW - 16 * u, y + 28 * u);
   ctx.textAlign = "left";
   ctx.fillStyle = C.dim;
   ctx.font = font(14, 400);
-  var totalsText = "共练 " + data.totals.total + " 个词 · 答对 " + data.totals.correct + " · 答错 " + data.totals.wrong;
-  ctx.fillText(totalsText, contentX + 16 * u, y + 50 * u);
-  if (data.lastRoundPerfect){
-    var totalsW = ctx.measureText(totalsText).width;
-    ctx.fillStyle = C.green;
-    ctx.font = font(14, 700);
-    ctx.fillText(" · 本轮全对", contentX + 16 * u + totalsW, y + 50 * u);
+  ctx.fillText("本次涉及 " + data.distinctWords + " 个不同的词 · 第一次就答对 " + data.firstCorrect + " 个", contentX + 16 * u, y + 52 * u);
+  ctx.fillText("后来练对 " + data.laterFixed + " 个", contentX + 16 * u, y + 74 * u);
+  if (keyGroups.length){
+    var lineY = 96;
+    keyGroups.forEach(function(g){
+      ctx.fillText("重点词 " + g.count + " 个 · 错了 " + g.errors + " 次的词：", contentX + 16 * u, y + lineY * u);
+      lineY += 20;
+      g.lines.forEach(function(line){
+        ctx.fillText(line, contentX + 16 * u, y + lineY * u);
+        lineY += 20;
+      });
+    });
+  } else {
+    ctx.fillText("重点词 0 个 · 没有答错过的词", contentX + 16 * u, y + 96 * u);
   }
-  y += (64 + 16) * u;
+  y += summaryH;
   ctx.fillStyle = C.text;
   ctx.font = font(16, 700);
   ctx.fillText("每一轮", contentX, y + 17 * u);
@@ -1110,7 +1207,9 @@ function drawShareCard(data){
       ctx.fillText("（进行中）", contentX + lw + 6 * u, y + 22 * u);
     }
     ctx.font = font(18, 700);
-    ctx.fillStyle = rate === "100%" ? C.green : C.text;
+    /* 第 1 轮的正确率标绿：每个词都是第一次练，这个正确率才是
+       真正的正确率。不另加行，就标这一处。与在线版一致。 */
+    ctx.fillStyle = i === 0 ? C.green : C.text;
     ctx.textAlign = "right";
     ctx.fillText("正确率 " + rate, contentX + contentW, y + 22 * u);
     ctx.textAlign = "left";
@@ -1833,12 +1932,12 @@ function flashHtml(){
   var h = backHomeHtml("fcGoHome");
   h += '<div class="card stage' + (fcRevealed ? "" : " compact") + '">';
   h += '<div class="stage-content"><p class="word serif">' + esc(e.word) + '</p>'
-    + ipaHtml(e.ipa, accent)
+    + practiceIpaHtml(e.ipa, accent, fcIpaShown, "fcShowIpa", "fc")
     + '<div class="reveal-zone"><button type="button" class="btn-ghost" aria-label="查看中文释义" onclick="fcToggleReveal()">' + (fcRevealed ? "隐藏中文释义" : "查看中文释义") + '</button>'
     + (fcRevealed ? '<p class="meaning" aria-live="polite">' + esc(e.meaning) + '</p>' : '')
     + '</div>'
     + '<button type="button" class="btn-speak" aria-label="听发音" onclick="fcSpeak()">🔊 听发音</button>'
-    + formChipsHtml(e, accent, "fcSpeakForm")
+    + formChipsHtml(e, accent, "fcSpeakForm", !fcIpaShown)
     + '</div>';
   if (fcJudged) h += '<div class="stamp ' + (fcJudged === "wrong" ? "stamp-wrong" : "stamp-correct") + '" aria-hidden="true"><div' + (fcStampFresh ? ' class="stamp-pop"' : '') + '>' + stampSvg(fcJudged) + '</div></div>';
   h += '</div>';
@@ -1879,9 +1978,9 @@ function quizHtml(){
     h += '<div class="feedback ' + (qzFeedback.kind === "correct" ? "good" : "bad") + '" aria-live="polite">'
       + '<p class="ft">' + esc(qzFeedback.text) + '</p>'
       + '<p class="fw serif">' + esc(e.word) + '</p>'
-      + ipaHtml(e.ipa, accent)
+      + practiceIpaHtml(e.ipa, accent, qzIpaShown, "qzShowIpa", "qz")
       + '<button type="button" class="btn-speak" aria-label="听发音" onclick="qzSpeak()">🔊 听发音</button>'
-      + formChipsHtml(e, accent, "qzSpeakForm")
+      + formChipsHtml(e, accent, "qzSpeakForm", !qzIpaShown)
       + '</div>';
   }
   h += '<div class="quiz-btns">';
