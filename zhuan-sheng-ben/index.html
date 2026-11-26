@@ -162,10 +162,10 @@ button:disabled{cursor:not-allowed}
 .book-list .accent{padding:.125rem}
 .book-list .accent button{min-height:2rem;padding:0 .625rem;font-size:.75rem}
 .book-list .chips{justify-content:flex-start;margin-top:.5rem}
-.book-list .w{display:block;font-size:1.5rem;font-weight:600}
+.book-list .w{display:block;font-size:1.875rem;font-weight:700}
 .book-list .ipa p{font-size:1.125rem}
 .book-list .ipa .lab{font-size:.75rem}
-.book-list .m{display:block;margin-top:.25rem;font-size:1.25rem;color:var(--dim)}
+.book-list .m{display:block;margin-top:.25rem;font-size:1.125rem;color:var(--text)}
 .book-list .c{flex:none;border-radius:999px;background:var(--count-bg);color:var(--count-tx);padding:.25rem .75rem;font-size:.875rem;font-weight:600}
 .clear-row{margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem}
 .clear-row button{min-height:2.75rem;border-radius:999px;border:1px solid var(--border);padding:0 1.25rem;font-weight:500}
@@ -210,10 +210,10 @@ button:disabled{cursor:not-allowed}
   .stage .word{font-size:3.75rem}
   .ipa p{font-size:1.25rem}
   .ipa .lab{font-size:1rem}
-  .book-list .w{font-size:1.875rem}
+  .book-list .w{font-size:2.25rem}
   .book-list .ipa p{font-size:1.25rem}
   .book-list .ipa .lab{font-size:.875rem}
-  .book-list .m{font-size:1.5rem}
+  .book-list .m{font-size:1.25rem}
   .book-list .spk{font-size:.875rem}
   .btn-speak{min-height:3rem;padding:0 2rem;font-size:1.125rem}
   .chips button{min-height:2.5rem;padding:.375rem 1rem;font-size:1rem}
@@ -232,8 +232,8 @@ button:disabled{cursor:not-allowed}
   .feedback .fw{font-size:2.25rem}
   .feedback .btn-speak{min-height:2.75rem;font-size:1rem;padding:0 1.5rem}
   .book-head h2{font-size:1.5rem}
-  .book-list .w{font-size:1.25rem}
-  .book-list .m{font-size:1rem}
+  .book-list .w{font-size:1.5625rem}
+  .book-list .m{font-size:.9375rem}
   .modal-card{max-width:32rem;padding:2rem}
   .modal-card .word{font-size:2.25rem}
   .modal-card .meaning{font-size:1.25rem}
@@ -1011,13 +1011,17 @@ function buildShareData(mode){
     return orderOf[a.word.toLowerCase()] - orderOf[b.word.toLowerCase()];
   });
   var last = rounds[rounds.length - 1];
+  var totals = rounds.reduce(function(acc, r){
+    return { total: acc.total + r.total, correct: acc.correct + r.correct, wrong: acc.wrong + r.wrong };
+  }, { total: 0, correct: 0, wrong: 0 });
   var now = new Date();
   return {
     modeLabel: mode === "flash" ? "英译中" : "中译英",
     dateText: now.getFullYear() + "年" + (now.getMonth() + 1) + "月" + now.getDate() + "日",
     rounds: rounds,
     wrongWords: wrongWords,
-    finishedPerfect: !!last && !last.live && last.wrong === 0 && last.correct > 0
+    totals: totals,
+    lastRoundPerfect: !!last && !last.live && last.wrong === 0 && last.correct > 0
   };
 }
 function roundRectPath(ctx, x, y, w, h, r){
@@ -1030,9 +1034,10 @@ function roundRectPath(ctx, x, y, w, h, r){
   ctx.arcTo(x, y, x + w, y, rr);
   ctx.closePath();
 }
-/* 把卡片画到 1080px 宽的 canvas 上（540 CSS px 的 2 倍）：每一轮按
-   顺序列出（练了几个词、答对几个、正确率），再列错词（按错误次数
-   从高到低）。与在线版同一张卡片。 */
+/* 把卡片画到 1080px 宽的 canvas 上（540 CSS px 的 2 倍）：先给所有
+   轮次加总的整体汇总（共练/答对/答错/整体正确率），再每一轮按顺序
+   列出（练了几个词、答对几个、正确率），再列错词（按错误次数从高
+   到低）。与在线版同一张卡片。 */
 function drawShareCard(data){
   var u = 2;
   var W = 540 * u;
@@ -1050,31 +1055,44 @@ function drawShareCard(data){
   /* 错词排版走共用的 layoutShareWords（单列：单词 + ×次数、音标、释义
      折行），先量好每条高度，画布高度才正好装下。 */
   var wordEntries = layoutShareWords(ctx, font, data.wrongWords, contentW);
-  var bannerH = data.finishedPerfect ? (44 + 16) * u : 0;
+  var summaryH = (64 + 16) * u;
   var wordsH = shareWordsHeight(wordEntries) * u;
   var H = margin * 2
     + (36 + 20 + 8 + 46 + 6 + 22 + 20) * u
-    + bannerH
+    + summaryH
     + (24 + 10) * u
     + data.rounds.length * 60 * u
     + (22 + 24 + 10) * u
     + wordsH
     + (24 + 20 + 32) * u;
   var y = paintShareCardHeader(canvas, ctx, font, C, { u: u, W: W, margin: margin, contentX: contentX }, H, "练习分享卡片", data.modeLabel + " · " + data.dateText + " · 共 " + data.rounds.length + " 轮");
-  if (data.finishedPerfect){
-    roundRectPath(ctx, contentX, y, contentW, 44 * u, 12 * u);
-    ctx.fillStyle = C.greenBg;
-    ctx.fill();
-    ctx.strokeStyle = C.greenBorder;
-    ctx.lineWidth = 1.5 * u;
-    ctx.stroke();
+  /* 整体汇总：卡片上所有轮次加起来算——共练多少个词、答对、答错、
+     整体正确率。最后一轮全对只在汇总行后标「本轮全对」，不拿它当
+     整体的百分之百。与在线版同一张卡片。 */
+  roundRectPath(ctx, contentX, y, contentW, 64 * u, 12 * u);
+  ctx.fillStyle = C.bg;
+  ctx.fill();
+  ctx.strokeStyle = C.border;
+  ctx.lineWidth = 1.5 * u;
+  ctx.stroke();
+  ctx.fillStyle = C.text;
+  ctx.font = font(16, 700);
+  ctx.fillText("整体情况", contentX + 16 * u, y + 27 * u);
+  ctx.font = font(18, 700);
+  ctx.textAlign = "right";
+  ctx.fillText("整体正确率 " + rateText(data.totals.correct, data.totals.wrong), contentX + contentW - 16 * u, y + 28 * u);
+  ctx.textAlign = "left";
+  ctx.fillStyle = C.dim;
+  ctx.font = font(14, 400);
+  var totalsText = "共练 " + data.totals.total + " 个词 · 答对 " + data.totals.correct + " · 答错 " + data.totals.wrong;
+  ctx.fillText(totalsText, contentX + 16 * u, y + 50 * u);
+  if (data.lastRoundPerfect){
+    var totalsW = ctx.measureText(totalsText).width;
     ctx.fillStyle = C.green;
-    ctx.font = font(16, 700);
-    ctx.textAlign = "center";
-    ctx.fillText("错词全部练对 · 正确率 100%", contentX + contentW / 2, y + 28 * u);
-    ctx.textAlign = "left";
-    y += (44 + 16) * u;
+    ctx.font = font(14, 700);
+    ctx.fillText(" · 本轮全对", contentX + 16 * u + totalsW, y + 50 * u);
   }
+  y += (64 + 16) * u;
   ctx.fillStyle = C.text;
   ctx.font = font(16, 700);
   ctx.fillText("每一轮", contentX, y + 17 * u);

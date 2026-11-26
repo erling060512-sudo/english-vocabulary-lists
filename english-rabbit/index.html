@@ -75,7 +75,8 @@ button:disabled{cursor:not-allowed}
 .chips .fm{font-weight:500}
 .chips .fi{color:var(--dim)}
 .reveal-zone{margin:1.5rem auto 0;max-width:28rem}
-.stage .fc-meaning{margin:1rem auto 0;max-width:28rem;min-height:1.75rem;font-size:1.125rem;line-height:1.7}
+.reveal-zone .meaning{margin:1rem 0 0;min-height:1.75rem;font-size:1.125rem;line-height:1.7}
+.reveal-zone .meaning.hide{visibility:hidden}
 .judge-row{margin-top:1.25rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
 .judge-row button{min-height:3rem;border-radius:999px;padding:0 1rem;font-size:.875rem;font-weight:600}
 .jbtn-bad{border:1px solid var(--bad-bd);background:var(--bad-bg);color:var(--bad-tx)}
@@ -87,7 +88,6 @@ button:disabled{cursor:not-allowed}
 .jbtn-next:disabled{opacity:.35}
 .stats{margin-top:1rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;font-size:.875rem;color:var(--dim)}
 .endround{margin-top:1rem;text-align:center}
-.endround button{display:inline-flex;min-height:2.75rem;align-items:center;gap:.5rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:0 1.5rem;font-weight:500}
 .action-row{margin-top:1rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem}
 .action-row button{display:inline-flex;min-height:2.75rem;align-items:center;gap:.5rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:0 1.5rem;font-weight:500}
 .share-card{width:100%;max-width:28rem;max-height:92vh;overflow-y:auto;border-radius:1.5rem 1.5rem 0 0;background:var(--surface);padding:1.5rem;box-shadow:0 20px 25px rgba(0,0,0,.25)}
@@ -96,6 +96,7 @@ button:disabled{cursor:not-allowed}
 .share-card .fname{margin:0 0 1rem;font-size:.875rem;font-weight:500;word-break:break-all}
 .share-card img{width:100%;border:1px solid var(--border);border-radius:.75rem;display:block}
 .share-card p.hint{margin:1rem 0 0;font-size:.875rem;line-height:1.7;color:var(--dim)}
+.endround button{display:inline-flex;min-height:2.75rem;align-items:center;gap:.5rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:0 1.5rem;font-weight:500}
 .below-book{margin-top:1rem}
 .quiz-card{padding:2rem 1.25rem}
 .quiz-card .tip{margin:0 0 .75rem;text-align:center;font-size:.875rem;color:var(--dim)}
@@ -114,19 +115,11 @@ button:disabled{cursor:not-allowed}
 .pill strong{border-radius:999px;background:#dc2626;padding:.125rem .625rem;font-size:.875rem;color:#fff}
 .overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.5)}
 .sheet{width:100%;max-width:28rem;border-radius:1.5rem 1.5rem 0 0;background:var(--surface);padding:1.75rem 1.5rem;text-align:center;box-shadow:0 20px 25px rgba(0,0,0,.25)}
-.sheet.left{text-align:left;max-height:92vh;overflow-y:auto}
-.sheet .panel-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.75rem}
-.sheet .panel-head h3{font-size:1.125rem;font-weight:700;margin:0}
-.sheet .panel-note{font-size:.875rem;line-height:1.65;color:var(--dim);margin:0 0 1rem}
-.sheet .exp-name{font-size:.875rem;font-weight:500;word-break:break-all;margin:0 0 .25rem}
-.sheet .row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
-.io-ta{width:100%;border:1px solid var(--border);border-radius:.75rem;background:var(--bg);color:var(--text);padding:.75rem;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.6}
 .sheet h3{margin:0;font-size:1.125rem;font-weight:700}
 .sheet .rate{margin:1rem 0;font-size:3rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
 .sheet .info{margin:0 0 1.5rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
 .sheet .btns{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem}
 .sheet .btns button{min-height:3rem;border-radius:999px;padding:0 1.75rem;font-weight:600}
-.sheet .btns button.armed{background:#dc2626;color:#fff;border-color:#dc2626}
 .book-overlay{position:fixed;inset:0;z-index:40;overflow-y:auto;background:var(--bg)}
 .book-wrap{margin:0 auto;width:100%;max-width:42rem;padding:1rem 1rem 4rem}
 .book-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:1rem}
@@ -141,18 +134,38 @@ button:disabled{cursor:not-allowed}
 .io-box p{margin:0 0 .75rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
 .io-box .row{display:flex;flex-wrap:wrap;gap:.5rem}
 .io-box .row button{min-height:2.75rem;border-radius:999px;border:1px solid var(--border);padding:0 1.25rem;font-weight:500}
+.io-box .row button.danger-soft{background:var(--bad-bg);border-color:var(--bad-bd);color:var(--bad-tx)}
 .io-box .row button.armed{background:#dc2626;color:#fff;border-color:#dc2626}
-.io-box .row button.danger{border-color:#fca5a5;color:#dc2626;background:#fef2f2}
-@media (prefers-color-scheme: dark){
-  .io-box .row button.danger{border-color:#991b1b;color:#fca5a5;background:rgba(153,27,27,.18)}
-}
 .io-warn{margin:.75rem 0 0;border:1px solid var(--bad-bd);background:var(--bad-bg);border-radius:.75rem;padding:.75rem 1rem;text-align:center;font-size:.875rem;font-weight:600;line-height:1.7;color:var(--bad-tx)}
+.paste-card{width:100%;max-width:28rem;max-height:92vh;overflow-y:auto;border-radius:1.5rem 1.5rem 0 0;background:var(--surface);padding:1.5rem;box-shadow:0 20px 25px rgba(0,0,0,.25)}
+.paste-card .top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.75rem}
+.paste-card h3{margin:0;font-size:1.125rem;font-weight:700}
+.paste-card p{margin:0 0 1rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
+.paste-card textarea{width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:.75rem;background:var(--bg);color:var(--text);padding:.75rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1rem;line-height:1.6;margin-bottom:1rem}
+.paste-card .row{display:flex;flex-wrap:wrap;gap:.5rem}
+.paste-card .row button{min-height:3rem;border-radius:999px;border:1px solid var(--border);padding:0 1.5rem;font-weight:500}
+.paste-card .row button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.paste-card .row button.armed{background:#dc2626;border-color:#dc2626;color:#fff}
+.confirm-card{width:100%;max-width:28rem;border-radius:1.5rem 1.5rem 0 0;background:var(--surface);padding:1.5rem;box-shadow:0 20px 25px rgba(0,0,0,.25)}
+.confirm-card h3{margin:0 0 .75rem;font-size:1.125rem;font-weight:700}
+.confirm-card p{margin:0 0 1.25rem;font-size:.875rem;line-height:1.7;color:var(--dim)}
+.confirm-card .row{display:flex;flex-wrap:wrap;gap:.5rem}
+.confirm-card .row button{min-height:3rem;border-radius:999px;border:1px solid var(--border);padding:0 1.5rem;font-weight:500}
+.confirm-card .row button.danger{background:#dc2626;border-color:#dc2626;color:#fff;font-weight:600}
 .book-empty{padding:2.5rem 0;text-align:center;color:var(--dim)}
 .book-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
-.book-list button{display:flex;width:100%;min-height:3.5rem;align-items:center;justify-content:space-between;gap:.75rem;border:1px solid var(--border);background:var(--surface);border-radius:.75rem;padding:.75rem 1rem;text-align:left}
-.book-list .w{display:block;font-size:1.125rem;font-weight:600}
-.book-list .m{display:block;font-size:.875rem;color:var(--dim)}
-.book-list .r{display:block;font-size:.75rem;color:var(--dim)}
+.book-list .bitem{border:1px solid var(--border);background:var(--surface);border-radius:.75rem;padding:.75rem 1rem}
+.book-list .btop{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem}
+.book-list .bmain{display:block;flex:1;min-width:0;min-height:0;text-align:left;background:none;border:none;padding:0}
+.book-list .bctrls{margin-top:.625rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+.book-list .spk{min-height:2rem;border-radius:999px;background:var(--accent);padding:0 .75rem;font-size:.75rem;font-weight:600;color:#fff}
+.book-list .accent{padding:.125rem}
+.book-list .accent button{min-height:2rem;padding:0 .625rem;font-size:.75rem}
+.book-list .chips{justify-content:flex-start;margin-top:.5rem}
+.book-list .w{display:block;font-size:1.875rem;font-weight:700}
+.book-list .ipa p{font-size:1.125rem}
+.book-list .ipa .lab{font-size:.75rem}
+.book-list .m{display:block;margin-top:.25rem;font-size:1.125rem;color:var(--text)}
 .book-list .c{flex:none;border-radius:999px;background:var(--count-bg);color:var(--count-tx);padding:.25rem .75rem;font-size:.875rem;font-weight:600}
 .clear-row{margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem}
 .clear-row button{min-height:2.75rem;border-radius:999px;border:1px solid var(--border);padding:0 1.25rem;font-weight:500}
@@ -162,23 +175,21 @@ button:disabled{cursor:not-allowed}
 .modal-card .word{margin:0 0 .5rem;font-size:1.875rem;font-weight:600;word-break:break-word}
 .modal-card .meaning{margin:1.25rem 0 0;font-size:1.125rem;line-height:1.7}
 .toast{position:fixed;left:50%;transform:translateX(-50%);z-index:60;width:max-content;max-width:92vw;border-radius:999px;background:var(--text);color:var(--bg);padding:.75rem 1.25rem;text-align:center;font-size:.875rem;font-weight:500;box-shadow:0 10px 15px rgba(0,0,0,.2);bottom:calc(96px + env(safe-area-inset-bottom))}
+.stage-content{position:relative}
 .stamp{position:absolute;top:.75rem;width:6rem;height:6rem;pointer-events:none}
-.fc-text{position:relative}
-.stamp svg{width:100%;height:100%;filter:drop-shadow(0 3px 8px rgba(0,0,0,.14))}
-.stamp-wrong{left:.75rem}
-.stamp-correct{right:.75rem}
-.stamp-in{transform:rotate(-12deg)}
-.stamp-in-r{transform:rotate(12deg)}
+.stamp svg{width:100%;height:100%;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.14))}
+.stamp-wrong{left:.75rem;transform:rotate(-12deg)}
+.stamp-correct{right:.75rem;transform:rotate(12deg)}
 @keyframes stamp-pop{0%{opacity:0;scale:1.7}55%{opacity:1;scale:.93}100%{opacity:1;scale:1}}
 .stamp-pop{animation:stamp-pop .28s ease-out both}
 @media (prefers-reduced-motion: reduce){.stamp-pop{animation:none}}
 @media (min-width:640px){
-  .stage .word{font-size:3rem}
   .stamp{width:7rem;height:7rem;top:1rem}
   .stamp-wrong{left:1rem}
   .stamp-correct{right:1rem}
+  .stage .word{font-size:3rem}
   .overlay{align-items:center;padding:1.5rem}
-  .sheet,.modal-card,.share-card{border-radius:1.5rem}
+  .sheet,.modal-card,.paste-card,.share-card{border-radius:1.5rem}
   .quiz-card .meaning{font-size:1.5rem}
 }
 @media (min-width:1024px){
@@ -199,10 +210,15 @@ button:disabled{cursor:not-allowed}
   .stage .word{font-size:3.75rem}
   .ipa p{font-size:1.25rem}
   .ipa .lab{font-size:1rem}
+  .book-list .w{font-size:2.25rem}
+  .book-list .ipa p{font-size:1.25rem}
+  .book-list .ipa .lab{font-size:.875rem}
+  .book-list .m{font-size:1.25rem}
+  .book-list .spk{font-size:.875rem}
   .btn-speak{min-height:3rem;padding:0 2rem;font-size:1.125rem}
   .chips button{min-height:2.5rem;padding:.375rem 1rem;font-size:1rem}
   .reveal-zone{max-width:36rem}
-  .stage .fc-meaning{max-width:36rem;min-height:2.25rem;font-size:1.5rem}
+  .reveal-zone .meaning{min-height:2.25rem;font-size:1.5rem}
   .judge-row button{min-height:3.5rem;padding:0 2rem;font-size:1.125rem}
   .jbtn-next{padding:0 2.25rem !important}
   .stats{font-size:1rem}
@@ -216,8 +232,8 @@ button:disabled{cursor:not-allowed}
   .feedback .fw{font-size:2.25rem}
   .feedback .btn-speak{min-height:2.75rem;font-size:1rem;padding:0 1.5rem}
   .book-head h2{font-size:1.5rem}
-  .book-list .w{font-size:1.25rem}
-  .book-list .m{font-size:1rem}
+  .book-list .w{font-size:1.5625rem}
+  .book-list .m{font-size:.9375rem}
   .modal-card{max-width:32rem;padding:2rem}
   .modal-card .word{font-size:2.25rem}
   .modal-card .meaning{font-size:1.25rem}
@@ -234,13 +250,13 @@ button:disabled{cursor:not-allowed}
 <div id="book-slot"></div>
 <div id="modal-slot"></div>
 <div id="paste-slot"></div>
-<div id="export-slot"></div>
-<div id="clear-slot"></div>
+<div id="confirm-slot"></div>
 <div id="share-slot"></div>
 <div id="toast-slot"></div>
-<!-- 不设 accept 过滤：备份文件在聊天软件、文件管理之间转手后，扩展名和
-     类型常对不上，带过滤会让它在手机文件选择器里直接变灰、选不了。 -->
-<input type="file" id="io-file" aria-label="选择错题备份文件" style="display:none">
+<!-- 不设 accept 过滤、不用 display:none：备份文件转手后扩展名/类型常对不上，
+     带过滤会在手机文件选择器里变灰选不了；display:none 的文件框靠 JS 触发点击，
+     部分手机浏览器不弹选择器。改成 1px 视觉隐藏，程序点击照样生效。 -->
+<input type="file" id="io-file" aria-label="选择错题备份文件" style="position:fixed;left:0;bottom:0;width:1px;height:1px;opacity:.01;border:0;padding:0">
 <script>
 "use strict";
 var WORDS = [{"word": "the", "ipa": "/ðə；ði/", "meaning": "art.这（那）个，这（那）些。"}, {"word": "be", "ipa": "/biː；bi/", "meaning": "v.是（原形）（其人称和时态形式有am,is,are,was,were,being,been)；成为。"}, {"word": "and", "ipa": "/ænd；ənd/", "meaning": "conj.和；又；而。"}, {"word": "of", "ipa": "/ɒv；əv/（英）/ʌv；əv/（美）", "meaning": "prep.（表所属，数量，）……的。"}, {"word": "a", "ipa": "/ə；eɪ/", "meaning": "art.一（个，件……）。"}, {"word": "in", "ipa": "/ɪn/", "meaning": "prep.在……里（内）；在……；以……adv.在家，在内，向内。"}, {"word": "to", "ipa": "/tuː；tə/", "meaning": "prep.（动词不定式符号，无词义）；（表示接受动作的人或物）给；对，向，到；在……之前。"}, {"word": "have", "ipa": "/hæv；həv/", "meaning": "v.有；吃；喝；进行；经受。"}, {"word": "it", "ipa": "/ɪt/", "meaning": "pron.它。"}, {"word": "I", "ipa": "/aɪ/", "meaning": "pron.我。"}, {"word": "that", "ipa": "/ðæt/", "meaning": "adj.&pron.那，那个（引导宾语从句等）adv.那么，那样。"}, {"word": "for", "ipa": "/fɔː；fə/（英）/fɔːr；fər/（美）", "meaning": "prep.为了……；向……，往……；与……交换；防备……；适合……；因为……；在……期间；对于……；对……来说 conj.因为，由于。"}, {"word": "you", "ipa": "/juː；ju/（英）/juː；jə/（美）", "meaning": "pron.你；你们。"}, {"word": "he", "ipa": "/hiː；hi/", "meaning": "pron.他"}, {"word": "with", "ipa": "/wɪð；wɪθ/", "meaning": "prep.关于，带有，以，和，用，有。"}, {"word": "on", "ipa": "/ɒn/（英）/ɑːn/（美）", "meaning": "prep.在……上（时），关于 adv.（穿，放……）上；接通；进行下去；（电灯）开。"}, {"word": "do", "ipa": "/duː；də/", "meaning": "v.做；干 n.注意事项。"}, {"word": "say", "ipa": "/seɪ/", "meaning": "v.说，讲。"}, {"word": "this", "ipa": "/ðɪs/", "meaning": "adj.&pron.这，这个。"}, {"word": "they", "ipa": "/ðeɪ/", "meaning": "pron.他（她）们；它们。"}, {"word": "at", "ipa": "/æt；ət/", "meaning": "prep.在（几点钟）；在（某处）。"}, {"word": "but", "ipa": "/bʌt；bət/", "meaning": "conj.但是，可是 prep.除了，除……外。"}, {"word": "we", "ipa": "/wiː；wi/", "meaning": "pron.我们。"}, {"word": "his", "ipa": "/hɪz；ɪz/", "meaning": "pron.他的。"}, {"word": "from", "ipa": "/frɒm；frəm/（英）/frʌm；frəm/（美）", "meaning": "prep.从；从……起，距，来自。"}, {"word": "not", "ipa": "/nɒt/（英）/nɑːt/（美）", "meaning": "adv.不，没。"}, {"word": "by", "ipa": "/baɪ/", "meaning": "prep.靠近，在……旁；在……时间；不迟于；被；用；由；乘（车）。"}, {"word": "she", "ipa": "/ʃiː；ʃi/", "meaning": "pron.她。"}, {"word": "or", "ipa": "/ɔː/（英）/ɔːr/（美）", "meaning": "conj.或；就是；否则。"}, {"word": "as", "ipa": "/æz；əz/", "meaning": "adv.&conj.像……一样；如同；因为 prep.作为，当做。"}, {"word": "what", "ipa": "/wɒt/（英）/wɑːt；wʌt/（美）", "meaning": "pron.什么，怎么样 adj.多么，何等；什么。"}, {"word": "go", "ipa": "/ɡəʊ/（英）/ɡoʊ/（美）", "meaning": "v.去；走；驶；通到；到达 n.尝试（做某事）。"}, {"word": "their", "ipa": "/ðeə/（英）/ðer/（美）", "meaning": "pron.他（她，它）们的。"}, {"word": "can", "ipa": "/kæn；kən/", "meaning": "aux.可以；能 n.罐头 v.罐装。"}, {"word": "who", "ipa": "/huː/", "meaning": "pron.谁。"}, {"word": "get", "ipa": "/ɡet/", "meaning": "v.成为；得到；具有；到达。"}, {"word": "if", "ipa": "/ɪf/", "meaning": "conj.如果，假设，是否，是不是。"}, {"word": "would", "ipa": "/wʊd；wəd/", "meaning": "aux.（will的过去式）将会，打算，想要，过去常常。"}, {"word": "her", "ipa": "/hɜː；hə/（英）/hɜːr；hər/（美）", "meaning": "pron.她（宾格），她的。"}, {"word": "all", "ipa": "/ɔːl/", "meaning": "adv.全部地 adj.全（部）；所有的；总；整 pron.全部；全体人员。"}, {"word": "my", "ipa": "/maɪ/", "meaning": "pron.我的。"}, {"word": "make", "ipa": "/meɪk/", "meaning": "v.制造，做；使得 n.样式；制造。"}, {"word": "about", "ipa": "/əˈbaʊt/", "meaning": "adv.大约；到处；四处 prep.关于；在各处；四处。"}, {"word": "know", "ipa": "/nəʊ/（英）/noʊ/（美）", "meaning": "v.知道，了解；认识；懂得。"}, {"word": "will", "ipa": "/wɪl/", "meaning": "n.意志，遗嘱。"}, {"word": "up", "ipa": "/ʌp/", "meaning": "adv.向上；在上方；起来；在……以上 adj.上面的，向上的，上行的 n.上升；上坡；上行；繁荣 v.举起；拿起；提高 prep.向（高处）；向（在）……上（面）游。"}, {"word": "one", "ipa": "/wʌn/", "meaning": "pron.一（个，只……）"}, {"word": "time", "ipa": "/taɪm/", "meaning": "n.时间；时期；钟点，次，回 v.测定……的时间，记录……的时间。"}, {"word": "there", "ipa": "/ðeə/（英）/ðer/（美）", "meaning": "int.那；你瞧（表示引起注意） n.那里，那儿 adv.在那里，往那里；（作引导词）表“存在”。"}, {"word": "year", "ipa": "/jɪə/（英）/jɪr/（美）", "meaning": "n.年。"}, {"word": "so", "ipa": "/səʊ/（英）/soʊ/（美）", "meaning": "adv.如此，这么；非常；同样 conj.因此，所以。"}, {"word": "think", "ipa": "/θɪŋk/", "meaning": "v.想；认为；考虑。"}, {"word": "when", "ipa": "/wen/", "meaning": "conj.当……的时候 adv.什么时候，何时。"}, {"word": "which", "ipa": "/wɪtʃ/", "meaning": "pron.那（哪）一个；那（哪）一些 adj.这（哪）个；这（哪）些；无论哪个（些）。"}, {"word": "them", "ipa": "/ðem；ðəm/", "meaning": "pron.他/她/它们（宾格）。"}, {"word": "some", "ipa": "/sʌm；səm/", "meaning": "adj.一些，若干；有些；某一 pron.若干，一些。"}, {"word": "me", "ipa": "/miː；mi/", "meaning": "pron.我（宾格）。"}, {"word": "people", "ipa": "/ˈpiːpl/", "meaning": "n.人，人们；人民。"}, {"word": "take", "ipa": "/teɪk/", "meaning": "v.拿；拿走；做；服用；乘坐；花费。"}, {"word": "out", "ipa": "/aʊt/", "meaning": "adv.出外；在外，向外；熄。"}, {"word": "into", "ipa": "/ˈɪntuː/", "meaning": "prep.到……里；向内；变成。"}, {"word": "just", "ipa": "/dʒʌst/", "meaning": "adv.刚才；恰好；不过；仅 adj.公正的。"}, {"word": "see", "ipa": "/siː/", "meaning": "v.看见，看到；领会；拜会。"}, {"word": "him", "ipa": "/hɪm/", "meaning": "pron.他（宾格）。"}, {"word": "your", "ipa": "/jɔː；jə/（英）/jʊr；jər/（美）", "meaning": "pron.你的；你们的。"}, {"word": "come", "ipa": "/kʌm/", "meaning": "v.来，来到。"}, {"word": "could", "ipa": "/kʊd；kəd/", "meaning": "aux.可以；能；可能。"}, {"word": "now", "ipa": "/naʊ/", "meaning": "adv.现在。"}, {"word": "than", "ipa": "/ðæn；ðən/", "meaning": "conj.比。"}, {"word": "like", "ipa": "/laɪk/", "meaning": "prep.像，跟……一样 v.喜欢，喜爱。"}, {"word": "other", "ipa": "/ˈʌðə/（英）/ˈʌðər/", "meaning": "pron.别人，别的东西 adj.别的，另外的。"}, {"word": "how", "ipa": "/haʊ/", "meaning": "adv.怎么，如何；多少；多么。"}, {"word": "then", "ipa": "/ðen/", "meaning": "adv.当时，那时，然后，那么。"}, {"word": "its", "ipa": "/ɪts/", "meaning": "pron.它的。"}, {"word": "our", "ipa": "/ˈaʊə；ɑː/（英）/ˈaʊər；ɑːr/（美）", "meaning": "pron.我们的。"}, {"word": "two", "ipa": "/tuː/", "meaning": "num.二。"}, {"word": "more", "ipa": "/mɔː/（英）/mɔːr/（美）", "meaning": "adj.&adv.另外的；附加的；较多的，再；另外；而且；更 n.更多的量；另外的一些。"}, {"word": "these", "ipa": "/ðiːz/", "meaning": "adj.&pron.这些。"}, {"word": "want", "ipa": "/wɒnt/（英）/wɑːnt/（美）", "meaning": "v.想，想要，需要，必要。"}, {"word": "way", "ipa": "/weɪ/", "meaning": "n.路，路线；方式，手段。"}, {"word": "look", "ipa": "/lʊk/", "meaning": "n.看，瞧 v.看，观看 v.看起来。"}, {"word": "first", "ipa": "/fɜːst/（英）/fɜːrst/（美）", "meaning": "num.第一 adj.&adv.第一；首次；最初 n.开始；开端。"}, {"word": "also", "ipa": "/ˈɔːlsəʊ/（英）/ˈɔːlsoʊ/（美）", "meaning": "adv.也。"}, {"word": "new", "ipa": "/njuː/（英）/nuː/（美）", "meaning": "adj.新的；新鲜的。"}, {"word": "because", "ipa": "/bɪˈkəz；bɪˈkɒz/（英）/bɪˈkəz；bɪˈkɔːz/（美）", "meaning": "conj.因为。"}, {"word": "day", "ipa": "/deɪ/", "meaning": "n.（一）天，（一）日；白天。"}, {"word": "use", "ipa": "/juːz/", "meaning": "n.&v.利用，使用，应用。"}, {"word": "no", "ipa": "/nəʊ/（英）/noʊ/（美）", "meaning": "adv.不，不是 adj.没有，无，不。"}, {"word": "man", "ipa": "/mæn/", "meaning": "n.成年男人；人类。"}, {"word": "find", "ipa": "/faɪnd/", "meaning": "v.找到，发现，感到。"}, {"word": "here", "ipa": "/hɪə/（英）/hɪr/（美）", "meaning": "adv.这里，在这里；向这里。"}, {"word": "thing", "ipa": "/θɪŋ/", "meaning": "n.东西；（复）物品，用品；事情，事件。"}, {"word": "give", "ipa": "/ɡɪv/", "meaning": "v.给，递给，付出，给予。"}, {"word": "many", "ipa": "/ˈmeni/", "meaning": "pron.许多人（或物） adj.许多的。"}, {"word": "well", "ipa": "/wel/", "meaning": "adv.好，令人满意地，完全的 adj.好的；健康的 int.（表示惊讶同意或犹豫等，亦用于接话语）好吧，那么，哎呀 n.井。"}, {"word": "only", "ipa": "/ˈəʊnli/（英）/ˈoʊnli/（美）", "meaning": "adj.唯一的，仅有的 adv.仅仅，只，才。"}, {"word": "those", "ipa": "/ðəʊz/（英）/ðoʊz/（美）", "meaning": "adj.&pron.那些。"}, {"word": "tell", "ipa": "/tel/", "meaning": "v.告诉，讲述，吩咐。"}, {"word": "very", "ipa": "/ˈveri/", "meaning": "adv.很，非常。"}, {"word": "even", "ipa": "/ˈiːvn/", "meaning": "adv.甚至，连（……都）；更。"}, {"word": "back", "ipa": "/bæk/", "meaning": "adv.回（原处）；向后 adj.后面的 n.背后，后部；背。"}, {"word": "any", "ipa": "/ˈeni/", "meaning": "pron.（无论）哪一个；哪些；任何的；（用于疑问句、否定句）一些；什么。"}, {"word": "good", "ipa": "/ɡʊd/", "meaning": "adj.好；良好。"}, {"word": "woman", "ipa": "/ˈwʊmən/", "meaning": "n.妇女，女人。"}, {"word": "through", "ipa": "/θruː/", "meaning": "prep.穿（通）过；从始至终 adv.穿（通）过；自始至终，全部。"}, {"word": "us", "ipa": "/ʌs；əs/", "meaning": "pron.我们（宾格）。"}, {"word": "life", "ipa": "/laɪf/", "meaning": "n.生命；生涯；生活；人生；生物。"}, {"word": "child", "ipa": "/tʃaɪld/", "meaning": "n.孩子，儿童。"}, {"word": "work", "ipa": "/wɜːk/（英）/wɜːrk/（美）", "meaning": "n.工作，劳动，事情 v.工作；（机器、器官等）运转，活动。"}, {"word": "down", "ipa": "/daʊn/", "meaning": "prep.沿着，沿……而下 adv.向下。"}, {"word": "May", "ipa": "/meɪ/", "meaning": "n.5月。"}, {"word": "after", "ipa": "/ˈɑːftə/（英）/ˈæftər/（美）", "meaning": "conj.在……以后。"}, {"word": "should", "ipa": "/ʃʊd；ʃəd/", "meaning": "v.应当，应该，会 aux.会，应该。"}, {"word": "call", "ipa": "/kɔːl/", "meaning": "n.喊，叫；电话，通话 v.称呼；呼唤；喊，叫。"}, {"word": "world", "ipa": "/wɜːld/（英）/wɜːrld/（美）", "meaning": "n.世界。"}, {"word": "over", "ipa": "/ˈəʊvə/（英）/ˈoʊvər/（美）", "meaning": "prep.在……上方，越过，遍及 adv.翻到，遍布，越过，结束。"}, {"word": "school", "ipa": "/skuːl/", "meaning": "n.学校。"}, {"word": "still", "ipa": "/stɪl/", "meaning": "adj.不动的，平静的 adv.仍然，还。"}, {"word": "try", "ipa": "/traɪ/", "meaning": "v.试，试图，努力。"}, {"word": "last", "ipa": "/lɑːst/（英）/læst/（美）", "meaning": "adj.最近刚过去；最后的 adv.最近刚过去；最后地 n.最后 v.持续。"}, {"word": "ask", "ipa": "/ɑːsk/（英）/æsk/（美）", "meaning": "v.问；请求，要求；邀请。"}, {"word": "need", "ipa": "/niːd/", "meaning": "n.需要，需求 aux.&v.需要，必须。"}, {"word": "too", "ipa": "/tuː/", "meaning": "adv.也，还，又，太，过分，很，非常。"}, {"word": "feel", "ipa": "/fiːl/", "meaning": "v.感觉，觉得；摸，触。"}, {"word": "three", "ipa": "/θriː/", "meaning": "num.三。"}, {"word": "state", "ipa": "/steɪt/", "meaning": "n.状态；情形；国家，（美国的）州。"}, {"word": "never", "ipa": "/ˈnevə/（英）/ˈnevər/（美）", "meaning": "adv.决不，从来没有。"}, {"word": "become", "ipa": "/bɪˈkʌm/", "meaning": "v.变得；成为。"}, {"word": "between", "ipa": "/bɪˈtwiːn/", "meaning": "prep.在（两者）之间；在……中间。"}, {"word": "high", "ipa": "/haɪ/", "meaning": "adj.高的；高度的 adv.高地。"}, {"word": "really", "ipa": "/ˈriːəli；ˈrɪəli/（英）/ˈriːəli/（美）", "meaning": "adv.真正地；到底；确实。"}, {"word": "something", "ipa": "/ˈsʌmθɪŋ/", "meaning": "pron.某事；某物。"}, {"word": "most", "ipa": "/məʊst/（英）/moʊst/（美）", "meaning": "adj.&adv.最多 n.大部分，大多数。"}, {"word": "another", "ipa": "/əˈnʌðə/（英）/əˈnʌðər/（美）", "meaning": "adj.再一；另一；别的；不同的 pron.另一个。"}, {"word": "much", "ipa": "/mʌtʃ/", "meaning": "adj.许多的，大量的 adv.非常；更加 n.许多，大量，非常。"}, {"word": "family", "ipa": "/ˈfæməli/", "meaning": "n.家庭；家族；子女。"}, {"word": "own", "ipa": "/əʊn/（英）/oʊn/（美）", "meaning": "adj.自己的 v.拥有，所有。"}, {"word": "leave", "ipa": "/liːv/", "meaning": "v.离开；把……留下，剩下。"}, {"word": "put", "ipa": "/pʊt/", "meaning": "v.放，摆。"}, {"word": "old", "ipa": "/əʊld/（英）/oʊld/（美）", "meaning": "adj.老的，旧的。"}, {"word": "while", "ipa": "/waɪl/", "meaning": "conj.在……的时候，和……同时 n.一会儿，一段时间。"}, {"word": "mean", "ipa": "/miːn/", "meaning": "v.意思，意指。"}, {"word": "keep", "ipa": "/kiːp/", "meaning": "v.保持；保存；继续不断 v.培育，饲养。"}, {"word": "student", "ipa": "/ˈstjuːdnt/（英）/ˈstuːdnt/（美）", "meaning": "n.学生。"}, {"word": "why", "ipa": "/waɪ/", "meaning": "adv.&int.为什么，你难道不知道（表示反驳、不耐烦等）。"}, {"word": "let", "ipa": "/let/", "meaning": "v.让。"}, {"word": "great", "ipa": "/ɡreɪt/", "meaning": "adj.伟大的，重要的，好极了 adv.（口语）好极了，很好。"}, {"word": "same", "ipa": "/seɪm/", "meaning": "n.同样的事 adj.同样的，同一。"}, {"word": "big", "ipa": "/bɪɡ/", "meaning": "adj.大的。"}, {"word": "group", "ipa": "/ɡruːp/", "meaning": "n.组，群。"}, {"word": "begin", "ipa": "/bɪˈɡɪn/", "meaning": "v.开始，着手。"}, {"word": "seem", "ipa": "/siːm/", "meaning": "v.似乎，好像。"}, {"word": "country", "ipa": "/ˈkʌntri/", "meaning": "n.国家；农村，乡下。"}, {"word": "help", "ipa": "/help/", "meaning": "n.&v.帮助，帮忙。"}, {"word": "talk", "ipa": "/tɔːk/", "meaning": "n.&v.谈话，讲话，演讲，交谈。"}, {"word": "where", "ipa": "/weə/（英）/wer/（美）", "meaning": "adv.在哪里；往那里。"}, {"word": "turn", "ipa": "/tɜːn/（英）/tɜːrn/（美）", "meaning": "v.旋转，翻转，转变，转弯 n.轮流，（轮流的）顺序。"}, {"word": "problem", "ipa": "/ˈprɒbləm/（英）/ˈprɑːbləm/（美）", "meaning": "n.问题，难题。"}, {"word": "every", "ipa": "/ˈevri/", "meaning": "adj.每一，每个的。"}, {"word": "start", "ipa": "/stɑːt/（英）/stɑːrt/（美）", "meaning": "v.开始，着手；出发。"}, {"word": "hand", "ipa": "/hænd/", "meaning": "n.手；指针 v.递；给；交付；交上；交进。"}, {"word": "might", "ipa": "/maɪt/", "meaning": "aux.可能，也许，或许。"}, {"word": "American", "ipa": "/əˈmerɪkən/", "meaning": "adj.美国的；美国人的 n.美国人。"}, {"word": "show", "ipa": "/ʃəʊ/（英）/ʃoʊ/（美）", "meaning": "n.展示，展览（会）；演出。"}, {"word": "part", "ipa": "/pɑːt/（英）/pɑːrt/（美）", "meaning": "n.部分；成分；角色；部件；零件 adj.局部的；部分的 v.分离；分开；分割。"}, {"word": "against", "ipa": "/əˈɡenst；əˈɡeɪnst/", "meaning": "prep.对着，反对。"}, {"word": "place", "ipa": "/pleɪs/", "meaning": "n.地方，处所 v.放置，安置，安排。"}, {"word": "such", "ipa": "/sʌtʃ/", "meaning": "adv.那么 pron.（泛指）人，事物 adj.这样的，那样的。"}, {"word": "again", "ipa": "/əˈɡen；əˈɡeɪn/", "meaning": "adv.再一次；再，又。"}, {"word": "few", "ipa": "/fjuː/", "meaning": "pron.不多；少数 adj.不多的；少数的。"}, {"word": "case", "ipa": "/keɪs/", "meaning": "n.情况；病例；案件；真相 n.箱；盒；容器。"}, {"word": "week", "ipa": "/wiːk/", "meaning": "n.星期，周。"}, {"word": "company", "ipa": "/ˈkʌmpəni/", "meaning": "n.公司。"}, {"word": "system", "ipa": "/ˈsɪstəm/", "meaning": "n.体系；系统。"}, {"word": "each", "ipa": "/iːtʃ/", "meaning": "adj.&pron.每人，每个，每件。"}, {"word": "right", "ipa": "/raɪt/", "meaning": "n.权利 adj.对，正确的 adv.正确地，恰恰，完全地 adj.右，右边的。"}, {"word": "hear", "ipa": "/hɪə/（英）/hɪr/（美）", "meaning": "v.听见；听说，得知。"}, {"word": "question", "ipa": "/ˈkwestʃən/", "meaning": "v.询问 n.问题。"}, {"word": "during", "ipa": "/ˈdjʊərɪŋ/（英）/ˈdʊrɪŋ/（美）", "meaning": "prep.在……期间；在……过程中。"}, {"word": "play", "ipa": "/pleɪ/", "meaning": "v.玩；打（球）；游戏；播放 n.玩耍，戏剧。"}, {"word": "government", "ipa": "/ˈɡʌvənmənt/（英）/ˈɡʌvərnmənt/（美）", "meaning": "n.政府。"}, {"word": "run", "ipa": "/rʌn/", "meaning": "v.跑，奔跑；（颜色）褪色。"}, {"word": "small", "ipa": "/smɔːl/", "meaning": "adj.小的，少的。"}, {"word": "number", "ipa": "/ˈnʌmbə/（英）/ˈnʌmbər/（美）", "meaning": "n.数，数字，号码，数量。"}, {"word": "off", "ipa": "/ɒf/（英）/ɔːf/（美）", "meaning": "prep.离开，脱离，（走）开。"}, {"word": "always", "ipa": "/ˈɔːlweɪz/", "meaning": "adv.总是；一直；永远。"}, {"word": "move", "ipa": "/muːv/", "meaning": "v.移动，搬动，搬家。"}, {"word": "night", "ipa": "/naɪt/", "meaning": "n.夜；夜间。"}, {"word": "live", "ipa": "/lɪv/", "meaning": "v.生活；居住；活着 adj.活的，活着的；实况，现场（直播）的。"}, {"word": "point", "ipa": "/pɔɪnt/", "meaning": "v.指，指向 n.点；分数。"}, {"word": "believe", "ipa": "/bɪˈliːv/", "meaning": "v.相信，认为。"}, {"word": "hold", "ipa": "/həʊld/（英）/hoʊld/（美）", "meaning": "v.拿；抱；握住；举行；进行。"}, {"word": "today", "ipa": "/təˈdeɪ/", "meaning": "adv.&n.今天；现在，当前。"}, {"word": "bring", "ipa": "/brɪŋ/", "meaning": "v.拿来，带来，取来。"}, {"word": "happen", "ipa": "/ˈhæpən/", "meaning": "v.（偶然）发生。"}, {"word": "next", "ipa": "/nekst/", "meaning": "adj.最近的，紧挨着的，隔壁的；下一次 adv.随后，然后，下一步 n.下一个人（东西）。"}, {"word": "without", "ipa": "/wɪˈðaʊt/", "meaning": "prep.没有。"}, {"word": "before", "ipa": "/bɪˈfɔː/（英）/bɪˈfɔːr/（美）", "meaning": "prep.在……以前；在……前面 adv.以前 conj.在……之前。"}, {"word": "large", "ipa": "/lɑːdʒ/（英）/lɑːrdʒ/（美）", "meaning": "adj.大的；巨大的。"}, {"word": "million", "ipa": "/ˈmɪljən/", "meaning": "num.百万 n.百万个（人或物）"}, {"word": "must", "ipa": "/mʌst；məst/", "meaning": "aux.必须；应当；很可能 n.必须做的事；未发酵的葡萄汁；发霉。"}, {"word": "home", "ipa": "/həʊm/（英）/hoʊm/（美）", "meaning": "n.家 adv.到家；回家。"}, {"word": "under", "ipa": "/ˈʌndə/（英）/ˈʌndər/（美）", "meaning": "adv.&prep.在……下面，向……下面。"}, {"word": "water", "ipa": "/ˈwɔːtə/（英）/ˈwɔːtər/（美）", "meaning": "n.水 v.浇水。"}, {"word": "room", "ipa": "/ruːm；rʊm/", "meaning": "n.房间，室；空间；地方。"}, {"word": "write", "ipa": "/raɪt/", "meaning": "v.写，书写；写作，著述。"}, {"word": "mother", "ipa": "/ˈmʌðə/（英）/ˈmʌðər/（美）", "meaning": "n.母亲。"}, {"word": "area", "ipa": "/ˈeəriə/（英）/ˈeriə/（美）", "meaning": "n.面积；地域，地方，区域；范围，领域。"}, {"word": "national", "ipa": "/ˈnæʃnəl/", "meaning": "adj.国家的，全国性的，民族的。"}, {"word": "money", "ipa": "/ˈmʌni/", "meaning": "n.钱；货币。"}, {"word": "story", "ipa": "/ˈstɔːri/", "meaning": "n.故事，小说。"}, {"word": "young", "ipa": "/jʌŋ/", "meaning": "adj.年轻的。"}, {"word": "fact", "ipa": "/fækt/", "meaning": "n.事实，现实。"}, {"word": "month", "ipa": "/mʌnθ/", "meaning": "n.月，月份。"}, {"word": "different", "ipa": "/ˈdɪfrənt/", "meaning": "adj.不同的，有差异的。"}, {"word": "lot", "ipa": "/lɒt/（英）/lɑːt/（美）", "meaning": "n.许多，好些。"}, {"word": "study", "ipa": "/ˈstʌdi/", "meaning": "v.学习；研究 n.书房。"}, {"word": "book", "ipa": "/bʊk/", "meaning": "n.书；本子 v.预定，定（房间、车票等）。"}, {"word": "eye", "ipa": "/aɪ/", "meaning": "n.眼睛。"}, {"word": "job", "ipa": "/dʒɒb/（英）/dʒɑːb/（美）", "meaning": "n.（一份）工作。"}, {"word": "though", "ipa": "/ðəʊ/（英）/ðoʊ/（美）", "meaning": "conj.虽然，可是。"}, {"word": "business", "ipa": "/ˈbɪznəs/", "meaning": "n.（本分）工作，职业；职责；生意，交易；事业。"}, {"word": "side", "ipa": "/saɪd/", "meaning": "n.边，旁边，面，侧面。"}, {"word": "kind", "ipa": "/kaɪnd/", "meaning": "n.种；类 adj.善良的，友好的。"}, {"word": "four", "ipa": "/fɔː/（英）/fɔːr/（美）", "meaning": "num.四。"}, {"word": "head", "ipa": "/hed/", "meaning": "n.头；头脑；才智；首脑；源头；标题 adj.头部的；主要的；首席的 v.率领；加标题；用头顶；出发；（船等）驶向。"}, {"word": "far", "ipa": "/fɑː/（英）/fɑːr/（美）", "meaning": "adj.&adv.远的；远地。"}, {"word": "black", "ipa": "/blæk/", "meaning": "n.黑色 adj.黑色的。"}, {"word": "long", "ipa": "/lɒŋ/（英）/lɔːŋ/（美）", "meaning": "adj.长的，远 adv.长久。"}, {"word": "both", "ipa": "/bəʊθ/（英）/boʊθ/（美）", "meaning": "adj.两；双 pron.两者；双方。"}, {"word": "little", "ipa": "/ˈlɪtl/", "meaning": "adj.小的，少的 adv.很少地，稍许 n.没有多少，一点。"}, {"word": "house", "ipa": "/haʊs/", "meaning": "n.房子；住宅。"}, {"word": "yes", "ipa": "/jes/", "meaning": "adv.是，好，同意。"}, {"word": "since", "ipa": "/sɪns/", "meaning": "adv.从那时以来 conj.从……以来，……以后，由于 prep.从……以来。"}, {"word": "provide", "ipa": "/prəˈvaɪd/", "meaning": "v.提供。"}, {"word": "service", "ipa": "/ˈsɜːvɪs/（英）/ˈsɜːrvɪs/（美）", "meaning": "n.服务。"}, {"word": "around", "ipa": "/əˈraʊnd/", "meaning": "adv.在周围；在附近 prep.在……周围；大约。"}, {"word": "friend", "ipa": "/frend/", "meaning": "n.朋友。"}, {"word": "important", "ipa": "/ɪmˈpɔːtnt/（英）/ɪmˈpɔːrtnt/（美）", "meaning": "adj.重要的。"}, {"word": "father", "ipa": "/ˈfɑːðə/（英）/ˈfɑːðər/（美）", "meaning": "n.父亲。"}, {"word": "sit", "ipa": "/sɪt/", "meaning": "v.坐。"}, {"word": "away", "ipa": "/əˈweɪ/", "meaning": "adv.离开；远离。"}, {"word": "until", "ipa": "/ənˈtɪl/", "meaning": "prep.&conj.直到……为止。"}, {"word": "power", "ipa": "/ˈpaʊə/（英）/ˈpaʊər/（美）", "meaning": "n.力，动力，电力。"}, {"word": "hour", "ipa": "/ˈaʊə/（英）/ˈaʊər/（美）", "meaning": "n.小时。"}, {"word": "game", "ipa": "/ɡeɪm/", "meaning": "n.游戏；运动；比赛。"}, {"word": "often", "ipa": "/ˈɒfn/（英）/ˈɔːfn/（美）", "meaning": "adv.经常，常常。"}, {"word": "yet", "ipa": "/jet/", "meaning": "adv.尚，还，仍然。"}, {"word": "line", "ipa": "/laɪn/", "meaning": "n.绳索，线，排，行，线路 v.画线于，（使）成行。"}, {"word": "political", "ipa": "/pəˈlɪtɪkl/", "meaning": "adj.政治的。"}, {"word": "end", "ipa": "/end/", "meaning": "n.末尾；终点；结束 v.结束，终止。"}, {"word": "among", "ipa": "/əˈmʌŋ/", "meaning": "prep.在……中间；在（三个以上）之间。"}, {"word": "ever", "ipa": "/ˈevə/（英）/ˈevər/（美）", "meaning": "adv.曾经；无论何时。"}, {"word": "stand", "ipa": "/stænd/", "meaning": "n.站；立；停止；立场；地位；台；坛；摊。"}, {"word": "bad", "ipa": "/bæd/", "meaning": "adj.坏的；有害的，不利的；严重的。"}, {"word": "lose", "ipa": "/luːz/", "meaning": "v.失去，丢失。"}, {"word": "however", "ipa": "/haʊˈevə/（英）/haʊˈevər/（美）", "meaning": "adv.可是 conj.然而，可是，尽管如此。"}, {"word": "member", "ipa": "/ˈmembə/（英）/ˈmembər/（美）", "meaning": "n.成员，会员。"}, {"word": "pay", "ipa": "/peɪ/", "meaning": "v.付钱，给……报酬 n.工资。"}, {"word": "law", "ipa": "/lɔː/", "meaning": "n.法律，法令；定律。"}, {"word": "meet", "ipa": "/miːt/", "meaning": "v.&n.遇见，见到；会；集会。"}, {"word": "car", "ipa": "/kɑː/（英）/kɑːr/（美）", "meaning": "n.汽车，小卧车。"}, {"word": "city", "ipa": "/ˈsɪti/", "meaning": "n.市，城市，都市。"}, {"word": "almost", "ipa": "/ˈɔːlməʊst/（英）/ˈɔːlmoʊst/（美）", "meaning": "adv.几乎，差不多。"}, {"word": "include", "ipa": "/ɪnˈkluːd/", "meaning": "v.包含，包括。"}, {"word": "continue", "ipa": "/kənˈtɪnjuː/", "meaning": "v.继续。"}, {"word": "set", "ipa": "/set/", "meaning": "v.释放，安置 n.装备，设备。"}, {"word": "later", "ipa": "/ˈleɪtə/（英）/ˈleɪtər/（美）", "meaning": "adj.晚些的，迟些的。"}, {"word": "name", "ipa": "/neɪm/", "meaning": "n.名字，姓名，名称 v.命名，名叫。"}, {"word": "five", "ipa": "/faɪv/", "meaning": "num.五。"}, {"word": "once", "ipa": "/wʌns/", "meaning": "n.&adv.一次，一度，从前 conj.一旦。"}, {"word": "white", "ipa": "/waɪt/", "meaning": "adj.白色的 n.白色。"}, {"word": "least", "ipa": "/liːst/", "meaning": "n.最少，最少量。"}, {"word": "president", "ipa": "/ˈprezɪdənt/", "meaning": "n.总统；主席。"}, {"word": "learn", "ipa": "/lɜːn/（英）/lɜːrn/（美）", "meaning": "v.学，学习，学会。"}, {"word": "real", "ipa": "/ˈriːəl；rɪəl/（英）/ˈriːəl/（美）", "meaning": "adj.真实的，确实的。"}, {"word": "change", "ipa": "/tʃeɪndʒ/", "meaning": "n.零钱；找头 v.改变，变化；更换；兑换。"}, {"word": "team", "ipa": "/tiːm/", "meaning": "n.队，组。"}, {"word": "minute", "ipa": "/ˈmɪnɪt/", "meaning": "n.分钟；一会儿，瞬间。"}, {"word": "several", "ipa": "/ˈsevrəl/", "meaning": "pron.几个，数个 adj.若干。"}, {"word": "idea", "ipa": "/aɪˈdɪə/（英）/aɪˈdiːə/（美）", "meaning": "n.主意，意见，打算，想法。"}, {"word": "kid", "ipa": "/kɪd/", "meaning": "n.小孩。"}, {"word": "body", "ipa": "/ˈbɒdi/（英）/ˈbɑːdi/（美）", "meaning": "n.身体；主体；正文；主要部分；尸体；躯体；团体 v.赋……以形体。"}, {"word": "information", "ipa": "/ˌɪnfəˈmeɪʃn/（英）/ˌɪnfərˈmeɪʃn/（美）", "meaning": "n.信息。"}, {"word": "nothing", "ipa": "/ˈnʌθɪŋ/", "meaning": "n.没有东西，没有什么 adv.一点也不；并不。"}, {"word": "ago", "ipa": "/əˈɡəʊ/（英）/əˈɡoʊ/（美）", "meaning": "adv.以前。"}, {"word": "lead", "ipa": "/liːd/", "meaning": "v.领导，带领 n.铅。"}, {"word": "social", "ipa": "/ˈsəʊʃl/（英）/ˈsoʊʃl/（美）", "meaning": "adj.社会的；社交的。"}, {"word": "understand", "ipa": "/ˌʌndəˈstænd/（英）/ˌʌndərˈstænd/（美）", "meaning": "v.懂得；明白；理解。"}, {"word": "whether", "ipa": "/ˈweðə/（英）/ˈweðər/（美）", "meaning": "conj.是否。"}, {"word": "watch", "ipa": "/wɒtʃ/（英）/wɑːtʃ/（美）", "meaning": "v.观看，注视；当心，注意 n.手表，表。"}, {"word": "together", "ipa": "/təˈɡeðə/（英）/təˈɡeðər/（美）", "meaning": "adv.一起，共同。"}, {"word": "follow", "ipa": "/ˈfɒləʊ/（英）/ˈfɑːloʊ/（美）", "meaning": "v.跟随；仿效；跟得上。"}, {"word": "parent", "ipa": "/ˈpeərənt/（英）/ˈperənt/（美）", "meaning": "n.父（母），双亲。"}, {"word": "stop", "ipa": "/stɒp/（英）/stɑːp/（美）", "meaning": "n.停；（停车）站 v.停，停止，阻止。"}, {"word": "face", "ipa": "/feɪs/", "meaning": "n.脸 v.面向；面对。"}, {"word": "anything", "ipa": "/ˈeniθɪŋ/", "meaning": "pron.什么事（物）；任何事（物）。"}, {"word": "create", "ipa": "/kriˈeɪt/", "meaning": "v.创造；造成。"}, {"word": "public", "ipa": "/ˈpʌblɪk/", "meaning": "adj.公共，公众的 n.公众。"}, {"word": "already", "ipa": "/ɔːlˈredi/", "meaning": "adv.已经。"}, {"word": "speak", "ipa": "/spiːk/", "meaning": "v.说，讲；谈话；发言。"}, {"word": "read", "ipa": "/riːd/", "meaning": "v.读；朗读。"}, {"word": "level", "ipa": "/ˈlevl/", "meaning": "n.水平线，水平。"}, {"word": "allow", "ipa": "/əˈlaʊ/", "meaning": "v.允许，准许。"}, {"word": "add", "ipa": "/æd/", "meaning": "v.添加，增加。"}, {"word": "office", "ipa": "/ˈɒfɪs/（英）/ˈɑːfɪs/（美）", "meaning": "n.办公室。"}, {"word": "spend", "ipa": "/spend/", "meaning": "v.度过；花费（钱、时间等）。"}, {"word": "door", "ipa": "/dɔː/（英）/dɔːr/（美）", "meaning": "n.门。"}, {"word": "health", "ipa": "/helθ/", "meaning": "n.健康，卫生。"}, {"word": "person", "ipa": "/ˈpɜːsn/（英）/ˈpɜːrsn/（美）", "meaning": "n.人。"}, {"word": "art", "ipa": "/ɑːt/（英）/ɑːrt/（美）", "meaning": "n.艺术，美术；技艺。"}, {"word": "sure", "ipa": "/ʃʊə/（英）/ʃʊr/（美）", "meaning": "adj.确信，肯定 adv.（口语）的确，一定，当然。"}, {"word": "war", "ipa": "/wɔː/（英）/wɔːr/（美）", "meaning": "n.战争。"}, {"word": "history", "ipa": "/ˈhɪstri/", "meaning": "n.历史，历史学。"}, {"word": "party", "ipa": "/ˈpɑːti/（英）/ˈpɑːrti/（美）", "meaning": "n.聚会，晚会；党派。"}, {"word": "within", "ipa": "/wɪˈðɪn/", "meaning": "prep.在……里面。"}, {"word": "grow", "ipa": "/ɡrəʊ/（英）/ɡroʊ/（美）", "meaning": "v.生长；发育；种植；变成。"}, {"word": "result", "ipa": "/rɪˈzʌlt/", "meaning": "n.结果，效果。"}, {"word": "open", "ipa": "/ˈəʊpən/（英）/ˈoʊpən/（美）", "meaning": "adj.开着的，开的 v.开，打开。"}, {"word": "morning", "ipa": "/ˈmɔːnɪŋ/（英）/ˈmɔːrnɪŋ/（美）", "meaning": "n.早晨，上午。"}, {"word": "walk", "ipa": "/wɔːk/", "meaning": "n.&v.步行；散步。"}, {"word": "reason", "ipa": "/ˈriːzn/", "meaning": "v.评理，劝说 n.理由，原因。"}, {"word": "low", "ipa": "/ləʊ/（英）/loʊ/（美）", "meaning": "adj.&adv.低；矮。"}, {"word": "win", "ipa": "/wɪn/", "meaning": "n.获胜，赢得。"}, {"word": "research", "ipa": "/rɪˈsɜːtʃ；ˈriːsɜːtʃ/（英）/rɪˈsɜːrtʃ；ˈriːsɜːrtʃ/（美）", "meaning": "n.研究，调查。"}, {"word": "girl", "ipa": "/ɡɜːl/（英）/ɡɜːrl/（美）", "meaning": "n.女孩。"}, {"word": "early", "ipa": "/ˈɜːli/（英）/ˈɜːrli/（美）", "meaning": "adj.早的 adv.早地。"}, {"word": "food", "ipa": "/fuːd/", "meaning": "n.食物，食品。"}, {"word": "moment", "ipa": "/ˈməʊmənt/（英）/ˈmoʊmənt/（美）", "meaning": "n.片刻，瞬间。"}, {"word": "himself", "ipa": "/hɪmˈself/", "meaning": "pron.他自己。"}, {"word": "air", "ipa": "/eə/（英）/er/（美）", "meaning": "n.空气；大气。"}, {"word": "teacher", "ipa": "/ˈtiːtʃə/（英）/ˈtiːtʃər/（美）", "meaning": "n.教师，教员。"}, {"word": "force", "ipa": "/fɔːs/（英）/fɔːrs/（美）", "meaning": "v.强迫，迫使。"}, {"word": "offer", "ipa": "/ˈɒfə/（英）/ˈɔːfər/（美）", "meaning": "n.&v.提供；建议。"}, {"word": "enough", "ipa": "/ɪˈnʌf/", "meaning": "n.足够；充足 adj.足够；充分的 adv.足够地；充分地。"}, {"word": "education", "ipa": "/ˌedʒuˈkeɪʃn/", "meaning": "n.教育，培养。"}, {"word": "across", "ipa": "/əˈkrɒs/（英）/əˈkrɔːs；əˈkrɑːs/（美）", "meaning": "prep.横过，穿过。"}, {"word": "although", "ipa": "/ɔːlˈðəʊ/（英）/ɔːlˈðoʊ/（美）", "meaning": "conj.虽然，尽管。"}, {"word": "remember", "ipa": "/rɪˈmembə/（英）/rɪˈmembər/（美）", "meaning": "v.记得，想起。"}, {"word": "foot", "ipa": "/fʊt/", "meaning": "n.足，脚；英尺。"}, {"word": "second", "ipa": "/ˈsekənd/", "meaning": "n.秒 num.第二 adj.第二的。"}, {"word": "boy", "ipa": "/bɔɪ/", "meaning": "n.男孩。"}, {"word": "maybe", "ipa": "/ˈmeɪbi/", "meaning": "adv.可能，大概，也许。"}, {"word": "toward", "ipa": "/təˈwɔːd/（英）/tɔːrd/（美）", "meaning": "prep.向；朝；对于；接近；关于；将近 adj.有希望的；有利的；逼近的。"}, {"word": "able", "ipa": "/ˈeɪbl/", "meaning": "adj.能够；有能力的。"}, {"word": "age", "ipa": "/eɪdʒ/", "meaning": "n.年龄；时代。"}, {"word": "policy", "ipa": "/ˈpɒləsi/（英）/ˈpɑːləsi/（美）", "meaning": "n.政策，方针，原则。"}, {"word": "everything", "ipa": "/ˈevriθɪŋ/", "meaning": "pron.每件事，事事。"}, {"word": "love", "ipa": "/lʌv/", "meaning": "n.&v.爱；热爱；很喜欢。"}, {"word": "process", "ipa": "/ˈprəʊses/（英）/ˈprɑːses；ˈproʊses/（美）", "meaning": "n.&v.过程，加工，处理。"}, {"word": "music", "ipa": "/ˈmjuːzɪk/", "meaning": "n.音乐，乐曲。"}, {"word": "consider", "ipa": "/kənˈsɪdə/（英）/kənˈsɪdər/（美）", "meaning": "v.考虑。"}, {"word": "appear", "ipa": "/əˈpɪə/（英）/əˈpɪr/（美）", "meaning": "v.出现。"}, {"word": "buy", "ipa": "/baɪ/", "meaning": "v.买。"}, {"word": "probably", "ipa": "/ˈprɒbəbli/（英）/ˈprɑːbəbli/（美）", "meaning": "adv.很可能，大概。"}, {"word": "human", "ipa": "/ˈhjuːmən/", "meaning": "adj.人的，人类的。"}, {"word": "wait", "ipa": "/weɪt/", "meaning": "v.等，等候。"}, {"word": "serve", "ipa": "/sɜːv/（英）/sɜːrv/（美）", "meaning": "v.招待（顾客等），服务。"}, {"word": "market", "ipa": "/ˈmɑːkɪt/（英）/ˈmɑːrkɪt/（美）", "meaning": "n.市场，集市。"}, {"word": "die", "ipa": "/daɪ/", "meaning": "v.死。"}, {"word": "send", "ipa": "/send/", "meaning": "v.打发，派遣；送，邮寄。"}, {"word": "expect", "ipa": "/ɪkˈspekt/", "meaning": "v.预料；盼望；认为。"}, {"word": "sense", "ipa": "/sens/", "meaning": "n.感觉，意识。"}, {"word": "build", "ipa": "/bɪld/", "meaning": "v.建筑；造。"}, {"word": "stay", "ipa": "/steɪ/", "meaning": "n.&v.停留，逗留，呆。"}, {"word": "fall", "ipa": "/fɔːl/", "meaning": "n.（美）秋季。"}, {"word": "oh", "ipa": "/əʊ/（英）/oʊ/（美）", "meaning": "int.哦；啊。"}, {"word": "nation", "ipa": "/ˈneɪʃn/", "meaning": "n.民族，国家。"}, {"word": "plan", "ipa": "/plæn/", "meaning": "n.&v.计划，打算。"}, {"word": "cut", "ipa": "/kʌt/", "meaning": "v.&n.切，剪，削，割，伤口。"}, {"word": "college", "ipa": "/ˈkɒlɪdʒ/（英）/ˈkɑːlɪdʒ/（美）", "meaning": "n.学院；专科学校。"}, {"word": "interest", "ipa": "/ˈɪntrəst/", "meaning": "n.兴趣，趣味；利息。"}, {"word": "death", "ipa": "/deθ/", "meaning": "n.死。"}, {"word": "course", "ipa": "/kɔːs/（英）/kɔːrs/（美）", "meaning": "n.过程；经过；课程。"}, {"word": "someone", "ipa": "/ˈsʌmwʌn/", "meaning": "pron.某一个人。"}, {"word": "experience", "ipa": "/ɪkˈspɪəriəns/（英）/ɪkˈspɪriəns/（美）", "meaning": "n.经验；经历。"}, {"word": "behind", "ipa": "/bɪˈhaɪnd/", "meaning": "prep.（表示位置）在……后面 adv.在后面；向后。"}, {"word": "reach", "ipa": "/riːtʃ/", "meaning": "v.到达，伸手（脚）够到。"}, {"word": "local", "ipa": "/ˈləʊkl/（英）/ˈloʊkl/（美）", "meaning": "adj.当地的；地方的。"}, {"word": "kill", "ipa": "/kɪl/", "meaning": "v.杀死，弄死。"}, {"word": "six", "ipa": "/sɪks/", "meaning": "num.六。"}, {"word": "remain", "ipa": "/rɪˈmeɪn/", "meaning": "v.余下，留下 v.保持，仍是。"}, {"word": "effect", "ipa": "/ɪˈfekt/", "meaning": "n.效果；作用。"}, {"word": "suggest", "ipa": "/səˈdʒest/", "meaning": "v.建议，提议。"}, {"word": "class", "ipa": "/klɑːs/（英）/klæs/（美）", "meaning": "n.（学校的）班；年级；课。"}, {"word": "control", "ipa": "/kənˈtrəʊl/（英）/kənˈtroʊl/（美）", "meaning": "v.&n.控制。"}, {"word": "raise", "ipa": "/reɪz/", "meaning": "v.使升高；饲养。"}, {"word": "care", "ipa": "/keə/（英）/ker/（美）", "meaning": "n.照料，保护；小心 v.介意……，在乎；关心。"}, {"word": "perhaps", "ipa": "/pəˈhæps/（英）/pərˈhæps/（美）", "meaning": "adv.可能，或。"}, {"word": "late", "ipa": "/leɪt/", "meaning": "adj.晚的，迟的 adv.晚地，迟地。"}, {"word": "hard", "ipa": "/hɑːd/（英）/hɑːrd/（美）", "meaning": "adv.努力地；使劲；猛烈地 adj.硬的；困难的；艰难的。"}, {"word": "true", "ipa": "/truː/", "meaning": "adj.真的，真实的；忠诚的。"}, {"word": "field", "ipa": "/fiːld/", "meaning": "n.田地；牧场；场地。"}, {"word": "else", "ipa": "/els/", "meaning": "adv.别的，其他的。"}, {"word": "pass", "ipa": "/pɑːs/（英）/pæs/（美）", "meaning": "v.传，递；经过；通过。"}, {"word": "former", "ipa": "/ˈfɔːmə/（英）/ˈfɔːrmər/（美）", "meaning": "adj.以前的，从前的；（两者之中的）前者。"}, {"word": "sell", "ipa": "/sel/", "meaning": "v.卖，售。"}, {"word": "major", "ipa": "/ˈmeɪdʒə/（英）/ˈmeɪdʒər/（美）", "meaning": "adj.较大的；主要的。"}, {"word": "sometimes", "ipa": "/ˈsʌmtaɪmz/", "meaning": "adv.有时。"}, {"word": "require", "ipa": "/rɪˈkwaɪə/（英）/rɪˈkwaɪər/（美）", "meaning": "v.需求；要求。"}, {"word": "along", "ipa": "/əˈlɒŋ/（英）/əˈlɔːŋ/（美）", "meaning": "adv.向前；和……一起；一同 prep.沿着；顺着。"}, {"word": "development", "ipa": "/dɪˈveləpmənt/", "meaning": "n.发展，发达，发育，开发。"}, {"word": "themselves", "ipa": "/ðəmˈselvz/", "meaning": "pron.他/她/它们自己。"}, {"word": "report", "ipa": "/rɪˈpɔːt/（英）/rɪˈpɔːrt/（美）", "meaning": "n.&v.报道，报告。"}, {"word": "role", "ipa": "/rəʊl/（英）/roʊl/（美）", "meaning": "n.角色。"}, {"word": "better", "ipa": "/ˈbetə/（英）/ˈbetər/（美）", "meaning": "adj.&adv.较好的，更好的；好些；更好地；更，更多 n.较好的事物；较优者 v.改善；胜过。"}, {"word": "effort", "ipa": "/ˈefət/（英）/ˈefərt/（美）", "meaning": "n.努力，艰难的尝试。"}, {"word": "decide", "ipa": "/dɪˈsaɪd/", "meaning": "v.决定；下决心。"}, {"word": "rate", "ipa": "/reɪt/", "meaning": "n.&v.率，评估，评价。"}, {"word": "strong", "ipa": "/strɒŋ/（英）/strɔːŋ/（美）", "meaning": "adj.强（壮）的；坚固的；强烈的；坚强的。"}, {"word": "possible", "ipa": "/ˈpɒsəbl/（英）/ˈpɑːsəbl/（美）", "meaning": "adj.可能的。"}, {"word": "heart", "ipa": "/hɑːt/（英）/hɑːrt/（美）", "meaning": "n.心，心脏，纸牌中的红桃。"}, {"word": "drug", "ipa": "/drʌɡ/", "meaning": "n.药，药物；毒品。"}, {"word": "leader", "ipa": "/ˈliːdə/（英）/ˈliːdər/（美）", "meaning": "n.领袖，领导人。"}, {"word": "light", "ipa": "/laɪt/", "meaning": "n.光，光亮；灯，灯光 v.点（火），点燃 adj.明亮的；轻的；浅色的。"}, {"word": "voice", "ipa": "/vɔɪs/", "meaning": "n.说话声；语态。"}, {"word": "wife", "ipa": "/waɪf/", "meaning": "n.妻子。"}, {"word": "whole", "ipa": "/həʊl/（英）/hoʊl/（美）", "meaning": "adj.整个的。"}, {"word": "police", "ipa": "/pəˈliːs/", "meaning": "n.警察，警务人员。"}, {"word": "mind", "ipa": "/maɪnd/", "meaning": "n.思想，想法 v.介意，关心。"}, {"word": "pull", "ipa": "/pʊl/", "meaning": "v.拉，拖 n.拉力，引力。"}, {"word": "return", "ipa": "/rɪˈtɜːn/（英）/rɪˈtɜːrn/（美）", "meaning": "v.归还。"}, {"word": "free", "ipa": "/friː/", "meaning": "adj.自由，空闲的；免费的。"}, {"word": "price", "ipa": "/praɪs/", "meaning": "n.价格，价钱。"}, {"word": "less", "ipa": "/les/", "meaning": "adj.&adv.少于，小于。"}, {"word": "decision", "ipa": "/dɪˈsɪʒn/", "meaning": "n.决定；决心。"}, {"word": "explain", "ipa": "/ɪkˈspleɪn/", "meaning": "v.解释，说明。"}, {"word": "son", "ipa": "/sʌn/", "meaning": "n.儿子。"}, {"word": "hope", "ipa": "/həʊp/（英）/hoʊp/（美）", "meaning": "n.&v.希望。"}, {"word": "develop", "ipa": "/dɪˈveləp/", "meaning": "v.（使）发展；（使）发达；（使）发育；开发 v.冲洗（照片）。"}, {"word": "view", "ipa": "/vjuː/", "meaning": "n.看法，见解；风景，景色。"}, {"word": "relationship", "ipa": "/rɪˈleɪʃnʃɪp/", "meaning": "n.关系。"}, {"word": "carry", "ipa": "/ˈkæri/", "meaning": "v.拿，搬，带，提，抬，背，抱，运等。"}, {"word": "town", "ipa": "/taʊn/", "meaning": "n.城镇，城。"}, {"word": "road", "ipa": "/rəʊd/（英）/roʊd/（美）", "meaning": "n.路，道路。"}, {"word": "drive", "ipa": "/draɪv/", "meaning": "v.开车；驱使；迫使 n.驾车；驱使；推进力；路；快车道；街。"}, {"word": "arm", "ipa": "/ɑːm/（英）/ɑːrm/（美）", "meaning": "n.臂，支架 v.以……装备，武装起来 n.（美）武器，武力。"}, {"word": "break", "ipa": "/breɪk/", "meaning": "n.间隙。"}, {"word": "difference", "ipa": "/ˈdɪfrəns/", "meaning": "n.不同。"}, {"word": "thank", "ipa": "/θæŋk/", "meaning": "v.感谢，致谢，道谢 n.（复）感谢，谢意。"}, {"word": "receive", "ipa": "/rɪˈsiːv/", "meaning": "v.收到，得到。"}, {"word": "value", "ipa": "/ˈvæljuː/", "meaning": "n.价值，益处。"}, {"word": "international", "ipa": "/ˌɪntəˈnæʃnəl/（英）/ˌɪntərˈnæʃnəl/（美）", "meaning": "adj.国际的。"}, {"word": "building", "ipa": "/ˈbɪldɪŋ/", "meaning": "n.建筑物；房屋；大楼。"}, {"word": "action", "ipa": "/ˈækʃn/", "meaning": "n.行动。"}, {"word": "full", "ipa": "/fʊl/", "meaning": "adj.满的，充满的；完全的。"}, {"word": "model", "ipa": "/ˈmɒdl/（英）/ˈmɑːdl/（美）", "meaning": "n.模型，原形，范例，模范。"}, {"word": "join", "ipa": "/dʒɔɪn/", "meaning": "v.参加，加入；连接；会合。"}, {"word": "season", "ipa": "/ˈsiːzn/", "meaning": "n.季；季节。"}, {"word": "society", "ipa": "/səˈsaɪəti/", "meaning": "n.社会。"}, {"word": "tax", "ipa": "/tæks/", "meaning": "n.税，税款。"}, {"word": "director", "ipa": "/dəˈrektə；daɪˈrektə/（英）/dəˈrektər；daɪˈrektər/（美）", "meaning": "n.所长，处长，主任；董事；导演。"}, {"word": "position", "ipa": "/pəˈzɪʃn/", "meaning": "n.位置。"}, {"word": "player", "ipa": "/ˈpleɪə/（英）/ˈpleɪər/（美）", "meaning": "n.比赛者，选手。"}, {"word": "agree", "ipa": "/əˈɡriː/", "meaning": "v.同意；应允。"}, {"word": "especially", "ipa": "/ɪˈspeʃəli/", "meaning": "adv.特别，尤其。"}, {"word": "record", "ipa": "/ˈrekɔːd/（英）/ˈrekərd/（美）", "meaning": "n.记录；唱片。"}, {"word": "pick", "ipa": "/pɪk/", "meaning": "v.拾起，采集；挑选。"}, {"word": "wear", "ipa": "/weə/（英）/wer/（美）", "meaning": "v.穿，戴。"}, {"word": "paper", "ipa": "/ˈpeɪpə/（英）/ˈpeɪpər/（美）", "meaning": "n.纸；报纸。"}, {"word": "special", "ipa": "/ˈspeʃl/", "meaning": "adj.特别的，专门的。"}, {"word": "space", "ipa": "/speɪs/", "meaning": "n.空间。"}, {"word": "ground", "ipa": "/ɡraʊnd/", "meaning": "n.地面。"}, {"word": "form", "ipa": "/fɔːm/（英）/fɔːrm/（美）", "meaning": "n.表格；形式；结构。"}, {"word": "support", "ipa": "/səˈpɔːt/（英）/səˈpɔːrt/（美）", "meaning": "v.&n.支持，赞助。"}, {"word": "event", "ipa": "/ɪˈvent/", "meaning": "n.事件，大事。"}, {"word": "official", "ipa": "/əˈfɪʃl/", "meaning": "n.（公司、团体或政府）官员，高级职员 adj.官方，政府的。"}, {"word": "whose", "ipa": "/huːz/", "meaning": "pron.谁的。"}, {"word": "matter", "ipa": "/ˈmætə/（英）/ˈmætər/（美）", "meaning": "n.要紧事，要紧，事情；问题 v.要紧，有重大关系。"}, {"word": "everyone", "ipa": "/ˈevriwʌn/", "meaning": "pron.每人，人人。"}, {"word": "couple", "ipa": "/ˈkʌpl/", "meaning": "n.夫妇，一对。"}, {"word": "project", "ipa": "/ˈprɒdʒekt/（英）/ˈprɑːdʒekt/（美）", "meaning": "n.工程。"}, {"word": "hit", "ipa": "/hɪt/", "meaning": "n.&v.打，撞，击中。"}, {"word": "base", "ipa": "/beɪs/", "meaning": "n.根据地，基地，（棒球）垒。"}, {"word": "activity", "ipa": "/ækˈtɪvəti/", "meaning": "n.活动。"}, {"word": "star", "ipa": "/stɑː/（英）/stɑːr/（美）", "meaning": "n.星，恒星。"}, {"word": "table", "ipa": "/ˈteɪbl/", "meaning": "n.桌子，表格。"}, {"word": "court", "ipa": "/kɔːt/（英）/kɔːrt/（美）", "meaning": "n.法庭；法院。"}, {"word": "produce", "ipa": "/prəˈdjuːs/（英）/prəˈduːs/（美）", "meaning": "v.生产；制造。"}, {"word": "eat", "ipa": "/iːt/", "meaning": "v.吃。"}, {"word": "teach", "ipa": "/tiːtʃ/", "meaning": "v.教书，教。"}, {"word": "oil", "ipa": "/ɔɪl/", "meaning": "n.油。"}, {"word": "half", "ipa": "/hɑːf/（英）/hæf/（美）", "meaning": "adj.&n.半，一个，半个。"}, {"word": "situation", "ipa": "/ˌsɪtʃuˈeɪʃn/", "meaning": "n.形式，情况。"}, {"word": "easy", "ipa": "/ˈiːzi/", "meaning": "adj.容易的，不费力的。"}, {"word": "cost", "ipa": "/kɒst/（英）/kɔːst/（美）", "meaning": "v.值（钱），花费 n.价格。"}, {"word": "industry", "ipa": "/ˈɪndəstri/", "meaning": "n.工业，产业。"}, {"word": "figure", "ipa": "/ˈfɪɡə/（英）/ˈfɪɡjər/（美）", "meaning": "n.数字；数目；图；图形；（人的）身型；人物；（绘画、雕刻）人物像 vt.（美口语）认为，判断.（在心里）想像，描绘。"}, {"word": "street", "ipa": "/striːt/", "meaning": "n.街，街道。"}, {"word": "itself", "ipa": "/ɪtˈself/", "meaning": "pron.它自己。"}, {"word": "phone", "ipa": "/fəʊn/（英）/foʊn/（美）", "meaning": "v.打电话 n.电话，电话机。"}, {"word": "either", "ipa": "/ˈaɪðə；ˈiːðə/（英）/ˈaɪðər；ˈiːðər/（美）", "meaning": "adj.两方任一方的；二者之一 conj.二者之一；要么……。"}, {"word": "data", "ipa": "/ˈdeɪtə/（英）/ˈdeɪtə；ˈdætə/（美）", "meaning": "n.资料，数据。"}, {"word": "cover", "ipa": "/ˈkʌvə/（英）/ˈkʌvər/（美）", "meaning": "n.盖子；罩 v.覆盖，遮盖；掩盖。"}, {"word": "quite", "ipa": "/kwaɪt/", "meaning": "adv.完全，十分。"}, {"word": "picture", "ipa": "/ˈpɪktʃə/（英）/ˈpɪktʃər/（美）", "meaning": "n.图片，画片，照片。"}, {"word": "clear", "ipa": "/klɪə/（英）/klɪr/（美）", "meaning": "adj.清晰；明亮的；清楚的。"}, {"word": "practice", "ipa": "/ˈpræktɪs/", "meaning": "n.练习。"}, {"word": "piece", "ipa": "/piːs/", "meaning": "n.一块（片，张，件……）。"}, {"word": "land", "ipa": "/lænd/", "meaning": "n.陆地，土地 v.登岸（陆），降落。"}, {"word": "recent", "ipa": "/ˈriːsnt/", "meaning": "adj.近来的，最近的。"}, {"word": "describe", "ipa": "/dɪˈskraɪb/", "meaning": "v.描写，叙述。"}, {"word": "product", "ipa": "/ˈprɒdʌkt/（英）/ˈprɑːdʌkt/（美）", "meaning": "n.产品，制品。"}, {"word": "doctor", "ipa": "/ˈdɒktə/（英）/ˈdɑːktər/（美）", "meaning": "n.医生，大夫；博士。"}, {"word": "wall", "ipa": "/wɔːl/", "meaning": "n.墙。"}, {"word": "patient", "ipa": "/ˈpeɪʃnt/", "meaning": "n.病人。"}, {"word": "worker", "ipa": "/ˈwɜːkə/（英）/ˈwɜːrkər/（美）", "meaning": "n.工人；工作者。"}, {"word": "news", "ipa": "/njuːz/（英）/nuːz/（美）", "meaning": "n.新闻，消息。"}, {"word": "test", "ipa": "/test/", "meaning": "v.&n.测试，考查，试验。"}, {"word": "movie", "ipa": "/ˈmuːvi/", "meaning": "n.（口语）电影。"}, {"word": "certain", "ipa": "/ˈsɜːtn/（英）/ˈsɜːrtn/（美）", "meaning": "adj.（未指明真实名称的）某……；确定的，无疑的；一定会……。"}, {"word": "north", "ipa": "/nɔːθ/（英）/nɔːrθ/（美）", "meaning": "adj.北的；朝北的；从北方来的 adv.向（在，从）北方 n.北；北方；北部。"}, {"word": "personal", "ipa": "/ˈpɜːsənl/（英）/ˈpɜːrsənl/（美）", "meaning": "adj.个人的，私人的。"}, {"word": "simply", "ipa": "/ˈsɪmpli/", "meaning": "adv.简单地，（加强语气）的确。"}, {"word": "third", "ipa": "/θɜːd/（英）/θɜːrd/（美）", "meaning": "num.第三。"}, {"word": "technology", "ipa": "/tekˈnɒlədʒi/（英）/tekˈnɑːlədʒi/（美）", "meaning": "n.技术。"}, {"word": "catch", "ipa": "/kætʃ/", "meaning": "v.接住；捉住；赶上；染上（疾病）。"}, {"word": "step", "ipa": "/step/", "meaning": "n.脚步，台阶，梯级 v.走，跨步。"}, {"word": "baby", "ipa": "/ˈbeɪbi/", "meaning": "n.婴儿。"}, {"word": "computer", "ipa": "/kəmˈpjuːtə/（英）/kəmˈpjuːtər/（美）", "meaning": "n.电子计算机。"}, {"word": "type", "ipa": "/taɪp/", "meaning": "v.打字。"}, {"word": "attention", "ipa": "/əˈtenʃn/", "meaning": "n.注意，关心。"}, {"word": "draw", "ipa": "/drɔː/", "meaning": "v.绘画；绘制；拉，拖；提取（金钱）。"}, {"word": "film", "ipa": "/fɪlm/", "meaning": "n.电影；影片；胶卷 v.拍摄，把……拍成电影。"}, {"word": "tree", "ipa": "/triː/", "meaning": "n.树。"}, {"word": "red", "ipa": "/red/", "meaning": "n.红色 adj.红色的。"}, {"word": "nearly", "ipa": "/ˈnɪəli/（英）/ˈnɪrli/（美）", "meaning": "adv.将近，几乎。"}, {"word": "organization", "ipa": "/ˌɔːɡənaɪˈzeɪʃn/（英）/ˌɔːrɡənəˈzeɪʃn/（美）", "meaning": "n.组织，机构。"}, {"word": "choose", "ipa": "/tʃuːz/", "meaning": "v.选择。"}, {"word": "cause", "ipa": "/kɔːz/", "meaning": "n.原因，起因 v.促使，引起，使发生。"}, {"word": "hair", "ipa": "/heə/（英）/her/（美）", "meaning": "n.头发。"}, {"word": "century", "ipa": "/ˈsentʃəri/", "meaning": "n.世纪，百年。"}, {"word": "evidence", "ipa": "/ˈevɪdəns/", "meaning": "n.证据，证明。"}, {"word": "window", "ipa": "/ˈwɪndəʊ/", "meaning": "n.窗户；计算机的窗。"}, {"word": "difficult", "ipa": "/ˈdɪfɪkəlt/", "meaning": "adj.难；艰难；不易相处。"}, {"word": "listen", "ipa": "/ˈlɪsn/", "meaning": "v.听，仔细听。"}, {"word": "soon", "ipa": "/suːn/", "meaning": "adv.不久，很快，一会儿。"}, {"word": "culture", "ipa": "/ˈkʌltʃə/（英）/ˈkʌltʃər/（美）", "meaning": "n.文化。"}, {"word": "billion", "ipa": "/ˈbɪljən/", "meaning": "num.十亿，百亿。"}, {"word": "chance", "ipa": "/tʃɑːns/（英）/tʃæns/（美）", "meaning": "n.机会，可能性。"}, {"word": "brother", "ipa": "/ˈbrʌðə/（英）/ˈbrʌðər/（美）", "meaning": "n.兄；弟。"}, {"word": "energy", "ipa": "/ˈenədʒi/（英）/ˈenərdʒi/（美）", "meaning": "n.精力；活力；能源。"}, {"word": "period", "ipa": "/ˈpɪəriəd/（英）/ˈpɪriəd/（美）", "meaning": "n.时期，时代。"}, {"word": "summer", "ipa": "/ˈsʌmə/（英）/ˈsʌmər/（美）", "meaning": "n.夏天，夏季。"}, {"word": "hundred", "ipa": "/ˈhʌndrəd/", "meaning": "num.百。"}, {"word": "available", "ipa": "/əˈveɪləbl/", "meaning": "adj.可获得的，有空的。"}, {"word": "plant", "ipa": "/plɑːnt/（英）/plænt/（美）", "meaning": "v.种植，播种 n.植物。"}, {"word": "likely", "ipa": "/ˈlaɪkli/", "meaning": "adj.很可能的。"}, {"word": "term", "ipa": "/tɜːm/（英）/tɜːrm/（美）", "meaning": "n.学期；术语；条款；项。"}, {"word": "short", "ipa": "/ʃɔːt/（英）/ʃɔːrt/（美）", "meaning": "adj.短的；矮的。"}, {"word": "letter", "ipa": "/ˈletə/（英）/ˈletər/（美）", "meaning": "n.信；字母。"}, {"word": "condition", "ipa": "/kənˈdɪʃn/", "meaning": "n.条件，状况。"}, {"word": "choice", "ipa": "/tʃɔɪs/", "meaning": "n.选择；抉择。"}, {"word": "single", "ipa": "/ˈsɪŋɡl/", "meaning": "adj.单一的，单个的。"}, {"word": "rule", "ipa": "/ruːl/", "meaning": "n.规则，规定 v.统治，支配。"}, {"word": "daughter", "ipa": "/ˈdɔːtə/（英）/ˈdɔːtər/（美）", "meaning": "n.女儿"}, {"word": "administration", "ipa": "/ədˌmɪnɪˈstreɪʃn/", "meaning": "n.管理，行政部门。"}, {"word": "south", "ipa": "/saʊθ/", "meaning": "adj.南（方）的；向南的；从南来的 adv.在南方；向南方；自南方 n.南；南方；南风；南部。"}, {"word": "husband", "ipa": "/ˈhʌzbənd/", "meaning": "n.丈夫。"}, {"word": "floor", "ipa": "/flɔː/（英）/flɔːr/（美）", "meaning": "n.地面，地板；（楼房的）层。"}, {"word": "campaign", "ipa": "/kæmˈpeɪn/", "meaning": "n.运动，战役。"}, {"word": "material", "ipa": "/məˈtɪəriəl/（英）/məˈtɪriəl/（美）", "meaning": "n.材料，原料。"}, {"word": "population", "ipa": "/ˌpɒpjuˈleɪʃn/（英）/ˌpɑːpjuˈleɪʃn/（美）", "meaning": "n.人口，人数。"}, {"word": "medical", "ipa": "/ˈmedɪkl/", "meaning": "adj.医学的，医疗的。"}, {"word": "hospital", "ipa": "/ˈhɒspɪtl/（英）/ˈhɑːspɪtl/（美）", "meaning": "n.医院。"}, {"word": "church", "ipa": "/tʃɜːtʃ/（英）/tʃɜːrtʃ/（美）", "meaning": "n.教堂；教会。"}, {"word": "close", "ipa": "/kləʊz/（英）/kloʊz/（美）", "meaning": "adj.亲密的；近，靠近 adv.近，靠近 v.关，关闭。"}, {"word": "thousand", "ipa": "/ˈθaʊznd/", "meaning": "num.千。"}, {"word": "risk", "ipa": "/rɪsk/", "meaning": "n.&v.危险，风险，冒险。"}, {"word": "fire", "ipa": "/ˈfaɪə/（英）/ˈfaɪər/（美）", "meaning": "n.火；火炉；火灾 v.开火，开（枪，炮等），射击。"}, {"word": "future", "ipa": "/ˈfjuːtʃə/（英）/ˈfjuːtʃər/（美）", "meaning": "n.将来。"}, {"word": "wrong", "ipa": "/rɒŋ/（英）/rɔːŋ/（美）", "meaning": "adj.错误，不正常，有毛病的。"}, {"word": "anyone", "ipa": "/ˈeniwʌn/", "meaning": "pron.任何人，无论谁。"}, {"word": "increase", "ipa": "/ɪnˈkriːs；ˈɪŋkriːs/", "meaning": "v.&n.增加，繁殖。"}, {"word": "security", "ipa": "/sɪˈkjʊərəti/（英）/sɪˈkjʊrəti/（美）", "meaning": "n.安全，平安。"}, {"word": "bank", "ipa": "/bæŋk/", "meaning": "n.（河海湖的）岸，堤 n.银行。"}, {"word": "myself", "ipa": "/maɪˈself/", "meaning": "pron.我自己。"}, {"word": "certainly", "ipa": "/ˈsɜːtnli/（英）/ˈsɜːrtnli/（美）", "meaning": "adv.当然；一定，无疑。"}, {"word": "west", "ipa": "/west/", "meaning": "adj.（在）西；向西，从西来的 adv.在西方，向西方 n.西部；西方。"}, {"word": "sport", "ipa": "/spɔːt/（英）/spɔːrt/（美）", "meaning": "v.&n.体育运动，锻炼；（复，英）运动会。"}, {"word": "board", "ipa": "/bɔːd/（英）/bɔːrd/（美）", "meaning": "n.木板；布告牌；委员会；（政府的）部 v.上（船、火车、飞机）。"}, {"word": "seek", "ipa": "/siːk/", "meaning": "v.试图；探寻。"}, {"word": "per", "ipa": "/pɜː；pə/（英）/pɜːr；pər/（美）", "meaning": "prep.每，每一。"}, {"word": "subject", "ipa": "/ˈsʌbdʒɪkt；ˈsʌbdʒekt/", "meaning": "adj.隶属的；受支配的；易受……的；在……条件下 v.使隶属；使服从；使受到 n.题目；主题；学科；主语；主体。"}, {"word": "officer", "ipa": "/ˈɒfɪsə/（英）/ˈɑːfɪsər/（美）", "meaning": "n.军官；公务员，官员；警察，警官。"}, {"word": "private", "ipa": "/ˈpraɪvət/", "meaning": "adj.私人的。"}, {"word": "rest", "ipa": "/rest/", "meaning": "n.休息；剩余的部分，其余的人（物） v.休息，歇息。"}, {"word": "deal", "ipa": "/diːl/", "meaning": "n.量，数额；交易。"}, {"word": "performance", "ipa": "/pəˈfɔːməns/（英）/pərˈfɔːrməns/（美）", "meaning": "n.演出，表演。"}, {"word": "fight", "ipa": "/faɪt/", "meaning": "n.打仗（架），争论。"}, {"word": "throw", "ipa": "/θrəʊ/（英）/θroʊ/（美）", "meaning": "v.投，掷，扔。"}, {"word": "top", "ipa": "/tɒp/（英）/tɑːp/（美）", "meaning": "n.顶部，（物体的）上面。"}, {"word": "past", "ipa": "/pɑːst/（英）/pæst/（美）", "meaning": "adv.过 n.过去，昔日，往事 prep.过……，走过某处。"}, {"word": "goal", "ipa": "/ɡəʊl/（英）/ɡoʊl/（美）", "meaning": "n.（足球）球门，目标。"}, {"word": "bed", "ipa": "/bed/", "meaning": "n.床。"}, {"word": "order", "ipa": "/ˈɔːdə/（英）/ˈɔːrdər/（美）", "meaning": "n.顺序。"}, {"word": "author", "ipa": "/ˈɔːθə/（英）/ˈɔːθər/（美）", "meaning": "n.作者，作家。"}, {"word": "fill", "ipa": "/fɪl/", "meaning": "v.填空，装满。"}, {"word": "represent", "ipa": "/ˌreprɪˈzent/", "meaning": "v.代表。"}, {"word": "focus", "ipa": "/ˈfəʊkəs/（英）/ˈfoʊkəs/（美）", "meaning": "v.&n.集中（注意力，精力）于，焦点，中心点。"}, {"word": "foreign", "ipa": "/ˈfɒrən/（英）/ˈfɔːrən/（美）", "meaning": "adj.外国的。"}, {"word": "drop", "ipa": "/drɒp/（英）/drɑːp/（美）", "meaning": "n.滴 v.掉下，落下；投递；放弃。"}, {"word": "blood", "ipa": "/blʌd/", "meaning": "n.血，血液。"}, {"word": "upon", "ipa": "/əˈpɒn/（英）/əˈpɑːn/（美）", "meaning": "prep.在……上面。"}, {"word": "agency", "ipa": "/ˈeɪdʒənsi/", "meaning": "n.代理机构。"}, {"word": "push", "ipa": "/pʊʃ/", "meaning": "n.&v.推。"}, {"word": "nature", "ipa": "/ˈneɪtʃə/（英）/ˈneɪtʃər/（美）", "meaning": "n.自然，性质，种类。"}, {"word": "store", "ipa": "/stɔː/（英）/stɔːr/（美）", "meaning": "n.商店 v.储藏，存储。"}, {"word": "reduce", "ipa": "/rɪˈdjuːs/（英）/rɪˈduːs/（美）", "meaning": "v.减少，缩减。"}, {"word": "sound", "ipa": "/saʊnd/", "meaning": "v.听起来，发出声音 n.声音。"}, {"word": "note", "ipa": "/nəʊt/（英）/noʊt/（美）", "meaning": "n.便条，笔记，注释；钞票，纸币；音符，音调 v.记下，记录；注意，留意。"}, {"word": "fine", "ipa": "/faɪn/", "meaning": "adj.细的；晴朗的；美好的；（身体）健康的 n.&v.罚款。"}, {"word": "near", "ipa": "/nɪə/（英）/nɪr/（美）", "meaning": "adj.近的 adv.附近，邻近 prep.在……附近，靠近。"}, {"word": "movement", "ipa": "/ˈmuːvmənt/", "meaning": "n.运动，活动。"}, {"word": "page", "ipa": "/peɪdʒ/", "meaning": "n.页，页码。"}, {"word": "enter", "ipa": "/ˈentə/（英）/ˈentər/（美）", "meaning": "v.进入。"}, {"word": "share", "ipa": "/ʃeə/（英）/ʃer/（美）", "meaning": "v.分享，共同使用。"}, {"word": "common", "ipa": "/ˈkɒmən/（英）/ˈkɑːmən/（美）", "meaning": "adj.普通，一般；共有的。"}, {"word": "poor", "ipa": "/pʊə；pɔː/（英）/pʊr；pɔːr/（美）", "meaning": "adj.贫穷；可怜；不好的，差的。"}, {"word": "natural", "ipa": "/ˈnætʃrəl/", "meaning": "adj.自然的。"}, {"word": "race", "ipa": "/reɪs/", "meaning": "n.种族，民族 v.（速度）竞赛，比赛 n.赛跑，竞赛。"}, {"word": "concern", "ipa": "/kənˈsɜːn/（英）/kənˈsɜːrn/（美）", "meaning": "v.&n.涉及，关心。"}, {"word": "similar", "ipa": "/ˈsɪmələ/（英）/ˈsɪmələr/（美）", "meaning": "adj.相似的，像。"}, {"word": "hot", "ipa": "/hɒt/（英）/hɑːt/（美）", "meaning": "adj.热的。"}, {"word": "language", "ipa": "/ˈlæŋɡwɪdʒ/", "meaning": "n.语言。"}, {"word": "usually", "ipa": "/ˈjuːʒuəli；ˈjuːʒəli/", "meaning": "adv.通常，经常。"}, {"word": "dead", "ipa": "/ded/", "meaning": "adj.死的；无生命的。"}, {"word": "rise", "ipa": "/raɪz/", "meaning": "v.上升，上涨。"}, {"word": "animal", "ipa": "/ˈænɪml/", "meaning": "n.动物。"}, {"word": "decade", "ipa": "/ˈdekeɪd/", "meaning": "n.十年期。"}, {"word": "article", "ipa": "/ˈɑːtɪkl/（英）/ˈɑːrtɪkl/（美）", "meaning": "n.文章；东西，物品；冠词。"}, {"word": "shoot", "ipa": "/ʃuːt/", "meaning": "v.射击，射中，发射 n.嫩枝；苗；芽。"}, {"word": "east", "ipa": "/iːst/", "meaning": "adj.东方；东部的；朝东的；从东方来 adv.在东方；向东方；从东方 n.东，东方；东部。"}, {"word": "save", "ipa": "/seɪv/", "meaning": "v.救，挽救，节省。"}, {"word": "seven", "ipa": "/ˈsevn/", "meaning": "num.七。"}, {"word": "artist", "ipa": "/ˈɑːtɪst/（英）/ˈɑːrtɪst/（美）", "meaning": "n.艺术家。"}, {"word": "scene", "ipa": "/siːn/", "meaning": "n.（戏剧、电影等的）一场，场景，布景。"}, {"word": "central", "ipa": "/ˈsentrəl/", "meaning": "adj.中心，中央；主要的。"}, {"word": "eight", "ipa": "/eɪt/", "meaning": "num.八。"}, {"word": "thus", "ipa": "/ðʌs/", "meaning": "adv.这样；因而。"}, {"word": "treatment", "ipa": "/ˈtriːtmənt/", "meaning": "n.治疗，疗法。"}, {"word": "beyond", "ipa": "/bɪˈjɒnd/（英）/bɪˈjɑːnd/（美）", "meaning": "prep.（表示位置）在……的那边。"}, {"word": "happy", "ipa": "/ˈhæpi/", "meaning": "adj.幸福；快乐的，高兴的。"}, {"word": "exactly", "ipa": "/ɪɡˈzæktli/", "meaning": "adv.精确地；确切地。"}, {"word": "protect", "ipa": "/prəˈtekt/", "meaning": "v.保护。"}, {"word": "approach", "ipa": "/əˈprəʊtʃ/（英）/əˈproʊtʃ/（美）", "meaning": "n.&v.靠近，接近，建议，要求。"}, {"word": "lie", "ipa": "/laɪ/", "meaning": "v.躺；卧；平放；位于 n.&v.谎言；说谎。"}, {"word": "size", "ipa": "/saɪz/", "meaning": "n.尺寸，大小。"}, {"word": "dog", "ipa": "/dɒɡ/（英）/dɔːɡ/（美）", "meaning": "n.狗。"}, {"word": "serious", "ipa": "/ˈsɪəriəs/（英）/ˈsɪriəs/（美）", "meaning": "adj.严肃的，严重的，认真的。"}, {"word": "occur", "ipa": "/əˈkɜː/（英）/əˈkɜːr/（美）", "meaning": "v.发生。"}, {"word": "media", "ipa": "/ˈmiːdiə/", "meaning": "n.大众传播媒介。"}, {"word": "ready", "ipa": "/ˈredi/", "meaning": "adj.准备好的。"}, {"word": "sign", "ipa": "/saɪn/", "meaning": "n.符号，标记。"}, {"word": "thought", "ipa": "/θɔːt/", "meaning": "n.思考，思想；念头。"}, {"word": "list", "ipa": "/lɪst/", "meaning": "n.一览表，清单。"}, {"word": "simple", "ipa": "/ˈsɪmpl/", "meaning": "adj.简单的，简易的。"}, {"word": "quality", "ipa": "/ˈkwɒləti/（英）/ˈkwɑːləti/（美）", "meaning": "n.质量，性质。"}, {"word": "pressure", "ipa": "/ˈpreʃə/（英）/ˈpreʃər/（美）", "meaning": "n.压迫，压力，压强。"}, {"word": "accept", "ipa": "/əkˈsept/", "meaning": "v.接受。"}, {"word": "answer", "ipa": "/ˈɑːnsə/（英）/ˈænsər/（美）", "meaning": "n.回答，答复；回信；答案 v.回答，答复；回信；（作出）答案。"}, {"word": "left", "ipa": "/left/", "meaning": "adj.左边的 adv.向左 n.左，左边。"}, {"word": "meeting", "ipa": "/ˈmiːtɪŋ/", "meaning": "n.会，集会，会见，汇合点。"}, {"word": "determine", "ipa": "/dɪˈtɜːmɪn/（英）/dɪˈtɜːrmɪn/（美）", "meaning": "v.决定；决心。"}, {"word": "prepare", "ipa": "/prɪˈpeə/（英）/prɪˈper/（美）", "meaning": "v.准备，预备，调制，配制。"}, {"word": "disease", "ipa": "/dɪˈziːz/", "meaning": "n.病，疾病。"}, {"word": "whatever", "ipa": "/wɒtˈevə/（英）/wətˈevər/（美）", "meaning": "conj.&pron.无论什么，不管什么。"}, {"word": "success", "ipa": "/səkˈses/", "meaning": "n.成功。"}, {"word": "argue", "ipa": "/ˈɑːɡjuː/（英）/ˈɑːrɡjuː/（美）", "meaning": "v.争辩，争论。"}, {"word": "cup", "ipa": "/kʌp/", "meaning": "n.茶杯。"}, {"word": "amount", "ipa": "/əˈmaʊnt/", "meaning": "n.&v.金额，数量，总计。"}, {"word": "ability", "ipa": "/əˈbɪləti/", "meaning": "n.能力；才能。"}, {"word": "staff", "ipa": "/stɑːf/（英）/stæf/（美）", "meaning": "n.全体职工（雇员）。"}, {"word": "indicate", "ipa": "/ˈɪndɪkeɪt/", "meaning": "v.表明，象征，暗示。"}, {"word": "character", "ipa": "/ˈkærəktə/（英）/ˈkærəktər/（美）", "meaning": "n.（汉）字，字体；品格。"}, {"word": "growth", "ipa": "/ɡrəʊθ/（英）/ɡroʊθ/（美）", "meaning": "n.生长，增长。"}, {"word": "loss", "ipa": "/lɒs/（英）/lɔːs/（美）", "meaning": "n.丧失；损耗。"}, {"word": "degree", "ipa": "/dɪˈɡriː/", "meaning": "n.程度；度数；学位。"}, {"word": "wonder", "ipa": "/ˈwʌndə/（英）/ˈwʌndər/（美）", "meaning": "v.对……疑惑，感到惊奇，想知道 n.惊讶，惊叹；奇迹。"}, {"word": "attack", "ipa": "/əˈtæk/", "meaning": "v.&n.攻击，袭击。"}, {"word": "herself", "ipa": "/hɜːˈself；həˈself/（英）/hɜːrˈself；hərˈself/（美）", "meaning": "pron.她自己。"}, {"word": "television", "ipa": "/ˈtelɪvɪʒn/", "meaning": "n.电视。"}, {"word": "box", "ipa": "/bɒks/（英）/bɑːks/（美）", "meaning": "n.盒子，箱子。"}, {"word": "TV", "ipa": "/ˌtiːˈviː/", "meaning": "n.电视机。"}, {"word": "training", "ipa": "/ˈtreɪnɪŋ/", "meaning": "n.培训。"}, {"word": "pretty", "ipa": "/ˈprɪti/", "meaning": "adj.漂亮的，俊俏的。"}, {"word": "trade", "ipa": "/treɪd/", "meaning": "n.贸易 v.用……进行交换。"}, {"word": "everybody", "ipa": "/ˈevribɒdi/（英）/ˈevribɑːdi；ˈevribʌdi/（美）", "meaning": "pron.每人，人人。"}, {"word": "physical", "ipa": "/ˈfɪzɪkl/", "meaning": "adj.身体的；物理的。"}, {"word": "lay", "ipa": "/leɪ/", "meaning": "v.放，搁。"}, {"word": "general", "ipa": "/ˈdʒenrəl/", "meaning": "adj.大体，笼统的，总的。"}, {"word": "feeling", "ipa": "/ˈfiːlɪŋ/", "meaning": "n.感情；感觉。"}, {"word": "standard", "ipa": "/ˈstændəd/（英）/ˈstændərd/（美）", "meaning": "n.&adj.标准（的）。"}, {"word": "bill", "ipa": "/bɪl/", "meaning": "n.账单；法案，议案；（美）钞票，纸币。"}, {"word": "message", "ipa": "/ˈmesɪdʒ/", "meaning": "n.消息，音信。"}, {"word": "fail", "ipa": "/feɪl/", "meaning": "v.失败；不及格；衰退。"}, {"word": "outside", "ipa": "/ˌaʊtˈsaɪd/", "meaning": "n.外面 adv.在外面；向外面 prep.在……外面。"}, {"word": "arrive", "ipa": "/əˈraɪv/", "meaning": "v.到达；达到。"}, {"word": "analysis", "ipa": "/əˈnæləsɪs/", "meaning": "n.分析，分析结果。"}, {"word": "benefit", "ipa": "/ˈbenɪfɪt/", "meaning": "n.&v.优势，益处，使……受益。"}, {"word": "sex", "ipa": "/seks/", "meaning": "n.性，性别。"}, {"word": "forward", "ipa": "/ˈfɔːwəd/（英）/ˈfɔːrwərd/（美）", "meaning": "adv.将来，今后，向前，前进。"}, {"word": "lawyer", "ipa": "/ˈlɔɪə/（英）/ˈlɔɪər/（美）", "meaning": "n.律师。"}, {"word": "present", "ipa": "/ˈpreznt/", "meaning": "adj.出现的，出席的 n.礼物，赠品 v.呈奉，奉送。"}, {"word": "section", "ipa": "/ˈsekʃn/", "meaning": "n.段，部分，部门。"}, {"word": "glass", "ipa": "/ɡlɑːs/（英）/ɡlæs/（美）", "meaning": "n.玻璃杯，玻璃；（复）眼镜。"}, {"word": "skill", "ipa": "/skɪl/", "meaning": "n.技能，技巧。"}, {"word": "sister", "ipa": "/ˈsɪstə/（英）/ˈsɪstər/（美）", "meaning": "n.姐；妹。"}, {"word": "professor", "ipa": "/prəˈfesə/（英）/prəˈfesər/（美）", "meaning": "n.教授。"}, {"word": "operation", "ipa": "/ˌɒpəˈreɪʃn/（英）/ˌɑːpəˈreɪʃn/（美）", "meaning": "n.手术，操作。"}, {"word": "crime", "ipa": "/kraɪm/", "meaning": "n.（法律上的）罪，犯罪。"}, {"word": "stage", "ipa": "/steɪdʒ/", "meaning": "n.舞台；阶段。"}, {"word": "ok", "ipa": "/əʊˈkeɪ/（英）/oʊˈkeɪ/（美）", "meaning": "adv.（口语）好，对，不错。"}, {"word": "OK", "ipa": "/əʊˈkeɪ/（英）/oʊˈkeɪ/（美）", "meaning": "adv.（口语）好，对，不错。"}, {"word": "compare", "ipa": "/kəmˈpeə/（英）/kəmˈper/（美）", "meaning": "v.比较，对照。"}, {"word": "authority", "ipa": "/ɔːˈθɒrəti/（英）/əˈθɔːrəti/（美）", "meaning": "n.权力，权威，威信，官方。"}, {"word": "miss", "ipa": "/mɪs/", "meaning": "v.失去，错过，缺。"}, {"word": "design", "ipa": "/dɪˈzaɪn/", "meaning": "n.&v.设计，策划图案，图样，样式。"}, {"word": "sort", "ipa": "/sɔːt/（英）/sɔːrt/（美）", "meaning": "v.把……分类，拣选 n.种类，类别。"}, {"word": "act", "ipa": "/ækt/", "meaning": "n.法令，条例 v.（戏）表演，扮演（角色），演出（戏）；行动，做事。"}, {"word": "ten", "ipa": "/ten/", "meaning": "num.十。"}, {"word": "knowledge", "ipa": "/ˈnɒlɪdʒ/（英）/ˈnɑːlɪdʒ/（美）", "meaning": "n.知识，学问。"}, {"word": "gun", "ipa": "/ɡʌn/", "meaning": "n.枪，炮。"}, {"word": "station", "ipa": "/ˈsteɪʃn/", "meaning": "n.站，所，车站；电台。"}, {"word": "blue", "ipa": "/bluː/", "meaning": "n.蓝色 adj.蓝色的 adj.悲伤的；沮丧的。"}, {"word": "clearly", "ipa": "/ˈklɪəli/（英）/ˈklɪrli/（美）", "meaning": "adv.清楚地，无疑地。"}, {"word": "discuss", "ipa": "/dɪˈskʌs/", "meaning": "v.讨论，议论。"}, {"word": "indeed", "ipa": "/ɪnˈdiːd/", "meaning": "adv.确实；实在。"}, {"word": "truth", "ipa": "/truːθ/", "meaning": "n.真理，事实，真相，实际。"}, {"word": "song", "ipa": "/sɒŋ/（英）/sɔːŋ/（美）", "meaning": "n.歌唱；歌曲。"}, {"word": "example", "ipa": "/ɪɡˈzɑːmpl/（英）/ɪɡˈzæmpl/（美）", "meaning": "n.例子；榜样。"}, {"word": "check", "ipa": "/tʃek/", "meaning": "n.检查；批改 v.校对，核对。"}, {"word": "environment", "ipa": "/ɪnˈvaɪrənmənt/", "meaning": "n.环境。"}, {"word": "leg", "ipa": "/leɡ/", "meaning": "n.腿；腿脚；支柱。"}, {"word": "dark", "ipa": "/dɑːk/（英）/dɑːrk/（美）", "meaning": "n.黑暗；暗处；日暮 adj.黑暗的；暗淡的；深色的。"}, {"word": "various", "ipa": "/ˈveəriəs/（英）/ˈveriəs；ˈværiəs/（美）", "meaning": "adj.各种各样的，不同的。"}, {"word": "rather", "ipa": "/ˈrɑːðə/（英）/ˈræðər/（美）", "meaning": "adv.相当，宁可。"}, {"word": "laugh", "ipa": "/lɑːf/（英）/læf/（美）", "meaning": "n.&v.笑，大笑；嘲笑。"}, {"word": "guess", "ipa": "/ɡes/", "meaning": "v.猜。"}, {"word": "prove", "ipa": "/pruːv/", "meaning": "v.证明。"}, {"word": "hang", "ipa": "/hæŋ/", "meaning": "v.悬挂，吊着；把……吊起。"}, {"word": "entire", "ipa": "/ɪnˈtaɪə/（英）/ɪnˈtaɪər/（美）", "meaning": "adj.整个的，全部的。"}, {"word": "rock", "ipa": "/rɒk/（英）/rɑːk/（美）", "meaning": "n.岩石，大石头 v.摇，摇晃。"}, {"word": "forget", "ipa": "/fəˈɡet/（英）/fərˈɡet/（美）", "meaning": "v.忘记；忘掉。"}, {"word": "remove", "ipa": "/rɪˈmuːv/", "meaning": "v.移动，拿走，脱掉（衣服等）。"}, {"word": "manager", "ipa": "/ˈmænɪdʒə/（英）/ˈmænɪdʒər/（美）", "meaning": "n.经理。"}, {"word": "enjoy", "ipa": "/ɪnˈdʒɔɪ/", "meaning": "v.欣赏；享受乐趣；喜欢。"}, {"word": "network", "ipa": "/ˈnetwɜːk/（英）/ˈnetwɜːrk/（美）", "meaning": "n.网络，网状系统。"}, {"word": "legal", "ipa": "/ˈliːɡl/", "meaning": "adj.与法律有关的，法律的。"}, {"word": "religious", "ipa": "/rɪˈlɪdʒəs/", "meaning": "adj.宗教的。"}, {"word": "cold", "ipa": "/kəʊld/（英）/koʊld/（美）", "meaning": "adj.冷的，寒的 n.寒冷；感冒，伤风。"}, {"word": "final", "ipa": "/ˈfaɪnl/", "meaning": "adj.最后的；终极的。"}, {"word": "main", "ipa": "/meɪn/", "meaning": "adj.主要的。"}, {"word": "science", "ipa": "/ˈsaɪəns/", "meaning": "n.科学，自然科学。"}, {"word": "green", "ipa": "/ɡriːn/", "meaning": "adj.绿色的；青的 n.绿色。"}, {"word": "memory", "ipa": "/ˈmeməri/", "meaning": "n.回忆，记忆。"}, {"word": "card", "ipa": "/kɑːd/（英）/kɑːrd/（美）", "meaning": "n.卡片；名片；纸牌。"}, {"word": "above", "ipa": "/əˈbʌv/", "meaning": "prep.在……上面 adj.上面的 adv.在……之上。"}, {"word": "seat", "ipa": "/siːt/", "meaning": "n.座位，座。"}, {"word": "cell", "ipa": "/sel/", "meaning": "n.（监狱的）单人牢房；（修道院等的）单人小室；（蜂巢的）小蜂窝，蜂房；（生物）细胞。"}, {"word": "nice", "ipa": "/naɪs/", "meaning": "adj.令人愉快的；好的，漂亮的。"}, {"word": "trial", "ipa": "/ˈtraɪəl/", "meaning": "n.审判；试验；试用。"}, {"word": "expert", "ipa": "/ˈekspɜːt/（英）/ˈekspɜːrt/（美）", "meaning": "n.专家，能手。"}, {"word": "spring", "ipa": "/sprɪŋ/", "meaning": "n.春天，春季 n.泉水，泉。"}, {"word": "firm", "ipa": "/fɜːm/（英）/fɜːrm/（美）", "meaning": "n.公司；企业 adj.坚固的，坚定的。"}, {"word": "radio", "ipa": "/ˈreɪdiəʊ/（英）/ˈreɪdioʊ/（美）", "meaning": "n.无线电，收音机。"}, {"word": "visit", "ipa": "/ˈvɪzɪt/", "meaning": "n.&v.参观，访问，拜访。"}, {"word": "avoid", "ipa": "/əˈvɔɪd/", "meaning": "v.避免，躲开，逃避。"}, {"word": "imagine", "ipa": "/ɪˈmædʒɪn/", "meaning": "v.想象，设想。"}, {"word": "tonight", "ipa": "/təˈnaɪt/", "meaning": "adv.&n.今晚，今夜。"}, {"word": "huge", "ipa": "/hjuːdʒ/", "meaning": "adj.巨大的，庞大的。"}, {"word": "ball", "ipa": "/bɔːl/", "meaning": "n.球；舞会。"}, {"word": "finish", "ipa": "/ˈfɪnɪʃ/", "meaning": "v.结束；做完。"}, {"word": "yourself", "ipa": "/jɔːˈself/（英）/jɔːrˈself/（美）", "meaning": "pron.你自己。"}, {"word": "theory", "ipa": "/ˈθɪəri/（英）/ˈθiːəri/（美）", "meaning": "n.理论。"}, {"word": "respond", "ipa": "/rɪˈspɒnd/（英）/rɪˈspɑːnd/（美）", "meaning": "v.回答，回应，作出反应。"}, {"word": "statement", "ipa": "/ˈsteɪtmənt/", "meaning": "n.声明，陈述，说法。"}];
@@ -363,16 +379,16 @@ function newEventId(){
   eventIdCounter += 1;
   return "e-" + Date.now().toString(36) + "-" + eventIdCounter.toString(36) + "-" + Math.floor(Math.random() * 0xffffffff).toString(36);
 }
-/* 旧备份只有次数、没有每条错次的编号：按（词, 序号）给它们定下固定的
-   legacy 编号，同一条旧记录在哪个设备上算出来的编号都一样，重复导入
-   靠编号去重，不会再算一遍。补齐到正好等于次数，次数本身不变。 */
+/* 旧备份只有次数、没有每条错次的编号：按（词，第几次）补出固定编号，
+   同一条旧记录在哪个设备上补出来的编号都一样，合并时就能认出是同一条，
+   不会重复计数。补的数量正好等于原次数，不改次数。 */
 function materializeEvents(wordKey, count, events, at){
   var out = [];
   var seen = {};
   (events || []).forEach(function(e){
     if (!e || !e.id || seen[e.id]) return;
     seen[e.id] = true;
-    out.push(e);
+    out.push({ id: e.id, at: typeof e.at === "string" ? e.at : at });
   });
   for (var i = 0; out.length < count; i += 1){
     var id = "legacy:" + wordKey + ":" + i;
@@ -382,18 +398,13 @@ function materializeEvents(wordKey, count, events, at){
   }
   return out;
 }
-/* 导入识别规则（文件导入和粘贴导入共用同一套，和导出格式一一对应）：
-   一条记录的全部字段都认——单词、释义、音标、次数、原因、序号、时间戳，
-   以及每条错次自己的编号和时间（events）。备份有三种形态都能认：
-   1. 本页导出的包装格式 { app, kind, mode, modeName, exportedAt, items }，
-      按里面写的 mode 归到对应模式；
-   2. 双模式格式 { flash: {...}, quiz: {...} }，两个模式各归各的，一起导入；
-   3. 裸的单模式词表 { 词: 记录 }，归到当前打开的这本。 */
-function normalizeBook(raw){
+function normalizeImportedBook(data){
+  if (!data || typeof data !== "object" || Array.isArray(data)) return null;
+  var raw = (data.items && typeof data.items === "object" && !Array.isArray(data.items)) ? data.items : data;
   var out = {};
   Object.keys(raw).forEach(function(k){
     var it = raw[k];
-    if (!it || typeof it !== "object" || Array.isArray(it)) return;
+    if (!it || typeof it !== "object") return;
     var word = String(it.word != null ? it.word : (k || "")).trim();
     if (!word) return;
     var count = parseInt(String(it.count != null ? it.count : ""), 10);
@@ -409,15 +420,14 @@ function normalizeBook(raw){
     var rawEvents = [];
     if (Array.isArray(it.events)){
       it.events.forEach(function(x){
-        if (!x || typeof x !== "object") return;
-        if (typeof x.id === "string" && x.id){
-          rawEvents.push({ id: x.id, at: (typeof x.at === "string" ? x.at : lastTime) });
+        if (x && typeof x === "object" && typeof x.id === "string" && x.id){
+          rawEvents.push({ id: x.id, at: typeof x.at === "string" ? x.at : lastTime });
         }
       });
     }
     var key = word.toLowerCase();
     var events = materializeEvents(key, count, rawEvents, lastTime);
-    var seqRaw = Number(it.seq);
+    var seqNum = Number(it.seq);
     out[key] = {
       word: word,
       meaning: String(it.meaning != null ? it.meaning : ""),
@@ -425,46 +435,11 @@ function normalizeBook(raw){
       count: events.length || count,
       reasons: reasons,
       events: events,
-      seq: (isFinite(seqRaw) && seqRaw > 0) ? Math.floor(seqRaw) : 0,
+      seq: (isFinite(seqNum) && seqNum > 0) ? Math.floor(seqNum) : 0,
       lastTime: lastTime
     };
   });
   return Object.keys(out).length ? out : null;
-}
-/* 词表的值全是记录对象；单条记录的值是字符串/数字/数组，绝不会是普通
-   对象——靠这一点把双模式备份 { flash: 词表, quiz: 词表 } 和「正好有个
-   词叫 flash 的裸词表」区分开。 */
-function isBookMap(v){
-  if (!v || typeof v !== "object" || Array.isArray(v)) return false;
-  return Object.keys(v).every(function(k){
-    var x = v[k];
-    return !!x && typeof x === "object" && !Array.isArray(x);
-  });
-}
-function normalizeImportedBooks(data, fallbackMode){
-  if (!data || typeof data !== "object" || Array.isArray(data)) return null;
-  if (isBookMap(data.items)){
-    var m = (data.mode === "quiz" || data.mode === "flash") ? data.mode : fallbackMode;
-    var b = normalizeBook(data.items);
-    if (!b) return null;
-    var single = {};
-    single[m] = b;
-    return single;
-  }
-  var out = {};
-  var any = false;
-  ["flash", "quiz"].forEach(function(mode){
-    if (isBookMap(data[mode])){
-      var bk = normalizeBook(data[mode]);
-      if (bk){ out[mode] = bk; any = true; }
-    }
-  });
-  if (any) return out;
-  var bare = normalizeBook(data);
-  if (!bare) return null;
-  var res = {};
-  res[fallbackMode] = bare;
-  return res;
 }
 
 /* ================= audio (Youdao, device TTS fallback) ================= */
@@ -532,7 +507,7 @@ function speakWord(word, accent){
   step();
 }
 
-/* ================= verdict stamp (same big-seal design as the online version) ================= */
+/* ================= verdict stamp (same seal design as the online version) ================= */
 function stampSvg(variant){
   var wrong = variant === "wrong";
   var ink = wrong ? "#dc2626" : "#16a34a";
@@ -540,11 +515,11 @@ function stampSvg(variant){
   var label = wrong ? "不会/错误" : "正确";
   var fontSize = wrong ? 15.5 : 19;
   var letterSpacing = wrong ? 1.5 : 7;
-  var rays = "";
-  for (var i = 0; i < 24; i++) rays += '<line x1="60" y1="60" x2="60" y2="14" transform="rotate(' + (i * 15) + ' 60 60)"/>';
   var mark = wrong
     ? '<path d="M47 27 L71 51 M71 27 L47 51" stroke="' + ink + '" stroke-width="6.5" stroke-linecap="round" fill="none"/>'
     : '<path d="M43 39 L55 51 L76 27" stroke="' + ink + '" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
+  var rays = "";
+  for (var i = 0; i < 24; i++) rays += '<line x1="60" y1="60" x2="60" y2="14" transform="rotate(' + (i * 15) + ' 60 60)"/>';
   return '<svg viewBox="0 0 120 120" aria-hidden="true"><defs>'
     + '<radialGradient id="' + gid + '" cx="50%" cy="50%" r="50%">'
     + '<stop offset="0%" stop-color="' + ink + '" stop-opacity="0.16"/>'
@@ -592,15 +567,10 @@ if (!Object.keys(qzHistoryBook).length){
   Object.keys(b).forEach(function(k){
     if (typeof b[k].seq !== "number") b[k].seq = ++bookSeq;
     else if (b[k].seq > bookSeq) bookSeq = b[k].seq;
-  });
-});
-/* 旧版本存下的记录没有每条错次的编号：打开时按（词, 序号）补上固定的
-   legacy 编号并存回去，次数一条不变，之后导出、合并都靠编号对齐。 */
-[fcHistoryBook, qzHistoryBook].forEach(function(b){
-  Object.keys(b).forEach(function(k){
+    /* 本机已存的旧记录补上每条错次的编号（数量正好等于原次数，不改次数） */
     var rec = b[k];
-    rec.events = materializeEvents(k, rec.count, Array.isArray(rec.events) ? rec.events : [], rec.lastTime || "");
-    rec.count = rec.events.length || rec.count;
+    rec.events = materializeEvents(k, rec.count || 0, rec.events, rec.lastTime || "");
+    if (rec.events.length) rec.count = rec.events.length;
   });
 });
 saveBook(FC_HIST_KEY, fcHistoryBook);
@@ -615,7 +585,7 @@ function applyDeltaToBook(book, entry, reason, delta){
   if (delta === 1){
     var nowIso = new Date().toISOString();
     if (cur){
-      cur.events = materializeEvents(key, cur.count, Array.isArray(cur.events) ? cur.events : [], cur.lastTime || "");
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
       cur.events.push({ id: newEventId(), at: nowIso });
       cur.count = cur.events.length;
       if (reason && cur.reasons.indexOf(reason) === -1) cur.reasons.push(reason);
@@ -632,9 +602,10 @@ function applyDeltaToBook(book, entry, reason, delta){
   } else if (cur){
     if (cur.count <= 1) delete book[key];
     else {
-      cur.events = materializeEvents(key, cur.count, Array.isArray(cur.events) ? cur.events : [], cur.lastTime || "");
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
       cur.events.pop();
       cur.count = cur.events.length;
+      if (!cur.count) delete book[key];
     }
   }
 }
@@ -645,7 +616,7 @@ function recordError(mode, entry, reason, delta){
   if (delta === 1){
     var nowIso2 = new Date().toISOString();
     if (cur){
-      cur.events = materializeEvents(key, cur.count, Array.isArray(cur.events) ? cur.events : [], cur.lastTime || "");
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
       cur.events.push({ id: newEventId(), at: nowIso2 });
       cur.count = cur.events.length;
       if (cur.reasons.indexOf(reason) === -1) cur.reasons.push(reason);
@@ -653,18 +624,18 @@ function recordError(mode, entry, reason, delta){
     } else {
       session[key] = {
         word: entry.word, meaning: entry.meaning, ipa: entry.ipa,
-        count: 1, reasons: [reason],
+        count: 1, reasons: [reason], seq: ++sessionSeq,
         events: [{ id: newEventId(), at: nowIso2 }],
-        seq: ++sessionSeq,
         lastTime: nowIso2
       };
     }
   } else if (cur){
     if (cur.count <= 1) delete session[key];
     else {
-      cur.events = materializeEvents(key, cur.count, Array.isArray(cur.events) ? cur.events : [], cur.lastTime || "");
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
       cur.events.pop();
       cur.count = cur.events.length;
+      if (!cur.count) delete session[key];
     }
   }
   if (mode === "flash"){ applyDeltaToBook(fcHistoryBook, entry, reason, delta); saveBook(FC_HIST_KEY, fcHistoryBook); }
@@ -707,7 +678,13 @@ function remainingOf(r){
 var fc = idleRound();
 var fcRevealed = false;
 var fcJudged = null; /* null | "correct" | "wrong" */
-var fcStampAnim = false; /* true only for the one render right after a verdict switch (correct ↔ wrong): that render carries the stamp-pop class; flashHtml consumes the flag so every later render (accent switch, speak, reveal) shows the seal statically */
+/* True only in the brief moment right after a verdict is SWITCHED from
+   the other verdict (正确 ↔ 不会/错误): only that switch plays the
+   seal's press-down animation. A first verdict stamps statically, and
+   any later re-render — e.g. switching the UK/US pronunciation accent
+   or any other button — keeps the seal perfectly still. */
+var fcStampFresh = false;
+var fcStampToken = 0;
 var fcPile = [];
 var fcPanel = { open:false, round:null };
 
@@ -736,8 +713,17 @@ var modalEntry = null;
 var ioAction = null; /* "import" | "merge" */
 var importArmed = false;
 var importArmTimer = null;
-var clearConfirm = null; /* null | "session" | "history" */
-var savedBookScroll = 0;
+/* 粘贴导入：选文件在手机浏览器上可能没反应时，把备份内容粘贴进来导入/合并 */
+var pasteOpen = false;
+var pasteText = "";
+var pasteArmed = false;
+/* 清空确认弹窗：null | "session" | "history"，渲染进独立的 confirm-slot，
+   打开、取消、确认都不重渲染错题本，滚动位置原地不动 */
+var clearConfirm = null;
+/* 错题本每个（模式 × 页签）的滚动位置：renderBook 重建浮层前后存/恢复，
+   切换模式、页签或任何重渲染都不再弹回顶部 */
+var bookScrollPos = {};
+var lastBookKey = null;
 var currentBookEntries = [];
 
 /* ================= flash logic ================= */
@@ -757,10 +743,10 @@ function startFlashRound(pool, isReview){
   render();
 }
 function finishFlashRound(){
-  fc.status = "finished"; fc.current = -1; fc.queue = [];
   if (fc.total > 0){
     fcChain.push({ total: fc.total, correct: fc.correct, wrong: fc.wrong, wrongWords: fcPile.map(function(i){ return WORDS[i].word; }) });
   }
+  fc.status = "finished"; fc.current = -1; fc.queue = [];
   fcPanel = { open:true, round:{ correct: fc.correct, wrong: fc.wrong, total: fc.total } };
 }
 function fcEntry(){ return fc.current >= 0 ? WORDS[fc.current] : null; }
@@ -777,8 +763,6 @@ function fcJudge(kind){
   if (kind === "correct" && !fcRevealed) return;
   if (fcJudged === kind) return;
   var prev = fcJudged;
-  /* 落印动画只在切换判定时播一次：第一次判定 prev 为 null，静态出现 */
-  fcStampAnim = prev !== null;
   if (kind === "wrong"){
     fcRevealed = true;
     recordError("flash", e, "不会/错误", 1);
@@ -788,6 +772,15 @@ function fcJudge(kind){
     fcPile = fcPile.filter(function(x){ return x !== fc.current; });
   }
   fcJudged = kind;
+  fcStampToken += 1;
+  var stampToken = fcStampToken;
+  if (prev !== null){
+    /* Switching between 正确 and 不会/错误: replay the stamp once. */
+    fcStampFresh = true;
+    setTimeout(function(){ if (fcStampToken === stampToken) fcStampFresh = false; }, 350);
+  } else {
+    fcStampFresh = false;
+  }
   render();
 }
 function fcNext(){
@@ -841,10 +834,10 @@ function startQuizRound(pool, isReview){
   render();
 }
 function finishQuizRound(){
-  qz.status = "finished"; qz.current = -1; qz.queue = [];
   if (qz.total > 0){
     qzChain.push({ total: qz.total, correct: qz.correct, wrong: qz.wrong, wrongWords: qzPile.map(function(i){ return WORDS[i].word; }) });
   }
+  qz.status = "finished"; qz.current = -1; qz.queue = [];
   qzPanel = { open:true, round:{ correct: qz.correct, wrong: qz.wrong, total: qz.total } };
 }
 function qzEntry(){ return qz.current >= 0 ? WORDS[qz.current] : null; }
@@ -924,16 +917,7 @@ function qzGoHome(){
   render();
 }
 
-/* 本轮实时统计（仅英译中闪卡）：fc.correct/wrong 是已点「下一个」结算过的数，
-   当前这张卡的判定（fcJudged）还没结算。实时数 = 已结算 + 当前判定：
-   点「正确」立刻 +1，切换成「不会/错误」时正确自动取消、错误 +1，
-   反过来也一样；点「下一个」后判定折进结算数，总数不变。 */
-function fcLiveCounts(){
-  var c = fc.correct + (fcJudged === "correct" ? 1 : 0);
-  var w = fc.wrong + (fcJudged === "wrong" ? 1 : 0);
-  return { correct: c, wrong: w, judged: c + w };
-}
-
+/* ================= pile panel ================= */
 function openPilePanel(mode){
   if (mode === "flash"){
     var live = fcLiveCounts();
@@ -945,6 +929,7 @@ function openPilePanel(mode){
 }
 function pilePanelStartPractice(mode){
   if (mode === "flash"){
+    var pool = fcPile.slice();
     /* 这一轮还没练完就开始练错词：先把进行中的这一轮按实时数记进链里，
        复习轮接着往后排，链不断 */
     if (fc.status === "active"){
@@ -953,10 +938,10 @@ function pilePanelStartPractice(mode){
         fcChain.push({ total: fc.total, correct: live.correct, wrong: live.wrong, wrongWords: fcPile.map(function(i){ return WORDS[i].word; }) });
       }
     }
-    var pool = fcPile.slice();
     fcPanel = { open:false, round:null };
     if (pool.length) startFlashRound(pool, true); else render();
   } else {
+    var pool2 = qzPile.slice();
     /* 同上：进行中的一轮先记进链（含刚答完还没点「下一个」的这道） */
     if (qz.status === "active"){
       var c = qz.correct + (qzFeedback && qzFeedback.kind === "correct" ? 1 : 0);
@@ -965,7 +950,6 @@ function pilePanelStartPractice(mode){
         qzChain.push({ total: qz.total, correct: c, wrong: w, wrongWords: qzPile.map(function(i){ return WORDS[i].word; }) });
       }
     }
-    var pool2 = qzPile.slice();
     qzPanel = { open:false, round:null };
     if (pool2.length) startQuizRound(pool2, true); else render();
   }
@@ -1027,13 +1011,17 @@ function buildShareData(mode){
     return orderOf[a.word.toLowerCase()] - orderOf[b.word.toLowerCase()];
   });
   var last = rounds[rounds.length - 1];
+  var totals = rounds.reduce(function(acc, r){
+    return { total: acc.total + r.total, correct: acc.correct + r.correct, wrong: acc.wrong + r.wrong };
+  }, { total: 0, correct: 0, wrong: 0 });
   var now = new Date();
   return {
     modeLabel: mode === "flash" ? "英译中" : "中译英",
     dateText: now.getFullYear() + "年" + (now.getMonth() + 1) + "月" + now.getDate() + "日",
     rounds: rounds,
     wrongWords: wrongWords,
-    finishedPerfect: !!last && !last.live && last.wrong === 0 && last.correct > 0
+    totals: totals,
+    lastRoundPerfect: !!last && !last.live && last.wrong === 0 && last.correct > 0
   };
 }
 function roundRectPath(ctx, x, y, w, h, r){
@@ -1046,9 +1034,10 @@ function roundRectPath(ctx, x, y, w, h, r){
   ctx.arcTo(x, y, x + w, y, rr);
   ctx.closePath();
 }
-/* 把卡片画到 1080px 宽的 canvas 上（540 CSS px 的 2 倍）：每一轮按
-   顺序列出（练了几个词、答对几个、正确率），再列错词（按错误次数
-   从高到低）。与在线版同一张卡片。 */
+/* 把卡片画到 1080px 宽的 canvas 上（540 CSS px 的 2 倍）：先给所有
+   轮次加总的整体汇总（共练/答对/答错/整体正确率），再每一轮按顺序
+   列出（练了几个词、答对几个、正确率），再列错词（按错误次数从高
+   到低）。与在线版同一张卡片。 */
 function drawShareCard(data){
   var u = 2;
   var W = 540 * u;
@@ -1066,31 +1055,44 @@ function drawShareCard(data){
   /* 错词排版走共用的 layoutShareWords（单列：单词 + ×次数、音标、释义
      折行），先量好每条高度，画布高度才正好装下。 */
   var wordEntries = layoutShareWords(ctx, font, data.wrongWords, contentW);
-  var bannerH = data.finishedPerfect ? (44 + 16) * u : 0;
+  var summaryH = (64 + 16) * u;
   var wordsH = shareWordsHeight(wordEntries) * u;
   var H = margin * 2
     + (36 + 20 + 8 + 46 + 6 + 22 + 20) * u
-    + bannerH
+    + summaryH
     + (24 + 10) * u
     + data.rounds.length * 60 * u
     + (22 + 24 + 10) * u
     + wordsH
     + (24 + 20 + 32) * u;
   var y = paintShareCardHeader(canvas, ctx, font, C, { u: u, W: W, margin: margin, contentX: contentX }, H, "练习分享卡片", data.modeLabel + " · " + data.dateText + " · 共 " + data.rounds.length + " 轮");
-  if (data.finishedPerfect){
-    roundRectPath(ctx, contentX, y, contentW, 44 * u, 12 * u);
-    ctx.fillStyle = C.greenBg;
-    ctx.fill();
-    ctx.strokeStyle = C.greenBorder;
-    ctx.lineWidth = 1.5 * u;
-    ctx.stroke();
+  /* 整体汇总：卡片上所有轮次加起来算——共练多少个词、答对、答错、
+     整体正确率。最后一轮全对只在汇总行后标「本轮全对」，不拿它当
+     整体的百分之百。与在线版同一张卡片。 */
+  roundRectPath(ctx, contentX, y, contentW, 64 * u, 12 * u);
+  ctx.fillStyle = C.bg;
+  ctx.fill();
+  ctx.strokeStyle = C.border;
+  ctx.lineWidth = 1.5 * u;
+  ctx.stroke();
+  ctx.fillStyle = C.text;
+  ctx.font = font(16, 700);
+  ctx.fillText("整体情况", contentX + 16 * u, y + 27 * u);
+  ctx.font = font(18, 700);
+  ctx.textAlign = "right";
+  ctx.fillText("整体正确率 " + rateText(data.totals.correct, data.totals.wrong), contentX + contentW - 16 * u, y + 28 * u);
+  ctx.textAlign = "left";
+  ctx.fillStyle = C.dim;
+  ctx.font = font(14, 400);
+  var totalsText = "共练 " + data.totals.total + " 个词 · 答对 " + data.totals.correct + " · 答错 " + data.totals.wrong;
+  ctx.fillText(totalsText, contentX + 16 * u, y + 50 * u);
+  if (data.lastRoundPerfect){
+    var totalsW = ctx.measureText(totalsText).width;
     ctx.fillStyle = C.green;
-    ctx.font = font(16, 700);
-    ctx.textAlign = "center";
-    ctx.fillText("错词全部练对 · 正确率 100%", contentX + contentW / 2, y + 28 * u);
-    ctx.textAlign = "left";
-    y += (44 + 16) * u;
+    ctx.font = font(14, 700);
+    ctx.fillText(" · 本轮全对", contentX + 16 * u + totalsW, y + 50 * u);
   }
+  y += (64 + 16) * u;
   ctx.fillStyle = C.text;
   ctx.font = font(16, 700);
   ctx.fillText("每一轮", contentX, y + 17 * u);
@@ -1364,53 +1366,17 @@ function openBook(mode){
   bookTab = "session";
   disarmImport();
   clearConfirm = null;
+  bookScrollPos = {};
+  pasteOpen = false; pasteText = ""; pasteArmed = false;
   bookOpen = true;
   render();
+  renderPaste();
+  renderConfirm();
 }
-function closeBook(){ bookOpen = false; render(); }
-function setBookMode(mode){ bookMode = mode; disarmImport(); clearConfirm = null; render(); }
+function closeBook(){ bookOpen = false; clearConfirm = null; render(); renderConfirm(); }
+function setBookMode(mode){ bookMode = mode; disarmImport(); clearConfirm = null; pasteOpen = false; pasteText = ""; pasteArmed = false; render(); renderPaste(); renderConfirm(); }
 function setBookTab(tab){ bookTab = tab; render(); }
 
-/* 导出面板（复制导出）：应用内浏览器不处理 blob 下载，点开只会把内容
-   当网页显示，文件存不下来。所以触屏端打开页面内的导出面板：内容就在
-   面板里，可一键复制去保存或直接粘贴导入，全程不跳页面。桌面端照常
-   直接下载文件。导出格式两种方式完全一样。 */
-var exportPanel = null; /* { filename, text, count } while open */
-function closeExportPanel(){ exportPanel = null; renderExportPanel(); }
-function renderExportPanel(){
-  var slot = document.getElementById("export-slot");
-  if (!slot) return;
-  if (!exportPanel){ slot.innerHTML = ""; return; }
-  slot.innerHTML = '<div class="overlay" role="dialog" aria-modal="true" aria-label="导出备份" onclick="closeExportPanel()">'
-    + '<div class="sheet left" onclick="event.stopPropagation()">'
-    + '<div class="panel-head"><h3>导出备份</h3>'
-    + '<button type="button" class="btn-ghost" aria-label="关闭导出面板" onclick="closeExportPanel()">关闭</button></div>'
-    + '<p class="exp-name">' + esc(exportPanel.filename) + '</p>'
-    + '<p class="panel-note">共 ' + exportPanel.count + ' 个词的历史错题。在应用里打开时，浏览器不会下载文件，只会把内容打开显示，所以这里不跳页面：点「复制全部内容」，粘贴到备忘录或文件 App 里保存成 .json 文件，以后用「导入」选这个文件、或用「粘贴导入」把内容粘贴进来就能恢复。</p>'
-    + '<div class="row"><button type="button" class="btn-accent" aria-label="复制全部备份内容" onclick="copyExportText()">复制全部内容</button></div>'
-    + '<textarea id="export-text" class="io-ta" rows="8" readonly aria-label="备份文件内容" onfocus="this.select()"></textarea>'
-    + '</div></div>';
-  var ta = document.getElementById("export-text");
-  if (ta) ta.value = exportPanel.text;
-}
-function copyExportText(){
-  if (!exportPanel) return;
-  function done(){ showToast("备份内容已复制，粘贴到备忘录或文件里保存成 .json 文件即可"); }
-  if (navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(exportPanel.text).then(done, function(){ fallbackCopy(done); });
-  } else {
-    fallbackCopy(done);
-  }
-}
-function fallbackCopy(done){
-  var ta = document.getElementById("export-text");
-  if (ta){
-    ta.focus();
-    ta.select();
-    try { if (document.execCommand("copy")){ done(); return; } } catch (e) {}
-  }
-  showToast("自动复制没成功，请长按下面内容、全选后手动复制");
-}
 function handleExport(){
   var hist = historyBook(bookMode);
   var keys = Object.keys(hist);
@@ -1424,20 +1390,12 @@ function handleExport(){
     exportedAt: now.toISOString(),
     items: hist
   };
-  function pad(n){ return String(n).padStart(2, "0"); }
-  var filename = "错题本-" + payload.modeName + "-历史错题-" + keys.length + "词-英语兔777词-" + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + ".json";
-  var text = JSON.stringify(payload, null, 2);
-  var coarsePointer = typeof window.matchMedia === "function" && window.matchMedia("(pointer: coarse)").matches;
-  if (coarsePointer){
-    exportPanel = { filename: filename, text: text, count: keys.length };
-    renderExportPanel();
-    return;
-  }
-  var blob = new Blob([text], { type: "application/json" });
+  var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   var url = URL.createObjectURL(blob);
   var a = document.createElement("a");
+  function pad(n){ return String(n).padStart(2, "0"); }
   a.href = url;
-  a.download = filename;
+  a.download = "错题本-" + payload.modeName + "-历史错题-" + keys.length + "词-英语兔777词-" + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + ".json";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -1461,100 +1419,160 @@ function pickMerge(){
   ioAction = "merge";
   document.getElementById("io-file").click();
 }
-/* 导入/合并共用：只增不减，按每条错次的编号（events）去重——已经有的
-   错次逐条跳过（计入 skipped），只有真正新的错次才让次数增加，次数
-   永远不会变少。已有记录一条不丢，同一条记录重复导入不重复计数。
-   新记录按 (lastTime, seq) 排序接在后面。 */
-function mergeIntoBook(book, items){
+function replaceHistoryBook(mode, items){
+  /* 保留每条记录自带的序号（原来的排序），没有序号的排在已有最大序号之后 */
+  var used = {};
+  var next = 0;
+  Object.keys(items).forEach(function(k){ if (items[k].seq > 0) next = Math.max(next, items[k].seq); });
+  Object.keys(items).forEach(function(k){
+    var s = items[k].seq;
+    if (!(s > 0) || used[s]){ next += 1; s = next; }
+    used[s] = true;
+    items[k].seq = s;
+    if (s > bookSeq) bookSeq = s;
+  });
+  if (mode === "flash"){ fcHistoryBook = items; saveBook(FC_HIST_KEY, fcHistoryBook); }
+  else { qzHistoryBook = items; saveBook(QZ_HIST_KEY, qzHistoryBook); }
+}
+function mergeHistoryBook(mode, items){
+  var book = historyBook(mode);
   var seq = 0;
   Object.keys(book).forEach(function(k){ if (book[k].seq > seq) seq = book[k].seq; });
   var added = 0, merged = 0, skipped = 0;
-  var keys = Object.keys(items).sort(function(a, b){
-    var ta = Date.parse(items[a].lastTime) || 0;
-    var tb = Date.parse(items[b].lastTime) || 0;
-    return ta - tb || (items[a].seq || 0) - (items[b].seq || 0);
-  });
-  keys.forEach(function(rawKey){
+  Object.keys(items).forEach(function(rawKey){
     var key = rawKey.toLowerCase();
     var inc = items[rawKey];
-    var incEvents = materializeEvents(key, inc.count, Array.isArray(inc.events) ? inc.events : [], inc.lastTime);
     var cur = book[key];
-    if (!cur){
+    if (cur){
+      merged += 1;
+      inc.reasons.forEach(function(r){ if (cur.reasons.indexOf(r) === -1) cur.reasons.push(r); });
+      /* 按每条错次的编号取并集：已经有的不重复算，只有真正新的错次才让次数增加，合并后次数不会变少 */
+      cur.events = materializeEvents(key, cur.count, cur.events, cur.lastTime || "");
+      var seen = {};
+      cur.events.forEach(function(e){ seen[e.id] = true; });
+      (inc.events || []).forEach(function(e){
+        if (seen[e.id]) skipped += 1;
+        else { seen[e.id] = true; cur.events.push(e); }
+      });
+      cur.count = cur.events.length;
+      if (!cur.ipa) cur.ipa = inc.ipa;
+      if (new Date(inc.lastTime) > new Date(cur.lastTime)) cur.lastTime = inc.lastTime;
+    } else {
       added += 1;
       seq += 1;
       book[key] = {
         word: inc.word, meaning: inc.meaning, ipa: inc.ipa,
-        count: incEvents.length || inc.count, reasons: inc.reasons.slice(),
-        events: incEvents, seq: seq, lastTime: inc.lastTime
+        count: inc.count, reasons: inc.reasons.slice(), events: (inc.events || []).slice(),
+        seq: seq, lastTime: inc.lastTime
       };
       if (seq > bookSeq) bookSeq = seq;
-      return;
     }
-    cur.events = materializeEvents(key, cur.count, Array.isArray(cur.events) ? cur.events : [], cur.lastTime || "");
-    var seen = {};
-    cur.events.forEach(function(e){ seen[e.id] = true; });
-    var events = cur.events.slice();
-    incEvents.forEach(function(e){
-      if (seen[e.id]){ skipped += 1; }
-      else { seen[e.id] = true; events.push(e); }
-    });
-    var reasonsChanged = false;
-    inc.reasons.forEach(function(r){ if (cur.reasons.indexOf(r) === -1){ cur.reasons.push(r); reasonsChanged = true; } });
-    var nextIpa = cur.ipa || inc.ipa;
-    var nextLastTime = (Date.parse(inc.lastTime) || 0) > (Date.parse(cur.lastTime) || 0) ? inc.lastTime : cur.lastTime;
-    var changed = events.length !== cur.events.length || reasonsChanged || nextIpa !== cur.ipa || nextLastTime !== cur.lastTime;
-    if (!changed) return;
-    merged += 1;
-    cur.count = events.length;
-    cur.events = events;
-    cur.ipa = nextIpa;
-    cur.lastTime = nextLastTime;
   });
+  if (mode === "flash") saveBook(FC_HIST_KEY, fcHistoryBook);
+  else saveBook(QZ_HIST_KEY, qzHistoryBook);
   return { added: added, merged: merged, skipped: skipped };
-}
-function replaceHistoryBook(mode, items){
-  var res = mergeIntoBook(historyBook(mode), items);
-  if (mode === "flash") saveBook(FC_HIST_KEY, fcHistoryBook);
-  else saveBook(QZ_HIST_KEY, qzHistoryBook);
-  return res;
-}
-function mergeHistoryBook(mode, items){
-  var res = mergeIntoBook(historyBook(mode), items);
-  if (mode === "flash") saveBook(FC_HIST_KEY, fcHistoryBook);
-  else saveBook(QZ_HIST_KEY, qzHistoryBook);
-  return res;
 }
 /* 备份文本解析：先去掉可能混进来的 BOM 头和首尾空白（文件在聊天软件、
    备忘录之间转手保存时常会带上，JSON.parse 遇到 BOM 会直接失败）；
-   粘贴进来的内容若被包了一层，截取第一个 { 到最后一个 } 再解析。
-   文件导入和粘贴导入共用这一条解析路径，识别规则完全一致。 */
-function parseBackupText(raw){
-  var t = String(raw == null ? "" : raw);
-  if (t.charCodeAt(0) === 0xfeff) t = t.slice(1);
-  t = t.trim();
-  var s = t.indexOf("{");
-  var e = t.lastIndexOf("}");
+   粘贴进来的内容若被包了一层，截取第一个 { 到最后一个 } 再解析。 */
+function parseBackupText(text){
+  var t = String(text == null ? "" : text);
+  if (t.charCodeAt(0) === 0xFEFF) t = t.slice(1);
+  t = t.replace(/^\s+/, "").replace(/\s+$/, "");
+  var s = t.indexOf("{"), e = t.lastIndexOf("}");
   if (s > 0 && e > s) t = t.slice(s, e + 1);
   return JSON.parse(t);
 }
-/* 把解析出的数据按模式并入历史错题：备份里有哪个模式就导哪个模式，
-   两个模式都有就一起导，一个词都不丢。导入和合并都是只增不减、
-   按每条错次的编号去重。 */
-function applyImportedData(data, action){
-  var books = normalizeImportedBooks(data, bookMode);
-  if (!books){ showToast("读不出错题记录，请确认用的是导出的备份"); return false; }
-  var added = 0, merged = 0, skipped = 0, modeCount = 0;
-  Object.keys(books).forEach(function(m){
-    var res = (action === "import" ? replaceHistoryBook(m, books[m]) : mergeHistoryBook(m, books[m]));
-    added += res.added; merged += res.merged; skipped += res.skipped; modeCount += 1;
+/* 备份识别：导出、文件导入、粘贴导入共用这一套规则（与在线版一致）。
+   导出的是带时间戳、次数、每条错次编号的详细 JSON，识别时先按原样
+   整体解析；内容经剪贴板、聊天软件、备忘录转手时可能被截断、引号
+   被换成弯引号、或被转义，整体解析就会失败或只剩几个词——这时逐条
+   抢救：把文本里每一条完整的单词记录单独抠出来解析，能认出的全认，
+   时间戳、次数、错次编号都跟着记录一起进来。最后取识别出词数最多
+   的结果，一个词都不丢。 */
+function parseBackupBook(rawText){
+  var raw = String(rawText == null ? "" : rawText);
+  var candidates = [];
+  function consider(data){
+    var b = normalizeImportedBook(data);
+    if (b) candidates.push(b);
+  }
+  /* 0) 内容被整体转义成一个 JSON 字符串（\"…\"）时，先解一层。 */
+  var work = raw;
+  try {
+    var once = JSON.parse(raw.replace(/^\s+/, "").replace(/\s+$/, ""));
+    if (typeof once === "string") work = once;
+  } catch (e) { /* 不是整体字符串，继续下面的流程 */ }
+  /* 1) 原样整体解析。 */
+  var strictData = null;
+  try { strictData = parseBackupText(work); } catch (e) { strictData = null; }
+  if (typeof strictData === "string"){
+    try { strictData = parseBackupText(strictData); } catch (e) { strictData = null; }
+  }
+  if (strictData) consider(strictData);
+  /* 2) 修掉转手时常见的变形（弯引号、HTML 转义）后再整体解析。 */
+  var repaired = work
+    .replace(/[“”„]/g, "\"")
+    .replace(/[‘’]/g, "'")
+    .replace(/&quot;/g, "\"")
+    .replace(/&#34;/g, "\"")
+    .replace(/&amp;/g, "&");
+  if (repaired !== raw){
+    try { consider(parseBackupText(repaired)); } catch (e) { /* 落到逐条抢救 */ }
+  }
+  /* 3) 逐条抢救：扫描文本里每一个完整的 { … } 片段，能解析且带 word
+        字段的就是一条单词记录。外层结构坏了、文本被截断时，完整的
+        记录照样一条条认出来。 */
+  var salvaged = {};
+  for (var i = 0; i < repaired.length; i += 1){
+    if (repaired.charAt(i) !== "{") continue;
+    var depth = 0, inStr = false, escCh = false, end = -1;
+    for (var j = i; j < repaired.length; j += 1){
+      var c = repaired.charAt(j);
+      if (inStr){
+        if (escCh) escCh = false;
+        else if (c === "\\") escCh = true;
+        else if (c === "\"") inStr = false;
+        continue;
+      }
+      if (c === "\"") inStr = true;
+      else if (c === "{") depth += 1;
+      else if (c === "}"){
+        depth -= 1;
+        if (depth === 0){ end = j; break; }
+      }
+    }
+    if (end === -1) continue;
+    try {
+      var obj = JSON.parse(repaired.slice(i, end + 1));
+      if (obj && typeof obj === "object" && !Array.isArray(obj)
+          && typeof obj.word === "string" && obj.word.trim()){
+        salvaged[obj.word.trim().toLowerCase()] = obj;
+      }
+    } catch (e) { /* 不是完整的 JSON 片段，跳过 */ }
+  }
+  if (Object.keys(salvaged).length) consider(salvaged);
+  if (!candidates.length) return null;
+  var best = candidates[0];
+  candidates.forEach(function(b){
+    if (Object.keys(b).length > Object.keys(best).length) best = b;
   });
-  render();
-  var skipNote = skipped ? "，" + skipped + " 次重复错次已跳过（不重复计数）" : "";
-  var both = modeCount > 1 ? "（英译中和中译英都已导入）" : "";
+  return best;
+}
+function applyImported(action, text){
+  var imported = parseBackupBook(text);
+  if (!imported){ showToast("读不出错题记录，请确认用的是导出的备份"); return false; }
+  var inCount = Object.keys(imported).length;
   if (action === "import"){
-    showToast("导入完成：新增 " + added + " 个词，更新 " + merged + " 个词，原有记录一条没丢" + skipNote + both);
+    replaceHistoryBook(bookMode, imported);
+    render();
+    showToast("已导入 " + inCount + " 个词，替换了原来的历史错题");
   } else {
-    showToast("合并完成：新增 " + added + " 个词，更新 " + merged + " 个词" + skipNote + both);
+    var res = mergeHistoryBook(bookMode, imported);
+    render();
+    showToast(res.skipped > 0
+      ? "合并完成：新增 " + res.added + " 个词，合并 " + res.merged + " 个词，其中 " + res.skipped + " 次是已有的记录，已跳过不重复计数"
+      : "合并完成：新增 " + res.added + " 个词，合并 " + res.merged + " 个词");
   }
   return true;
 }
@@ -1564,93 +1582,117 @@ function handleFileChosen(file){
   if (!action || !file) return;
   var reader = new FileReader();
   reader.onload = function(){
-    try {
-      applyImportedData(parseBackupText(reader.result == null ? "" : reader.result), action);
-    } catch (e) {
+    /* 与粘贴导入走同一个识别入口（applyImported → parseBackupBook） */
+    if (!applyImported(action, reader.result)){
       showToast("这个文件读不出错题记录，请确认选的是导出的备份文件；选文件不行时可以试试「粘贴导入」");
     }
   };
   reader.onerror = function(){ showToast("文件读取失败，请重试，或试试「粘贴导入」"); };
   reader.readAsText(file);
 }
-/* ================= paste import ================= */
-var pasteImport = null; /* { text } while the panel is open */
-/* 粘贴面板打开期间锁住页面滚动：点开面板时页面不能跳到顶部、也不许
-   滚动，关掉后面板后页面还停在刚才的位置。 */
-function openPasteImport(){ pasteImport = { text: "" }; document.body.style.overflow = "hidden"; renderPaste(); }
-function closePasteImport(){ pasteImport = null; document.body.style.overflow = ""; renderPaste(); }
-function handlePasteImport(action){
-  if (!pasteImport) return;
-  try {
-    if (applyImportedData(parseBackupText(pasteImport.text), action)) closePasteImport();
-  } catch (e) {
-    showToast("这份内容读不出错题记录，请把备份的全部内容原样粘贴进来");
-  }
+/* 粘贴导入改成独立弹窗：渲染进自己的 paste-slot，不重渲染错题本，
+   点开、关闭都不动错题本的滚动位置，不会跳回顶部。 */
+function togglePasteImport(){
+  pasteOpen = true;
+  pasteArmed = false;
+  renderPaste();
+}
+function closePasteImport(){
+  pasteOpen = false;
+  pasteArmed = false;
+  renderPaste();
 }
 function renderPaste(){
   var slot = document.getElementById("paste-slot");
   if (!slot) return;
-  if (!pasteImport){ slot.innerHTML = ""; return; }
-  slot.innerHTML = '<div class="overlay" role="dialog" aria-modal="true" aria-label="粘贴导入" onclick="closePasteImport()">'
-    + '<div class="sheet left" onclick="event.stopPropagation()">'
-    + '<div class="panel-head"><h3>粘贴导入</h3>'
+  if (!pasteOpen){ slot.innerHTML = ""; return; }
+  var modeLabel = bookMode === "flash" ? "英译中" : "中译英";
+  slot.innerHTML = '<div class="overlay" style="z-index:55" role="dialog" aria-modal="true" aria-label="粘贴导入" onclick="closePasteImport()">'
+    + '<div class="paste-card" onclick="event.stopPropagation()">'
+    + '<div class="top"><h3>粘贴导入</h3>'
     + '<button type="button" class="btn-ghost" aria-label="关闭粘贴导入面板" onclick="closePasteImport()">关闭</button></div>'
-    + '<p class="panel-note">先复制一份导出的备份内容（在导出面板里点「复制全部内容」，或打开备份文件全选复制），再粘贴到下面，点「导入」或「合并」。和文件导入同一套识别规则：备份里写了哪个模式就导哪个模式，两个模式都有就一起导；只增不减，按每条错次的编号去重，不会覆盖或丢掉已有记录。</p>'
-    + '<textarea id="paste-text" class="io-ta" rows="8" aria-label="粘贴备份内容" placeholder="把备份的全部内容粘贴到这里" oninput="pasteImport.text = this.value">' + esc(pasteImport.text) + '</textarea>'
+    + '<p>作用于当前这本（' + modeLabel + '）的历史错题。先打开备份文件，全选复制里面的全部内容，再粘贴到下面，点「导入（替换）」或「合并」。</p>'
+    + '<textarea id="paste-area" aria-label="粘贴备份内容" rows="8" placeholder="把备份文件的全部内容粘贴到这里" oninput="onPasteInput(this)">' + esc(pasteText) + '</textarea>'
     + '<div class="row">'
-    + '<button type="button" class="btn-accent" aria-label="粘贴导入历史错题" onclick="handlePasteImport(\'import\')">导入</button>'
-    + '<button type="button" aria-label="粘贴合并历史错题" onclick="handlePasteImport(\'merge\')">合并</button>'
+    + '<button type="button" id="paste-import-btn" aria-label="粘贴导入替换历史错题" class="primary' + (pasteArmed ? " armed" : "") + '" onclick="applyPasted(\'import\')">' + (pasteArmed ? "再点一次确认替换" : "导入（替换）") + '</button>'
+    + '<button type="button" aria-label="粘贴合并历史错题" onclick="applyPasted(\'merge\')">合并</button>'
     + '</div></div></div>';
-  var ta = document.getElementById("paste-text");
-  if (ta) ta.value = pasteImport.text;
 }
-/* 清空确认改走弹窗：点清空按钮先弹确认框，弹窗打开期间页面停在原地，
-   确认后错题本回到打开弹窗时的滚动位置，不再原地二次点击确认、
-   也不再因为列表一下变空而被弹回顶部。 */
-function openClearConfirm(){
-  var ov = document.querySelector("#book-slot .book-overlay");
-  savedBookScroll = ov ? ov.scrollTop : 0;
+function onPasteInput(el){
+  pasteText = el.value;
+  if (pasteArmed){
+    pasteArmed = false;
+    var b = document.getElementById("paste-import-btn");
+    if (b){ b.textContent = "导入（替换）"; b.className = "primary"; }
+  }
+}
+function applyPasted(action){
+  if (action === "import" && !pasteArmed){
+    pasteArmed = true;
+    var b = document.getElementById("paste-import-btn");
+    if (b){ b.textContent = "再点一次确认替换"; b.className = "primary armed"; }
+    showToast("导入会替换当前历史错题，确认就再点一次「导入（替换）」");
+    return;
+  }
+  pasteArmed = false;
+  var ok = applyImported(action, pasteText);
+  if (!ok){
+    showToast("这份内容读不出错题记录，请把备份文件的全部内容原样粘贴进来");
+    return;
+  }
+  if (ok){
+    pasteOpen = false;
+    pasteText = "";
+    renderPaste();
+  }
+}
+/* 清空改成独立弹窗确认：点「清空」只把弹窗渲染进 confirm-slot，
+   错题本浮层一个字都不动，人停在原来的界面和滚动位置；点「确认清空」
+   才真正清空，点「取消」或弹窗外任意处就关掉、什么都不动。 */
+function askClearBook(){
   clearConfirm = bookTab;
-  document.body.style.overflow = "hidden";
-  renderClearConfirm();
+  renderConfirm();
 }
 function closeClearConfirm(){
   clearConfirm = null;
-  document.body.style.overflow = "";
-  renderClearConfirm();
+  renderConfirm();
 }
-function confirmClearBook(){
+function doClearBook(){
   var which = clearConfirm;
-  if (!which) return;
-  closeClearConfirm();
+  clearConfirm = null;
+  renderConfirm();
   if (which === "session"){
     if (bookMode === "flash") fcSessionBook = {}; else qzSessionBook = {};
     render();
     showToast("本次错题已清空，历史错题不受影响");
-  } else {
+  } else if (which === "history"){
     if (bookMode === "flash"){ fcHistoryBook = {}; saveBook(FC_HIST_KEY, fcHistoryBook); }
     else { qzHistoryBook = {}; saveBook(QZ_HIST_KEY, qzHistoryBook); }
     render();
     showToast("历史错题已清空");
   }
 }
-function renderClearConfirm(){
-  var slot = document.getElementById("clear-slot");
+function renderConfirm(){
+  var slot = document.getElementById("confirm-slot");
   if (!slot) return;
-  if (!clearConfirm){ slot.innerHTML = ""; return; }
+  if (!clearConfirm){
+    slot.innerHTML = "";
+    document.body.style.overflow = "";
+    return;
+  }
   var modeLabel = bookMode === "flash" ? "英译中" : "中译英";
   var isHist = clearConfirm === "history";
   var count = Object.keys(bookFor(bookMode, clearConfirm)).length;
-  slot.innerHTML = '<div class="overlay" role="dialog" aria-modal="true" aria-label="' + (isHist ? "确认清空历史错题" : "确认清空本次错题") + '" onclick="closeClearConfirm()">'
-    + '<div class="sheet" onclick="event.stopPropagation()">'
-    + '<h3>' + (isHist ? "清空历史错题？" : "清空本次错题？") + '</h3>'
-    + '<p class="info">' + (isHist
-      ? '要清空「' + modeLabel + '」的全部历史错题吗？共 ' + count + ' 个词，存在这台设备浏览器里的记录会被删掉，清空后不能恢复。'
-      : '要清空「' + modeLabel + '」的本次错题吗？共 ' + count + ' 个词，历史错题不受影响。') + '</p>'
-    + '<div class="btns">'
-    + '<button type="button" class="btn-ghost" aria-label="取消清空" onclick="closeClearConfirm()">取消</button>'
-    + '<button type="button" class="armed" aria-label="' + (isHist ? "确认清空历史错题" : "确认清空本次错题") + '" onclick="confirmClearBook()">确认清空</button>'
+  slot.innerHTML = '<div class="overlay" style="z-index:55" role="dialog" aria-modal="true" aria-label="' + (isHist ? "确认清空历史错题" : "确认清空本次错题") + '" onclick="closeClearConfirm()">'
+    + '<div class="confirm-card" onclick="event.stopPropagation()">'
+    + '<h3>' + (isHist ? "清空历史错题" : "清空本次错题") + '</h3>'
+    + '<p>要清空「' + modeLabel + '」错题本里的' + (isHist ? "历史" : "本次") + '错题（共 ' + count + ' 个词）吗？清空后无法恢复，' + (isHist ? "本次错题不受影响。" : "历史错题不受影响。") + '</p>'
+    + '<div class="row">'
+    + '<button type="button" aria-label="取消清空" onclick="closeClearConfirm()">取消</button>'
+    + '<button type="button" class="danger" aria-label="' + (isHist ? "确认清空历史错题" : "确认清空本次错题") + '" onclick="doClearBook()">确认清空</button>'
     + '</div></div></div>';
+  /* 弹窗打开期间锁住底下页面的滚动，关掉后在上面的分支里恢复 */
+  document.body.style.overflow = "hidden";
 }
 /* 用某个模式的历史错题当词库，随机练一轮，走正常结算流程 */
 function startHistoryPractice(mode){
@@ -1680,12 +1722,18 @@ function startSessionPractice(mode){
   if (mode === "flash") startFlashRound(pool, false);
   else startQuizRound(pool, false);
 }
+function bookEntryAt(i){
+  var pair = currentBookEntries[i];
+  if (!pair) return { word: "", ipa: "", meaning: "" };
+  var rec = pair[1];
+  var idx = wordIndexByKey[pair[0]];
+  return idx !== undefined ? WORDS[idx] : { word: rec.word, ipa: rec.ipa, meaning: rec.meaning };
+}
+function bookSpeak(i){ var e = bookEntryAt(i); if (e.word) speakWord(e.word, accent); }
 function openWordCard(i){
   var pair = currentBookEntries[i];
   if (!pair) return;
-  var rec = pair[1];
-  var idx = wordIndexByKey[pair[0]];
-  modalEntry = idx !== undefined ? WORDS[idx] : { word: rec.word, ipa: rec.ipa, meaning: rec.meaning };
+  modalEntry = bookEntryAt(i);
   renderModal();
 }
 function closeWordCard(){ modalEntry = null; renderModal(); }
@@ -1742,9 +1790,19 @@ function statsHtml(round, remaining){
   var liveC = round.correct + (typeof qzFeedback !== "undefined" && qzFeedback && qzFeedback.kind === "correct" ? 1 : 0);
   var liveW = round.wrong + (typeof qzFeedback !== "undefined" && qzFeedback && qzFeedback.kind !== "correct" ? 1 : 0);
   var done = liveC + liveW;
-  var h = '<div class="stats"><span aria-live="polite">词库 ' + round.total + ' 词 · 当前第 ' + (round.correct + round.wrong + 1) + ' 个 · 还剩 ' + (round.total - done) + ' · 已练 ' + done + '</span><span>正确 ' + liveC + ' · 错误 ' + liveW + ' · 正确率 ' + rateText(liveC, liveW);
+  var h = '<div class="stats"><span aria-live="polite">词库 ' + round.total + ' 词 · 当前第 ' + (round.correct + round.wrong + 1) + ' 个 · 还剩 ' + (round.total - done) + ' · 已练 ' + done + '</span><span>正确 ' + round.correct + ' · 错误 ' + round.wrong;
+  if (round.correct + round.wrong > 0) h += ' · 正确率 ' + rateText(round.correct, round.wrong);
   if (round.isReview) h += ' · 「不知道」练习轮';
   return h + '</span></div>';
+}
+/* 本轮实时统计（仅英译中闪卡）：fc.correct/wrong 是已点「下一个」结算过的数，
+   当前这张卡的判定（fcJudged）还没结算。实时数 = 已结算 + 当前判定：
+   点「正确」立刻 +1，切换成「不会/错误」时正确自动取消、错误 +1，
+   反过来也一样；点「下一个」后判定折进结算数，总数不变。 */
+function fcLiveCounts(){
+  var c = fc.correct + (fcJudged === "correct" ? 1 : 0);
+  var w = fc.wrong + (fcJudged === "wrong" ? 1 : 0);
+  return { correct: c, wrong: w, judged: c + w };
 }
 function flashStatsHtml(){
   var live = fcLiveCounts();
@@ -1753,7 +1811,7 @@ function flashStatsHtml(){
   var pos = fc.correct + fc.wrong + 1;
   return '<div class="stats" aria-live="polite" aria-label="本轮词库进度：词库 ' + fc.total + ' 词，当前第 ' + pos + ' 个，还剩 ' + (fc.total - done) + '，已练 ' + done + '；正确 ' + live.correct + '，错误 ' + live.wrong + '，正确率 ' + rate + '">'
     + '<span>词库 ' + fc.total + ' 词 · 当前第 ' + pos + ' 个 · 还剩 ' + (fc.total - done) + ' · 已练 ' + done + '</span>'
-    + '<span>正确 ' + live.correct + ' · 错误 ' + live.wrong + ' · 正确率 ' + rate + (fc.isReview ? ' · 「不知道」练习轮' : '') + '</span></div>';
+    + '<span>正确 ' + live.correct + ' · 错误 ' + live.wrong + ' · 正确率 ' + rate + '</span></div>';
 }
 
 /* ================= flash view ================= */
@@ -1774,21 +1832,19 @@ function flashHtml(){
   if (!e) return "";
   var h = backHomeHtml("fcGoHome");
   h += '<div class="card stage' + (fcRevealed ? "" : " compact") + '">';
-  h += '<div class="fc-text"><p class="word serif">' + esc(e.word) + '</p>'
+  h += '<div class="stage-content"><p class="word serif">' + esc(e.word) + '</p>'
     + ipaHtml(e.ipa, accent)
-    + (fcRevealed ? '<p class="fc-meaning" aria-live="polite">' + esc(e.meaning) + '</p>' : '')
+    + '<div class="reveal-zone"><button type="button" class="btn-ghost" aria-label="查看中文释义" onclick="fcToggleReveal()">' + (fcRevealed ? "隐藏中文释义" : "查看中文释义") + '</button>'
+    + (fcRevealed ? '<p class="meaning" aria-live="polite">' + esc(e.meaning) + '</p>' : '')
     + '</div>'
     + '<button type="button" class="btn-speak" aria-label="听发音" onclick="fcSpeak()">🔊 听发音</button>'
     + formChipsHtml(e, accent, "fcSpeakForm")
-    + '<div class="reveal-zone"><button type="button" class="btn-ghost" aria-label="查看中文释义" onclick="fcToggleReveal()">' + (fcRevealed ? "隐藏中文释义" : "查看中文释义") + '</button>'
     + '</div>';
-  if (fcJudged === "wrong") h += '<div class="stamp stamp-wrong stamp-in" aria-hidden="true"><div' + (fcStampAnim ? ' class="stamp-pop"' : '') + '>' + stampSvg("wrong") + '</div></div>';
-  if (fcJudged === "correct") h += '<div class="stamp stamp-correct stamp-in-r" aria-hidden="true"><div' + (fcStampAnim ? ' class="stamp-pop"' : '') + '>' + stampSvg("correct") + '</div></div>';
-  fcStampAnim = false; /* 动画标记只用一次：之后的任何重渲染印章都静态显示 */
+  if (fcJudged) h += '<div class="stamp ' + (fcJudged === "wrong" ? "stamp-wrong" : "stamp-correct") + '" aria-hidden="true"><div' + (fcStampFresh ? ' class="stamp-pop"' : '') + '>' + stampSvg(fcJudged) + '</div></div>';
   h += '</div>';
   h += '<div class="judge-row">'
     + '<button type="button" aria-label="不会/错误" aria-pressed="' + (fcJudged === "wrong") + '" class="jbtn-bad' + (fcJudged === "wrong" ? " on" : "") + '" onclick="fcJudge(\'wrong\')">不会/错误</button>'
-    + '<button type="button" aria-label="' + (fc.queue.length === 0 ? "结束" : "下一个") + '" class="jbtn-next"' + (fcJudged === null ? " disabled" : "") + ' onclick="fcNext()">' + (fc.queue.length === 0 ? "结束" : "下一个") + '</button>' 
+    + '<button type="button" aria-label="' + (fc.queue.length === 0 ? "结束" : "下一个") + '" class="jbtn-next"' + (fcJudged === null ? " disabled" : "") + ' onclick="fcNext()">' + (fc.queue.length === 0 ? "结束" : "下一个") + '</button>'
     + '<button type="button" aria-label="正确" aria-pressed="' + (fcJudged === "correct") + '" class="jbtn-good' + (fcJudged === "correct" ? " on" : "") + '"' + (fcRevealed ? "" : " disabled") + ' onclick="fcJudge(\'correct\')">正确</button>'
     + '</div>';
   h += flashStatsHtml();
@@ -1873,11 +1929,13 @@ function pilePanelHtml(mode){
 /* ================= notebook overlay ================= */
 function renderBook(){
   var slot = document.getElementById("book-slot");
-  if (!bookOpen){ slot.innerHTML = ""; return; }
-  /* 重渲染前记下错题本的滚动位置、渲染完恢复：错题本里任何点按
-     （切模式、切范围、导入、清空等）都不许把页面弹回顶部。 */
-  var prevOv = slot.querySelector(".book-overlay");
-  var prevScroll = prevOv ? prevOv.scrollTop : 0;
+  if (!bookOpen){ slot.innerHTML = ""; lastBookKey = null; return; }
+  /* 浮层是整段重建的：重建前先把当前滚动位置存到上一个（模式×页签）名下，
+     重建后恢复当前（模式×页签）存过的位置——切换页签、切换模式、导入
+     待确认、清空后重渲染等任何一次重建都不再把人弹回顶部。 */
+  var key = bookMode + ":" + bookTab;
+  var oldOv = slot.querySelector(".book-overlay");
+  if (oldOv && lastBookKey) bookScrollPos[lastBookKey] = oldOv.scrollTop;
   var modeLabel = bookMode === "flash" ? "英译中" : "中译英";
   var sessionCount = Object.keys(sessionBook(bookMode)).length;
   var historyCount = Object.keys(historyBook(bookMode)).length;
@@ -1899,16 +1957,16 @@ function renderBook(){
     h += '<div class="practice-box"><p>用这本累积的历史错题当词库，随机不重复练一轮，练完照常统计这一轮的正确率。</p>'
       + '<button type="button" class="btn-accent" aria-label="用历史错题练习一轮"' + (historyCount === 0 ? " disabled" : "") + ' onclick="startHistoryPractice(\'' + bookMode + '\')">用历史错题练习一轮（' + historyCount + ' 个词）</button>'
       + '<div style="margin-top:.75rem"><button type="button" class="btn-ghost" aria-label="分享历史错题卡片"' + (historyCount === 0 ? " disabled" : "") + ' onclick="exportHistoryShareCard(bookMode)">' + SHARE_ICON + '分享卡片</button></div></div>';
-    h += '<div class="io-box"><p>作用于当前这本（' + modeLabel + '）的历史错题，存在这台设备的浏览器里，打开自动读回。导出：把历史错题存成一个备份文件，里面带每个词的次数、时间戳和每条错次的编号。导入：选一个备份文件，把里面的记录并进来——只增不减，已有的记录不会被覆盖或丢掉。合并：选一个备份文件，把里面的记录按词并进来，按每条错次的编号去重，同一条记录重复导入不会重复计数。文件导入和粘贴导入用同一套识别规则：选文件没反应时，点「粘贴导入」，把备份内容粘贴进来也能导入、合并；备份里英译中和中译英都有时，两个模式会一起导入。</p>'
+    h += '<div class="io-box"><p>作用于当前这本（' + modeLabel + '）的历史错题，存在这台设备的浏览器里，打开自动读回。导出：把历史错题存成一个备份文件。导入：选一个备份文件，用里面的记录替换当前历史错题。合并：选一个备份文件，把里面的记录按词并进来，同一个词的次数相加。选文件没反应时，点「粘贴导入」，把备份文件的内容粘贴进来也能导入、合并。</p>'
       + '<div class="row">'
       + '<button type="button" aria-label="导出历史错题" onclick="handleExport()">导出</button>'
       + '<button type="button" aria-label="导入历史错题" class="' + (importArmed ? "armed" : "") + '" onclick="armOrPickImport()">' + (importArmed ? "再点一次选文件" : "导入") + '</button>'
       + '<button type="button" aria-label="合并历史错题" onclick="pickMerge()">合并</button>'
-      + '<button type="button" aria-label="粘贴备份内容导入" onclick="openPasteImport()">粘贴导入</button>'
-      + '<button type="button" aria-label="清空历史错题" class="danger" onclick="openClearConfirm()">清空历史错题</button>'
+      + '<button type="button" aria-label="粘贴备份内容导入" onclick="togglePasteImport()">粘贴导入</button>'
+      + '<button type="button" aria-label="清空历史错题" class="danger-soft" onclick="askClearBook()">清空历史错题</button>'
       + '</div>';
     if (importArmed)
-      h += '<p class="io-warn" role="alert">导入只增不减，不会覆盖已有记录，再点一次选文件</p>';
+      h += '<p class="io-warn" role="alert">导入会替换当前历史错题，再点一次选文件</p>';
     h += '</div>';
   }
   var entries = sortedBookEntries(bookFor(bookMode, bookTab), bookTab === "session");
@@ -1919,23 +1977,31 @@ function renderBook(){
     h += '<ul class="book-list">';
     entries.forEach(function(pair, i){
       var rec = pair[1];
-      h += '<li><button type="button" aria-label="查看单词卡片 ' + esc(rec.word) + '" onclick="openWordCard(' + i + ')">'
-        + '<span><span class="w serif">' + esc(rec.word) + '</span>'
+      var e = bookEntryAt(i);
+      h += '<li><div class="bitem">'
+        + '<div class="btop"><button type="button" class="bmain" aria-label="查看单词卡片 ' + esc(rec.word) + '" onclick="openWordCard(' + i + ')">'
+        + '<span class="w serif">' + esc(rec.word) + '</span>'
+        + ipaHtml(e.ipa, accent)
         + '<span class="m">' + esc(rec.meaning) + '</span>'
-        + (rec.reasons.length ? '<span class="r">' + esc(rec.reasons.join(" · ")) + '</span>' : '')
-        + '</span><span class="c">×' + rec.count + '</span></button></li>';
+        + '</button><span class="c">×' + rec.count + '</span></div>'
+        + '<div class="bctrls">'
+        + '<button type="button" class="spk" aria-label="听 ' + esc(rec.word) + ' 的发音" onclick="bookSpeak(' + i + ')">🔊 听发音</button>'
+        + accentHtml("单词 " + rec.word + " 的发音口音切换")
+        + '</div>'
+        + '</div></li>';
     });
     h += '</ul>';
   }
-  /* 清空历史错题已经移到上面的导入导出按钮行（粘贴导入后面，淡红色）；
-     底部这一行只留本次错题的清空。 */
+  /* 历史错题的清空按钮已挪到上方导入导出那一行（粘贴导入后面），
+     底部这行只剩本次错题的清空。 */
   if (bookTab === "session"){
-    h += '<div class="clear-row"><button type="button" aria-label="清空本次错题" onclick="openClearConfirm()">清空本次错题</button></div>';
+    h += '<div class="clear-row"><button type="button" aria-label="清空本次错题" onclick="askClearBook()">清空本次错题</button></div>';
   }
   h += '</div></div>';
   slot.innerHTML = h;
   var newOv = slot.querySelector(".book-overlay");
-  if (newOv && prevScroll) newOv.scrollTop = prevScroll;
+  if (newOv) newOv.scrollTop = bookScrollPos[key] || 0;
+  lastBookKey = key;
 }
 
 /* ================= word card modal ================= */
@@ -1995,10 +2061,6 @@ function render(){
   document.getElementById("panel-slot").innerHTML = pilePanelHtml("flash") + pilePanelHtml("quiz");
   renderBook();
   renderModal();
-  renderPaste();
-  renderExportPanel();
-  renderClearConfirm();
-  renderShare();
 }
 function setView(v){ view = v; render(); }
 
@@ -2008,12 +2070,10 @@ document.getElementById("io-file").addEventListener("change", function(ev){
   if (f) handleFileChosen(f);
 });
 document.addEventListener("keydown", function(ev){
-  if (ev.key !== "Escape") return;
-  if (sharePanel) closeSharePanel();
-  if (modalEntry) closeWordCard();
-  if (clearConfirm) closeClearConfirm();
-  if (pasteImport) closePasteImport();
-  if (exportPanel) closeExportPanel();
+  if (ev.key === "Escape" && sharePanel) closeSharePanel();
+  else if (ev.key === "Escape" && clearConfirm) closeClearConfirm();
+  else if (ev.key === "Escape" && pasteOpen) closePasteImport();
+  else if (ev.key === "Escape" && modalEntry) closeWordCard();
 });
 render();
 
