@@ -44,6 +44,8 @@ button:disabled{cursor:not-allowed}
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:.25rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:.25rem;margin-bottom:1.25rem}
 .tabs button{min-height:2.75rem;border-radius:999px;font-size:1rem;font-weight:600;color:var(--dim)}
 .tabs button.on{background:var(--text);color:var(--bg)}
+.kbd-hint{display:none}
+@media (min-width:1024px){.kbd-hint{display:block;margin:-.75rem 0 1.25rem;text-align:center;font-size:.75rem;line-height:1.6;color:var(--dim)}}
 .card{border:1px solid var(--border);background:var(--surface);border-radius:1rem;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .idle{padding:2.5rem 1.25rem;text-align:center}
 .idle h2{margin:0 0 .5rem;font-size:1.125rem;font-weight:600}
@@ -2131,6 +2133,7 @@ function render(){
     + '<div class="tabs" role="tablist" aria-label="练习模式">'
     + '<button type="button" role="tab" aria-selected="' + (view === "flash") + '" class="' + (view === "flash" ? "on" : "") + '" onclick="setView(\'flash\')">英译中闪卡</button>'
     + '<button type="button" role="tab" aria-selected="' + (view === "quiz") + '" class="' + (view === "quiz" ? "on" : "") + '" onclick="setView(\'quiz\')">中译英拼写</button></div>'
+    + '<p class="kbd-hint">快捷键：空格 听发音 · C 查看中文释义 · X 显示音标 · V 切换英/美发音 · 1 不会/错误 · 2 正确 · Enter 下一个 · B 错题本 · S 分享卡片 · Esc 回主界面（拼写模式：Enter 提交/下一个 · 1 不知道；在输入框里打字时空格照常输入）</p>'
     + (view === "flash"
         ? '<section aria-label="英译中闪卡">' + flashHtml() + '</section>'
         : '<section aria-label="中译英拼写">' + quizHtml() + '</section>')
@@ -2168,11 +2171,73 @@ document.getElementById("io-file").addEventListener("change", function(ev){
   ev.target.value = "";
   if (f) handleFileChosen(f);
 });
+/* ================= 键盘快捷键（电脑端） =================
+   空格 听发音 · C 查看中文释义 · X 显示当前卡片音标 · V 切换英式/美式
+   发音 · 1 不会/错误 · 2 正确 · Enter 下一个 ·
+   B 打开错题本 · S 分享卡片 · Esc 回到主界面。
+   拼写模式：空格仍是听发音，Enter 提交答案、再按一次下一个，1 是不知道，
+   X 显示反馈卡上的音标，V 同样切换口音。
+   空格的判断只看有没有在输入：在输入框里打字时空格/字母/数字都照常
+   输入（拼写输入框的 Enter 由输入框自己的 onkeydown 提交/下一个）；
+   焦点不在输入框时（包括提交后输入框被禁用）空格恢复听发音。
+   带 Ctrl/Alt/Meta 的组合键、输入法组字中、长按连发都不触发；任一
+   弹层打开时只有 Esc 起作用（逐层关闭），快捷键不穿透到弹层下面。 */
 document.addEventListener("keydown", function(ev){
-  if (ev.key === "Escape" && sharePanel) closeSharePanel();
-  else if (ev.key === "Escape" && clearConfirm) closeClearConfirm();
-  else if (ev.key === "Escape" && pasteOpen) closePasteImport();
-  else if (ev.key === "Escape" && modalEntry) closeWordCard();
+  var key = ev.key;
+  if (key === "Escape"){
+    if (sharePanel) closeSharePanel();
+    else if (clearConfirm) closeClearConfirm();
+    else if (pasteOpen) closePasteImport();
+    else if (modalEntry) closeWordCard();
+    else if (fcPanel.open){ fcPanel = { open:false, round:null }; render(); }
+    else if (qzPanel.open){ qzPanel = { open:false, round:null }; render(); }
+    else if (bookOpen) closeBook();
+    else if (view === "flash"){
+      if (fc.status === "active") fcGoHome();
+      else if (fc.status === "finished"){ fc = idleRound(); fcPanel = { open:false, round:null }; render(); }
+    } else {
+      if (qz.status === "active") qzGoHome();
+      else if (qz.status === "finished"){ qz = idleRound(); qzPanel = { open:false, round:null }; render(); }
+    }
+    return;
+  }
+  if (ev.isComposing || ev.repeat || ev.ctrlKey || ev.metaKey || ev.altKey) return;
+  if (sharePanel || clearConfirm || pasteOpen || modalEntry || bookOpen || fcPanel.open || qzPanel.open) return;
+  var t = ev.target;
+  if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
+  /* 音标未显示且正聚焦在音标上时，空格/回车是「显示音标」，音标自己的
+     onkeydown 已经 preventDefault，不要再触发听发音/下一个。 */
+  if (ev.defaultPrevented) return;
+  /* V 切换英式/美式发音：两个模式、练习中与未开始时都有效（口音是
+     全局设置）；在输入框里打字时已在上面被挡住，不会误触。 */
+  if (key === "v" || key === "V"){ setAccent(accent === "uk" ? "us" : "uk"); return; }
+  if (view === "flash"){
+    if (fc.status !== "active" || !fcEntry()){
+      if (key === "b" || key === "B") openBook("flash");
+      else if (key === "s" || key === "S") exportShareCard("flash");
+      return;
+    }
+    if (key === " "){ ev.preventDefault(); fcSpeak(); }
+    else if (key === "c" || key === "C") fcToggleReveal();
+    else if (key === "x" || key === "X") fcShowIpa();
+    else if (key === "1") fcJudge("wrong");
+    else if (key === "2") fcJudge("correct");
+    else if (key === "Enter"){ ev.preventDefault(); fcNext(); }
+    else if (key === "b" || key === "B") openBook("flash");
+    else if (key === "s" || key === "S") exportShareCard("flash");
+  } else {
+    if (qz.status !== "active" || !qzEntry()){
+      if (key === "b" || key === "B") openBook("quiz");
+      else if (key === "s" || key === "S") exportShareCard("quiz");
+      return;
+    }
+    if (key === " "){ ev.preventDefault(); qzSpeak(); }
+    else if (key === "x" || key === "X") qzShowIpa();
+    else if (key === "Enter"){ ev.preventDefault(); if (qzFeedback) qzNext(); else qzSubmit(); }
+    else if (key === "1") qzUnknown();
+    else if (key === "b" || key === "B") openBook("quiz");
+    else if (key === "s" || key === "S") exportShareCard("quiz");
+  }
 });
 render();
 
